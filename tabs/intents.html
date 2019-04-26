@@ -1,0 +1,43 @@
+<template class="section-template">
+<section id="intents" class="wrapper style1">
+  <div class="inner">
+    <h2>Load Your Custom Intents</h2>
+    <div class="split style1">
+      <section>
+        <form method="post" action="#">
+          <div class="field">
+            <label for="intent-name">Intent Name</label>
+            <textarea name="intent-name" id="intent-name" rows="1"></textarea>
+          </div>
+          <div class="field">
+            <label for="intent-examples">Intent Example</label>
+            <textarea name="intent-examples" id="intent-examples" rows="7"></textarea>
+          </div>
+          <div class="split style1">
+            <section>
+              <button type="button" name="add-intent" class="button submit" >Add</button>
+            </section>
+            <section>
+              <button type="button" name="load-intent" class="button submit" >Load From Excel Sheet</button>
+            </section>
+          <div />
+        </form>
+      </section>
+
+      <section>
+        <h5>Example</h5>
+        <p>
+          ## intent:greet_ar<br />
+          - مرحبا<br />
+          - أهلا وسهلا<br />
+          - أهلا ومرحبا<br />
+          - السلام عليكم<br />
+          - صباح الخير<br />
+          - مساء الخير<br />
+          - أهلا<br />
+        </p>
+      </section>
+    </div>
+  </div>
+</section>
+</template>

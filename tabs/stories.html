@@ -1,0 +1,43 @@
+<template class="section-template">
+<section id="stories" class="wrapper style1">
+  <div class="inner">
+    <h2>Load Your Custom Stories</h2>
+    <div class="split style1">
+      <section>
+        <form method="post" action="#">
+          <div class="field">
+            <label for="story-name">Story Name</label>
+            <textarea name="story-name" id="story-name" rows="1"></textarea>
+          </div>
+          <div class="field">
+            <label for="story-body">Story Body</label>
+            <textarea name="story-body" id="story-body" rows="7"></textarea>
+          </div>
+          <div class="split style1">
+            <section>
+              <a href="#" class="button submit">Add</a>
+            </section>
+            <section>
+              <a href="#" class="button submit">Load Python Script</a>
+            </section>
+          <div />
+        </form>
+      </section>
+
+      <section>
+        <h5>Example</h5>
+        <p>
+          ## story_ar<br />
+            * greet_ar<br />
+              - utter_ask_name<br />
+            * name_ar<br />
+              - utter_greet<br />
+              - utter_introduce<br />
+            * start_ar<br />
+              - utter_info<br />
+        </p>
+      </section>
+    </div>
+  </div>
+</section>
+</template>
