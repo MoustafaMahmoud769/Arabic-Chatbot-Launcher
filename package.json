@@ -1,20 +1,16 @@
 {
-  "name": "electron-tutorial-app",
-  "productName": "Electron tutorial app",
-  "description": "Application for electron tutorials",
-  "version": "0.1.5",
+  "name": "Arabic-Chatbot-Launcher",
+  "description": "Application for starting your own arabic chatbot",
+  "version": "1.0.0",
   "main": "main.js",
-  "license": "MIT",
-  "author": "Christian Engvall",
   "devDependencies": {
     "electron": "^3.0.5",
     "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^12.2.0",
-    "electron-winstaller": "^2.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/crilleengvall/electron-tutorial-app.git"
+    "electron-winstaller": "^2.7.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "1.16.4"
   },
   "scripts": {
     "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds --darwinDarkModeSupport=true",
@@ -22,6 +18,7 @@
     "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
     "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app electron-tutorial-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns",
     "create-installer-win": "node installers/windows/createinstaller.js",
-    "create-debian-installer": "electron-installer-debian --src release-builds/electron-tutorial-app-linux-x64/ --arch amd64 --config debian.json"
+    "create-debian-installer": "electron-installer-debian --src release-builds/electron-tutorial-app-linux-x64/ --arch amd64 --config debian.json",
+    "start": "electron ."
   }
 }
