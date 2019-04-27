@@ -4,8 +4,8 @@ if (setupEvents.handleSquirrelEvent()) {
 }
 
 // globalShortcut
-const {app, BrowserWindow} = require('electron')
-cont url = require('url')
+const {app, BrowserWindow, ipcMain} = require('electron')
+var url = require('url')
 var path = require('path')
 
 let mainWindow
@@ -22,10 +22,11 @@ function createWindow () {
   })
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
+    mainWindow.maximize()
   })
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -47,3 +48,12 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+
+require('./utils/dialog')
+require('./utils/intents')
+require('./utils/entites')
+require('./utils/actions')
+require('./utils/stories')
+require('./utils/slots')
+require('./utils/launch')
