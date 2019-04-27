@@ -9,15 +9,15 @@ ipcMain.on('add-intent', (event, arg)=> {
   ok = true;
   let rawdata = fs.readFileSync('assets/botFiles/intents.json');
   let intents = JSON.parse(rawdata);
-  intents.push (obj);
   for(let i = 0; i < intents.length; i++){
-    if (intents[i].intentName === obj.intentName) {
-      throw intents
+    if (intents[i].name == obj.name) {
+      ok = false;
     }
   }
   if (!ok) {
     return;
   }
+  intents.push(obj);
   fs.writeFile('assets/botFiles/intents.json', JSON.stringify(intents, null, 2), (err) => {
     if (err)
       throw err;

@@ -5,7 +5,10 @@ function(n) {
     actions.messaging = {
 
       addAction: function() {
-        ipcRenderer.send('add-action', 'an-argument')
+        let actionName = document.getElementById("action-name").value
+        let actionExamples = document.getElementById("action-examples").value
+        let args = {actionName, actionExamples}
+        ipcRenderer.send('add-action', args)
       },
 
       loadAction: function() {

@@ -5,7 +5,10 @@ function(n) {
     entites.messaging = {
 
       addEntity: function() {
-        ipcRenderer.send('add-entity', 'an-argument')
+        let actionName = document.getElementById("entity").value
+        let actionExamples = document.getElementById("entity-examples").value
+        let args = {actionName, actionExamples}
+        ipcRenderer.send('add-entity', args)
       },
 
       loadEntity: function() {

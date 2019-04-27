@@ -5,7 +5,10 @@ function(n) {
     story.messaging = {
 
       addStory: function() {
-        ipcRenderer.send('add-story', 'an-argument')
+        let storyName = document.getElementById("story-name").value
+        let storyBody = document.getElementById("story-body").value
+        let args = {storyName, storyBody}
+        ipcRenderer.send('add-story', args)
       },
 
       loadStory: function() {
