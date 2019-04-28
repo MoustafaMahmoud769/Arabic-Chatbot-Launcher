@@ -1,14 +1,11 @@
 const { ipcMain, dialog } = require('electron')
 var fs = require('fs')
-
-function strip(str) {
-    return str.replace(/^\s+|\s+$/g, '');
-}
+var tools = require('./tools')
 
 function cleanEntity(entityObj) {
-  entityObj.name = strip(entityObj.name);
+  entityObj.name = tools.strip(entityObj.name);
   for(i = 0; i < entityObj.examples.length; i++) {
-    entityObj.examples[i] = strip(entityObj.examples[i]);
+    entityObj.examples[i] = tools.strip(entityObj.examples[i]);
   }
   entityObj.examples = entityObj.examples.filter(Boolean);
   return entityObj;
@@ -40,20 +37,25 @@ function validateSingleEntity(entity) {
   /**
    * found out if the one or more of the entity examples is also
    * an example of another entity.
+   * found out if the title is already existed?
    */
   let rawdata = fs.readFileSync('assets/botFiles/entites.json');
   let entites = JSON.parse(rawdata);
   entites_matchs = 0;
   entites_names = [];
-  entites.forEach(function(old_intent, index){
-  for(i=0; i<old_intent.examples.length; i++) {
-    for(k=0; k<entity.examples.length; k++) {
-      if(old_intent.examples[i] == entity.examples[k]) {
-        entites_matchs++;
-        entites_names.push(old_intent.name);
+  title_existed = false;
+  entites.forEach(function(old_entity, index){
+    if(old_entity.name == entity.name) {
+      title_existed = true;
+    }
+    for(i=0; i<old_entity.examples.length; i++) {
+      for(k=0; k<entity.examples.length; k++) {
+        if(old_entity.examples[i] == entity.examples[k]) {
+          entites_matchs++;
+          entites_names.push(old_entity.name);
+        }
       }
     }
-  }
   });
 
   /**
@@ -82,6 +84,7 @@ function validateSingleEntity(entity) {
 
   return {
     empty: empty,
+    title_existed: title_existed,
     duplications: duplications,
     entites_matchs: entites_matchs,
     entites_names: entites_names,
@@ -101,13 +104,19 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
   validation_results = validateSingleEntity(entity);
 
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your Entity is empty!', 'You must provide title and examples of your entity!');
+    dialog.showErrorBox('Your entity is empty!', 'You must provide title and examples of your entity!');
     return;
   }
 
   if(validation_results.duplications != 0) {
-    dialog.showErrorBox('Your Entity examples have duplications!', 'One or more of your entity examples is repeated more than once!');
-    return;  }
+    dialog.showErrorBox('Your entity examples have duplications!', 'One or more of your entity examples is repeated more than once!');
+    return;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
+    return;
+  }
 
   if(validation_results.entites_matchs != 0) {
     dialog.showErrorBox('Entity examples are not unique!', 'Entity examples matches with other entities examples ' + validation_results.entites_matchs + ' time' + (validation_results.entites_matchs!=1?'s':'') + '! here is a list of entities name that share examples with this one:\n' + validation_results.entites_names);
