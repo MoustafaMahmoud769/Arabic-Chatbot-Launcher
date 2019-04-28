@@ -1,7 +1,7 @@
 # Arabic Chatbot Launcher
 
 ## How to run
-- install nodejs
+- install nodejs globally
 - enter project directory
-- npm install
-- electron .
+- $ npm install
+- $ npm start

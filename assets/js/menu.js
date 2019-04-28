@@ -28,6 +28,7 @@ function(n) {
 
       showSection: function(event) {
         const sectionId = event.target.dataset.section
+        console.log(sectionId);
         $('#' + sectionId).show()
         $('#' + sectionId + ' section').show()
       },
