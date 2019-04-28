@@ -26,6 +26,18 @@ function validateSingleEntity(entity) {
    }
 
   /**
+   * check for duplications in entity examples
+   */
+   duplications = 0;
+   for(i=0; i<entity.examples.length; i++) {
+    for(j=i+1; j<entity.examples.length; j++) {
+      if(entity.examples[i] == entity.examples[j]) {
+        duplications++;
+      }
+    }
+   }
+
+  /**
    * found out if the one or more of the entity examples is also
    * an example of another entity.
    */
@@ -70,6 +82,7 @@ function validateSingleEntity(entity) {
 
   return {
     empty: empty,
+    duplications: duplications,
     entites_matchs: entites_matchs,
     entites_names: entites_names,
     intents_counter: intents_counter,
@@ -88,9 +101,13 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
   validation_results = validateSingleEntity(entity);
 
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your Entity is empty!', 'You must provide title and examples of your entity');
+    dialog.showErrorBox('Your Entity is empty!', 'You must provide title and examples of your entity!');
     return;
   }
+
+  if(validation_results.duplications != 0) {
+    dialog.showErrorBox('Your Entity examples have duplications!', 'One or more of your entity examples is repeated more than once!');
+    return;  }
 
   if(validation_results.entites_matchs != 0) {
     dialog.showErrorBox('Entity examples are not unique!', 'Entity examples matches with other entities examples ' + validation_results.entites_matchs + ' time' + (validation_results.entites_matchs!=1?'s':'') + '! here is a list of entities name that share examples with this one:\n' + validation_results.entites_names);
@@ -98,7 +115,7 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
   }
 
   if(validation_results.intents_counter == 0) {
-    dialog.showErrorBox('No examples matches in any intents examples!', 'Entities examples must match words in intents examples to be effective.');
+    dialog.showErrorBox('No examples matches in any intents examples!', 'Entities examples must match words in intents examples to be effective!');
     return;
   }
 
