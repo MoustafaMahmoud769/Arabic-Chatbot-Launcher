@@ -1,20 +1,5 @@
 import json
-import os
-import glob
-
-
-def initialize_bot_dir(path):
-    if not os.path.exists(path + "/data/nlu"):
-        os.makedirs(path + "/data/nlu")
-    if not os.path.exists(path + "/data/core"):
-        os.makedirs(path + "/data/core")
-
-    files = glob.glob(path + "/data/nlu/*")
-    for f in files:
-        os.remove(f)
-    files = glob.glob(path + "/data/core/*")
-    for f in files:
-        os.remove(f)
+import sys
 
 
 def write_stories(stories_, path):
@@ -85,7 +70,7 @@ def write_domain(data, path):
 with open("data.json", "r", encoding="utf-8") as json_file:
     data = json.load(json_file)
 
-initialize_bot_dir("bot")
-write_domain(data, "bot")
-write_stories(data["stories"], "bot")
-write_nlu(data["intents"], "bot")
+path = sys.argv[1]
+write_domain(data, path)
+write_stories(data["stories"], path)
+write_nlu(data["intents"], path)
