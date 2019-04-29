@@ -20,7 +20,9 @@ if ! [[ $key =~ ^[0-9a-zA-Z]+$ ]]; then
     echo 'Invalid Bot name'; exit
 fi
 
-rm -rf $BOT
+if [ -d "$BOT" ]; then
+  echo 'Bot name already exists'; exit
+fi
 mkdir $BOT
 mkdir $BOT/data
 mkdir $BOT/data/core
