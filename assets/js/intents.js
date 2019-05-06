@@ -46,13 +46,32 @@ function(n) {
       },
 
       outputSelectedPathsFromOpenDialog: function(paths) {
+        if (!paths)
+          return;
         let results = [];
-        console.log(paths[0]);
+        var set = new Set();
+        var loc = window.location.pathname;
+        var dir = loc.substring(0, loc.lastIndexOf('/')) + '/assets/botFiles/intents.json';
+        let rawdata = fs.readFileSync(dir);
+        let data = JSON.parse(rawdata);
+        for (let i = 0; i < data.length; i++)
+          set.add(data[i].name);
         fs.createReadStream(paths[0])
-          .pipe(csv())
+          .pipe(csv(['name', 'examples']))
           .on('data', (data) => results.push(data))
           .on('end', () => {
-            //TODO: Validate
+            for (let i = 0; i < results.length; i++) {
+              row = results[i];
+              if (row.hasOwnProperty('name') && row.hasOwnProperty('examples') && !set.has(row.name)) {
+                let newRow = { name: row.name, examples: row.examples.split('\n') };
+                data.push(newRow);
+              }
+              set.add(row.name);
+            }
+            fs.writeFile('assets/botFiles/intents.json', JSON.stringify(data, null, 2), (err) => {
+              if (err)
+                throw err;
+            });
           });
       },
 
