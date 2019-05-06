@@ -3,16 +3,24 @@ const { ipcRenderer } = require('electron')
 window.actions = window.actions || {},
 function(n) {
     actions.messaging = {
-
-      addAction: function() {
+      
+      SendCurrentAction: function(eventName) {
         let actionName = document.getElementById("action-name").value
         let actionExamples = document.getElementById("action-examples").value
         let args = {actionName, actionExamples}
-        ipcRenderer.send('add-action', args)
+        ipcRenderer.send(eventName, args)
+      },
+
+      addAction: function() {
+        actions.messaging.SendCurrentAction('add-action');
       },
 
       loadAction: function() {
         ipcRenderer.send('load-action', 'an-argument')
+      },
+
+      validateCurrentAction: function() {
+        actions.messaging.SendCurrentAction('validate-curr-action');
       },
 
       init: function() {
@@ -24,6 +32,9 @@ function(n) {
           actions.messaging.loadAction()
         })
 
+        $('#validate-curr-action').click( function () {
+          actions.messaging.validateCurrentAction()
+        })
       }
     };
 
