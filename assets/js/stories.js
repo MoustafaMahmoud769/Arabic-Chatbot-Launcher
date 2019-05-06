@@ -4,15 +4,23 @@ window.story = window.story || {},
 function(n) {
     story.messaging = {
 
-      addStory: function() {
+      SendCurrentStory: function(eventName) {
         let storyName = document.getElementById("story-name").value
         let storyBody = document.getElementById("story-body").value
         let args = {storyName, storyBody}
-        ipcRenderer.send('add-story', args)
+        ipcRenderer.send(eventName, args)
+      },
+
+      addStory: function() {
+        story.messaging.SendCurrentStory('add-story');
       },
 
       loadStory: function() {
         ipcRenderer.send('load-story', 'an-argument')
+      },
+      
+      validateCurrentStory: function() {
+        story.messaging.SendCurrentStory('validate-curr-story');
       },
 
       init: function() {
@@ -24,6 +32,9 @@ function(n) {
           story.messaging.loadStory()
         })
 
+        $('#validate-curr-story').click( function () {
+          story.messaging.validateCurrentStory()
+        })
       }
     };
 
