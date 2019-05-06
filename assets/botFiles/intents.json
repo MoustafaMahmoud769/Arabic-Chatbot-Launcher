@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "sasa1",
+    "examples": [
+      "exs"
+    ]
+  },
+  {
+    "name": "sasa2",
+    "examples": [
+      "exssss"
+    ]
+  }
+]
