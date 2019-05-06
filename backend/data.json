@@ -1,0 +1,102 @@
+{
+  "stories": [
+    [
+      {"intent": "greet"},
+      {"action": "utter_greet"},
+      {"intent": "mood_great"},
+      {"action": "utter_happy"}
+    ],
+    [
+      {"intent": "greet"},
+      {"action": "utter_greet"},
+      {"intent": "mood_unhappy"},
+      {"action": "utter_cheer_up"},
+      {"action": "utter_did_that_help"},
+      {"intent": "mood_affirm"},
+      {"action": "utter_happy"}
+    ],
+    [
+      {"intent": "greet"},
+      {"action": "utter_greet"},
+      {"intent": "mood_unhappy"},
+      {"action": "utter_cheer_up"},
+      {"action": "utter_did_that_help"},
+      {"intent": "mood_deny"},
+      {"action": "utter_goodbye"}
+    ],
+    [
+      {"intent": "goodbye"},
+      {"action": "utter_goodbye"}
+    ]
+  ],
+  "intents": {
+    "greet": [
+      "hey",
+      "hello",
+      "hi",
+      "good morning",
+      "good evening",
+      "hey there"
+    ],
+    "goodbye": [
+      "bye",
+      "goodbye",
+      "see you around",
+      "see you later"
+    ],
+    "mood_affirm": [
+      "yes",
+      "indeed",
+      "of course",
+      "that sounds good",
+      "correct"
+    ],
+    "mood_deny": [
+      "no",
+      "never",
+      "I don't think so",
+      "don't like that ",
+      "no way",
+      "not really"
+    ],
+    "mood_great": [
+      "perfect",
+      "very good",
+      "great",
+      "amazing",
+      "wonderful",
+      "I am feeling very good",
+      "I am great",
+      "I'm good"
+    ],
+    "mood_unhappy": [
+      "sad",
+      "very sad",
+      "unhappy",
+      "bad",
+      "very bad",
+      "awful",
+      "terrible",
+      "not very good",
+      "extremely sad",
+      "so sad"
+    ]
+  },
+  "actions": {
+    "utter_greet": [
+      "Hey! How are you?"
+    ],
+    "utter_cheer_up": [
+      "Here is something to cheer you up: :)"
+    ],
+    "utter_did_that_help": [
+      "Did that help you?"
+    ],
+    "utter_happy": [
+      "Great carry on!"
+    ],
+    "utter_goodbye": [
+      "Bye"
+    ]
+  }
+}
