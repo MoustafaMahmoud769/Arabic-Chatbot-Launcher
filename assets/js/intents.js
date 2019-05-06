@@ -1,4 +1,10 @@
 const { ipcRenderer } = require('electron')
+const csv = require('csv-parser')
+const fs = require('fs')
+
+ipcRenderer.on('open-dialog-paths-selected-intent', (event, arg)=> {
+  intents.handler.outputSelectedPathsFromOpenDialog(arg);
+})
 
 window.intents = window.intents || {},
 function(n) {
@@ -17,10 +23,6 @@ function(n) {
         intents.messaging.SendCurrentIntent('add-intent');
       },
 
-      loadIntent: function() {
-        ipcRenderer.send('load-intent', 'an-argument')
-      },
-
       validateCurrentIntent: function() {
         intents.messaging.SendCurrentIntent('validate-curr-intent');
       },
@@ -31,17 +33,39 @@ function(n) {
           intents.messaging.addIntent()
         })
 
-        $('#load-intent').click( function () {
-          intents.messaging.loadIntent()
-        })
         $('#validate-curr-intent').click( function () {
           intents.messaging.validateCurrentIntent()
         })
       }
     };
 
+    intents.handler = {
+
+      loadIntent: function() {
+        ipcRenderer.send('show-open-dialog-intent');
+      },
+
+      outputSelectedPathsFromOpenDialog: function(paths) {
+        let results = [];
+        console.log(paths[0]);
+        fs.createReadStream(paths[0])
+          .pipe(csv())
+          .on('data', (data) => results.push(data))
+          .on('end', () => {
+            //TODO: Validate
+          });
+      },
+
+      init: function() {
+        $('#load-intent').click( function () {
+          intents.handler.loadIntent()
+        })
+      }
+    };
+
     n(function() {
         intents.messaging.init();
+        intents.handler.init();
     })
 
 }(jQuery);

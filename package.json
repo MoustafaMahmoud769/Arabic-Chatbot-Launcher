@@ -20,5 +20,8 @@
     "create-installer-win": "node installers/windows/createinstaller.js",
     "create-debian-installer": "electron-installer-debian --src release-builds/electron-tutorial-app-linux-x64/ --arch amd64 --config debian.json",
     "start": "electron ."
+  },
+  "dependencies": {
+    "csv-parser": "^2.2.0"
   }
 }

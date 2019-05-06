@@ -1,5 +1,10 @@
 const { ipcRenderer } = require('electron')
-var fs = require('fs')
+const csv = require('csv-parser')
+const fs = require('fs')
+
+ipcRenderer.on('open-dialog-paths-selected-story', (event, arg)=> {
+  story.handler.outputSelectedPathsFromOpenDialog(arg);
+})
 
 window.story = window.story || {},
 function(n) {
@@ -16,10 +21,6 @@ function(n) {
 
       addStory: function() {
         story.messaging.SendCurrentStory('add-story');
-      },
-
-      loadStory: function() {
-        ipcRenderer.send('load-story', 'an-argument')
       },
 
       validateCurrentStory: function() {
@@ -72,12 +73,8 @@ function(n) {
 
       init: function() {
         $('#add-story').click( function () {
+        })
           story.messaging.addStory()
-        })
-
-        $('#load-story').click( function () {
-          story.messaging.loadStory()
-        })
 
         $('#validate-curr-story').click( function () {
           story.messaging.validateCurrentStory()
@@ -97,8 +94,32 @@ function(n) {
       }
     };
 
+    story.handler = {
+
+      loadStory: function() {
+        ipcRenderer.send('show-open-dialog-story');
+      },
+
+      outputSelectedPathsFromOpenDialog: function(paths) {
+        let results = [];
+        console.log(paths[0]);
+        fs.createReadStream(paths[0])
+          .pipe(csv())
+          .on('data', (data) => results.push(data))
+          .on('end', () => {
+            //TODO: Validate
+          });
+      },
+
+      init: function() {
+        $('#load-story').click( function () {
+          story.handler.loadStory()
+        })
+      }
+    };
+
     n(function() {
         story.messaging.init();
+        story.handler.init();
     })
-
 }(jQuery);

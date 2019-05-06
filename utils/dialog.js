@@ -1,20 +1,37 @@
 const { ipcMain, dialog, app } = require('electron')
 
-ipcMain.on('show-open-dialog', (event, arg)=> {
+const options = {
+  title: 'Choose CSV file',
+  defaultPath: '/',
+  //buttonLabel: 'Do it',
+  filters: [
+    { name: 'csv', extensions: ['csv'] }
+  ]
+  // properties: ['showHiddenFiles'],
+  //message: 'This message will only be shown on macOS'
+};
 
-  const options = {
-      //title: 'Open a file or folder',
-      //defaultPath: '/path/to/something/',
-      //buttonLabel: 'Do it',
-      /*filters: [
-        { name: 'xml', extensions: ['xml'] }
-      ],*/
-      //properties: ['showHiddenFiles'],
-      //message: 'This message will only be shown on macOS'
-    };
-
+ipcMain.on('show-open-dialog-action', (event, arg)=> {
     dialog.showOpenDialog(null, options, (filePaths) => {
-      event.sender.send('open-dialog-paths-selected', filePaths)
+      event.sender.send('open-dialog-paths-selected-action', filePaths)
+    });
+})
+
+ipcMain.on('show-open-dialog-intent', (event, arg)=> {
+    dialog.showOpenDialog(null, options, (filePaths) => {
+      event.sender.send('open-dialog-paths-selected-intent', filePaths)
+    });
+})
+
+ipcMain.on('show-open-dialog-entity', (event, arg)=> {
+    dialog.showOpenDialog(null, options, (filePaths) => {
+      event.sender.send('open-dialog-paths-selected-entity', filePaths)
+    });
+})
+
+ipcMain.on('show-open-dialog-story', (event, arg)=> {
+    dialog.showOpenDialog(null, options, (filePaths) => {
+      event.sender.send('open-dialog-paths-selected-story', filePaths)
     });
 })
 

@@ -1,4 +1,10 @@
 const { ipcRenderer } = require('electron')
+const csv = require('csv-parser')
+const fs = require('fs')
+
+ipcRenderer.on('open-dialog-paths-selected-entity', (event, arg)=> {
+  entites.handler.outputSelectedPathsFromOpenDialog(arg);
+})
 
 window.entites = window.entites || {},
 function(n) {
@@ -17,10 +23,6 @@ function(n) {
         entites.messaging.SendCurrentEntity('add-entity');
       },
 
-      loadEntity: function() {
-        ipcRenderer.send('load-entity', 'an-argument')
-      },
-
       validateCurrentEntity: function() {
         entites.messaging.SendCurrentEntity('validate-curr-entity');
       },
@@ -30,18 +32,39 @@ function(n) {
           entites.messaging.addEntity();
         })
 
-        $('#load-entity').click( function () {
-          entites.messaging.loadEntity()
-        })
-
         $('#validate-curr-entity').click( function () {
           entites.messaging.validateCurrentEntity()
         })
       }
     };
 
+    entites.handler = {
+
+      loadEntity: function() {
+        ipcRenderer.send('show-open-dialog-entity');
+      },
+
+      outputSelectedPathsFromOpenDialog: function(paths) {
+        let results = [];
+        console.log(paths[0]);
+        fs.createReadStream(paths[0])
+          .pipe(csv())
+          .on('data', (data) => results.push(data))
+          .on('end', () => {
+            //TODO: Validate
+          });
+      },
+
+      init: function() {
+        $('#load-entity').click( function () {
+          entites.handler.loadEntity()
+        })
+      }
+    };
+
     n(function() {
         entites.messaging.init();
+        entites.handler.init();
     })
 
 }(jQuery);
