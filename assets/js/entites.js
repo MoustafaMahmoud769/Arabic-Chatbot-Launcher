@@ -5,10 +5,12 @@ function(n) {
 
     entites.messaging = {
       SendCurrentEntity: function(eventName) {
-        let entityName = document.getElementById("entity").value
-        let entityExamples = document.getElementById("entity-examples").value
-        let args = {entityName, entityExamples}
-        ipcRenderer.send(eventName, args)
+        let entityName = document.getElementById("entity").value;
+        let entityExamples = document.getElementById("entity-examples").value;
+        let args = {entityName, entityExamples};
+        ipcRenderer.send(eventName, args);
+        document.getElementById("entity").value = '';
+        document.getElementById("entity-examples").value = '';
       },
 
       addEntity: function() {

@@ -6,10 +6,12 @@ function(n) {
     story.messaging = {
 
       SendCurrentStory: function(eventName) {
-        let storyName = document.getElementById("story-name").value
-        let storyBody = document.getElementById("story-body").value
-        let args = {storyName, storyBody}
-        ipcRenderer.send(eventName, args)
+        let storyName = document.getElementById("story-name").value;
+        let storyBody = document.getElementById("story-body").value;
+        let args = {storyName, storyBody};
+        ipcRenderer.send(eventName, args);
+        document.getElementById("story-name").value = '';
+        document.getElementById("story-body").value = '';
       },
 
       addStory: function() {
@@ -19,7 +21,7 @@ function(n) {
       loadStory: function() {
         ipcRenderer.send('load-story', 'an-argument')
       },
-      
+
       validateCurrentStory: function() {
         story.messaging.SendCurrentStory('validate-curr-story');
       },

@@ -5,10 +5,12 @@ function(n) {
     intents.messaging = {
 
       SendCurrentIntent: function(eventName) {
-        let intentName = document.getElementById("intent-name").value
-        let intentExamples = document.getElementById("intent-examples").value
-        let args = {intentName, intentExamples}
-        ipcRenderer.send(eventName, args)
+        let intentName = document.getElementById("intent-name").value;
+        let intentExamples = document.getElementById("intent-examples").value;
+        let args = {intentName, intentExamples};
+        ipcRenderer.send(eventName, args);
+        document.getElementById("intent-name").value = '';
+        document.getElementById("intent-examples").value = '';
       },
 
       addIntent: function() {

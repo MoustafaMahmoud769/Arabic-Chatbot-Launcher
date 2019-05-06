@@ -55,11 +55,15 @@ function(n) {
       getData: function() {
         var loc = window.location.pathname;
         var dir = loc.substring(0, loc.lastIndexOf('/')) + '/assets/botFiles/';
-        selected = document.getElementById("show-content").value.toLowerCase() + '.json';
-        let rawdata = fs.readFileSync(dir + selected);
-        let data = JSON.parse(rawdata);
+        selected = document.getElementById("show-content").value.toLowerCase();
         let tableRef = document.getElementById('show-data');
         show.messaging.addHeader(tableRef);
+        if (selected === 'none') {
+          return;
+        }
+        selected += '.json';
+        let rawdata = fs.readFileSync(dir + selected);
+        let data = JSON.parse(rawdata);
         for(let i = 0; i < data.length; i++){
           show.messaging.addRow(tableRef, data[i]);
         }
