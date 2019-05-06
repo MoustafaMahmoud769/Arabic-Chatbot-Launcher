@@ -4,7 +4,7 @@ var fs = require('fs')
 ipcMain.on('add-story', (event, arg)=> {
   var obj = {
     name: arg.storyName,
-    body: arg.storyBody.split('\n')
+    examples: arg.storyBody.split('\n')
   };
   ok = true;
   let rawdata = fs.readFileSync('assets/botFiles/stories.json');
