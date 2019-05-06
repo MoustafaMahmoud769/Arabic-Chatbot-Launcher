@@ -11,15 +11,28 @@
           </div>
           <div class="field">
             <label for="story-body">Story Body</label>
-            <textarea name="story-body" id="story-body" rows="7"></textarea>
+            <textarea name="story-body" id="story-body" rows="7" disabled></textarea>
+          </div>
+          <div class="">
+            <label for="intents-list">Intents</label>
+            <select id="intents-list">
+            </select>
+            <br />
+            <label for="actions-list">Actions</label>
+            <select id="actions-list">
+            </select>
+            <br />
           </div>
           <div class="split style1">
             <section>
               <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
             </section>
             <section>
-              <button type="button" id="load-story" name="load-story" class="button submit" >Load Story</button>
+              <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
             </section>
+<!--             <section>
+              <button type="button" id="load-story" name="load-story" class="button submit" >Load Story</button>
+            </section> -->
           <div />
         </form>
       </section>
