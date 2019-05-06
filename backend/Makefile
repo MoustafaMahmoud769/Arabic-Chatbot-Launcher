@@ -23,7 +23,7 @@ clean:
 all: train-nlu train-core
 
 train-nlu:
-	python3 -m rasa_nlu.train -c nlu_config.yml --data data/nlu -o models --fixed_model_name nlu --project current --verbose
+	python3 -m rasa_nlu.train -c config/nlu_config.yml --data data/nlu -o models --fixed_model_name nlu --project current --verbose
 
 train-core:
 	python3 -m rasa_core.train -d domain.yml -s data/core -o models/current/dialogue --epochs 10

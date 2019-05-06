@@ -1,90 +1,119 @@
 {
   "stories": [
     [
-      {"intent": "greet"},
-      {"action": "utter_greet"},
-      {"intent": "mood_great"},
-      {"action": "utter_happy"}
+      {
+        "intent": "greet"
+      },
+      {
+        "action": "utter_ask_name"
+      },
+      {
+        "intent": "say_name"
+      },
+      {
+        "action": "utter_pleasure"
+      }
     ],
     [
-      {"intent": "greet"},
-      {"action": "utter_greet"},
-      {"intent": "mood_unhappy"},
-      {"action": "utter_cheer_up"},
-      {"action": "utter_did_that_help"},
-      {"intent": "mood_affirm"},
-      {"action": "utter_happy"}
-    ],
-    [
-      {"intent": "greet"},
-      {"action": "utter_greet"},
-      {"intent": "mood_unhappy"},
-      {"action": "utter_cheer_up"},
-      {"action": "utter_did_that_help"},
-      {"intent": "mood_deny"},
-      {"action": "utter_goodbye"}
-    ],
-    [
-      {"intent": "goodbye"},
-      {"action": "utter_goodbye"}
+      {
+        "intent": "goodbye"
+      },
+      {
+        "action": "utter_goodbye"
+      }
     ]
   ],
-  "intents": {
-    "greet": [
-      "hey",
-      "hello",
-      "hi",
-      "good morning",
-      "good evening",
-      "hey there"
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "greet",
+        "text": "hey"
+      },
+      {
+        "intent": "greet",
+        "text": "hello"
+      },
+      {
+        "intent": "greet",
+        "text": "hi"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 11,
+            "end": 15,
+            "value": "Jack",
+            "entity": "name"
+          }
+        ],
+        "text": "my name is Jack"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 4,
+            "end": 7,
+            "value": "Tom",
+            "entity": "name"
+          },
+          {
+            "start": 29,
+            "end": 34,
+            "value": "Tommy",
+            "entity": "name"
+          }
+        ],
+        "text": "I'm Tom, some people call me Tommy"
+      },
+      {
+        "intent": "goodbye",
+        "text": "bye"
+      },
+      {
+        "intent": "goodbye",
+        "text": "goodbye"
+      },
+      {
+        "intent": "mood_affirm",
+        "text": "yes"
+      },
+      {
+        "intent": "mood_affirm",
+        "text": "of course"
+      },
+      {
+        "intent": "mood_deny",
+        "text": "no"
+      },
+      {
+        "intent": "mood_deny",
+        "text": "I don't think so"
+      },
+      {
+        "intent": "mood_great",
+        "text": "very good"
+      },
+      {
+        "intent": "mood_great",
+        "text": "great"
+      },
+      {
+        "intent": "mood_great",
+        "text": "amazing"
+      }
     ],
-    "goodbye": [
-      "bye",
-      "goodbye",
-      "see you around",
-      "see you later"
-    ],
-    "mood_affirm": [
-      "yes",
-      "indeed",
-      "of course",
-      "that sounds good",
-      "correct"
-    ],
-    "mood_deny": [
-      "no",
-      "never",
-      "I don't think so",
-      "don't like that ",
-      "no way",
-      "not really"
-    ],
-    "mood_great": [
-      "perfect",
-      "very good",
-      "great",
-      "amazing",
-      "wonderful",
-      "I am feeling very good",
-      "I am great",
-      "I'm good"
-    ],
-    "mood_unhappy": [
-      "sad",
-      "very sad",
-      "unhappy",
-      "bad",
-      "very bad",
-      "awful",
-      "terrible",
-      "not very good",
-      "extremely sad",
-      "so sad"
-    ]
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": []
   },
   "actions": {
     "utter_greet": [
       "Hey! How are you?"
+    ],
+    "utter_ask_name": [
+      "What's your name?"
     ],
     "utter_cheer_up": [
       "Here is something to cheer you up: :)"
@@ -97,6 +126,9 @@
     ],
     "utter_goodbye": [
       "Bye"
+    ],
+    "utter_pleasure": [
+      "nice to meet you!"
     ]
   }
 }
