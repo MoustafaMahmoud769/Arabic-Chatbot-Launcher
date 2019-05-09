@@ -13,6 +13,7 @@ function parseEntites(data) {
   let ret = [];
   for (let i = 0; i < cur.length; ++i) {
     let obj = cur[i].split('\t');
+    //TODO : parse value
     var entity = {
       from: obj[0], to: obj[1], value: obj[2], name: obj[3]
     };

@@ -37,7 +37,7 @@ function(n) {
         let attr = [];
         attr.push(document.getElementById("intent-entity-from").value);
         attr.push(document.getElementById("intent-entity-to").value);
-        attr.push(document.getElementById("intent-entity-value").value);
+        attr.push(document.getElementById("intent-entity-idx").value);
         attr.push(document.getElementById("intent-entity-name").value);
         let text = attr.join('\t') + '\n';
         let cur = document.getElementById("intent-entites").value;
@@ -45,7 +45,7 @@ function(n) {
         document.getElementById("intent-entites").value = cur;
         document.getElementById("intent-entity-from").value = '';
         document.getElementById("intent-entity-to").value = '';
-        document.getElementById("intent-entity-value").value = '';
+        document.getElementById("intent-entity-idx").value = '';
       },
 
       removeIntentEntity: function() {
