@@ -17,8 +17,7 @@ function validateSingleEntity(entity) {
    * check if name or examples are empty!
    */
    empty = false;
-   if(entity.name == '' ||
-      entity.examples.length == 0) {
+   if(entity.name == '') {
     empty = true;
    }
 
@@ -53,7 +52,7 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
   validation_results = validateSingleEntity(entity);
 
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your entity is empty!', 'You must provide title and examples of your entity!');
+    dialog.showErrorBox('Your entity is empty!', 'You must provide title for your entity!');
     return;
   }
 
@@ -86,7 +85,7 @@ ipcMain.on('add-entity', (event, arg)=> {
     dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
     return;
   }
-
+  let entites = JSON.parse(fs.readFileSync(path));
   entites.push(entity);
   fs.writeFile(path, JSON.stringify(entites, null, 2), (err) => {
     if (err)
@@ -101,7 +100,7 @@ ipcMain.on('load-entity', (event, arg)=> {
   let data = JSON.parse(fs.readFileSync(path));
   for (let i = 0; i < data.length; i++)
     set.add(data[i].name);
-  let added = 0;
+  var added = 0;
   fs.createReadStream(arg)
     .pipe(csv(['name']))
     .on('data', (data) => results.push(data))
@@ -110,7 +109,7 @@ ipcMain.on('load-entity', (event, arg)=> {
         row = results[i];
         if (row.hasOwnProperty('name') && !set.has(row.name)) {
           data.push(row);
-          ++added;
+          added++;
         }
         set.add(row.name);
       }
@@ -119,15 +118,15 @@ ipcMain.on('load-entity', (event, arg)=> {
           dialog.showErrorBox('Oops.. ', 'Something went wrong');
           return;
         }
+        dialog.showMessageBox({
+          type: 'info',
+          message: 'Loaded Successfully',
+          detail: 'Added ' + added.toString(10) + ' Entites.',
+          buttons: ['Ok']
+        });
+        event.sender.send('entites-changed');
       });
     });
-  dialog.showMessageBox({
-    type: 'info',
-    message: 'Loaded Successfully',
-    detail: 'Added ' + added.toString(10) + ' Entites.',
-    buttons: ['Ok']
-  });
-  event.sender.send('entites-changed');
 })
 
 ipcMain.on('get-entites', (event, arg)=> {
