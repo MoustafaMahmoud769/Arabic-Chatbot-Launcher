@@ -6,6 +6,21 @@ var tools = require('./tools')
 
 const path = 'assets/botFiles/intents.json';
 
+function parseEntites(data) {
+  let cur = data.split('\n');
+  if (cur[cur.length - 1] == '')
+    cur.pop();
+  let ret = [];
+  for (let i = 0; i < cur.length; ++i) {
+    let obj = cur[i].split('\t');
+    var entity = {
+      from: obj[0], to: obj[1], value: obj[2], name: obj[3]
+    };
+    ret.push(entity);
+  }
+  return ret;
+}
+
 function cleanIntent(intentObj) {
   intentObj.name = tools.strip(intentObj.name);
   for(i = 0; i < intentObj.examples.length; i++) {
@@ -61,7 +76,7 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: arg.intentEntites.split('\n')
+    entites: parseEntites(arg.intentEntites)
   };
   intent = cleanIntent(intent);
 
@@ -95,7 +110,7 @@ ipcMain.on('add-intent', (event, arg)=> {
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: arg.intentEntites.split('\n')
+    entites: parseEntites(arg.intentEntites)
   };
   intent = cleanIntent(intent);
 

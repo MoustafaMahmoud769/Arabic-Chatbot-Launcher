@@ -50,6 +50,8 @@ function(n) {
 
       removeIntentEntity: function() {
         let cur = document.getElementById("intent-entites").value.split('\n');
+        if (cur[cur.length - 1] == '')
+          cur.pop();
         cur.pop();
         document.getElementById("intent-entites").value = cur.join('\n');
       },
@@ -129,6 +131,15 @@ function(n) {
         cell.innerHTML = " <b>Delete</b>";
       },
 
+      handleEntites: function(data) {
+        let ret = []
+        for (let i = 0; i < data.length; ++i) {
+          let text = data[i].from + '\t' + data[i].to + '\t' + data[i].value + '\t' + data[i].name;
+          ret.push(text);
+        }
+        return ret.join('\n');
+      },
+
       addRow: function(tableRef, data) {
         let newRow = tableRef.insertRow(-1);
         let newCell1 = newRow.insertCell(-1);
@@ -138,7 +149,7 @@ function(n) {
         let newText2 = document.createTextNode(data.examples.join('\n'));
         newCell2.appendChild(newText2);
         let newCell3 = newRow.insertCell(-1);
-        let newText3 = document.createTextNode(data.entites.join('\n'));
+        let newText3 = document.createTextNode(intents.handler.handleEntites(data.entites));
         newCell3.appendChild(newText3);
         let newCell4 = newRow.insertCell(-1);
         let element = document.createElement("input");
