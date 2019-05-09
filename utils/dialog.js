@@ -36,7 +36,7 @@ ipcMain.on('show-open-dialog-story', (event, arg)=> {
 })
 
 ipcMain.on('show-error-box', (event, arg) => {
-  dialog.showErrorBox('Oops! Something went wrong!', arg.intentExamples)
+  dialog.showErrorBox('Oops! Something went wrong!', 'Load Failed')
 });
 
 ipcMain.on('show-message-box', (event, arg) => {
