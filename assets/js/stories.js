@@ -41,7 +41,7 @@ function(n) {
         else {
           var opt = document.createElement('option');
           opt.appendChild(document.createTextNode('None') );
-          opt.value = 'None';
+          opt.value = '';
           sel.appendChild(opt);
         }
       },
@@ -73,8 +73,8 @@ function(n) {
 
       init: function() {
         $('#add-story').click( function () {
-        })
           story.messaging.addStory()
+        })
 
         $('#validate-curr-story').click( function () {
           story.messaging.validateCurrentStory()

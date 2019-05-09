@@ -26,8 +26,7 @@ function validateSingleEntity(entity) {
    * an example of another entity.
    * found out if the title is already existed?
    */
-  let rawdata = fs.readFileSync(path);
-  let entites = JSON.parse(rawdata);
+  let entites = JSON.parse(fs.readFileSync(path));
   title_existed = false;
   entites.forEach(function(old_entity, index){
     if(old_entity.name == entity.name) {
@@ -130,8 +129,7 @@ ipcMain.on('load-entity', (event, arg)=> {
 })
 
 ipcMain.on('get-entites', (event, arg)=> {
-  let rawdata = fs.readFileSync(path);
-  let data = JSON.parse(rawdata);
+  let data = JSON.parse(fs.readFileSync(path));
   event.sender.send('send-entites', data);
 })
 

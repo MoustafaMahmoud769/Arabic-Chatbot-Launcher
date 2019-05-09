@@ -1,6 +1,10 @@
 const { ipcMain, dialog } = require('electron')
-var fs = require('fs')
+const fs = require('fs')
+const csv = require('csv-parser')
+
 var tools = require('./tools')
+
+const path = 'assets/botFiles/intents.json';
 
 function cleanIntent(intentObj) {
   intentObj.name = tools.strip(intentObj.name);
@@ -36,8 +40,7 @@ function validateSingleIntent(intent) {
   /**
    * check for title existed before?
    */
-  let rawdata = fs.readFileSync('assets/botFiles/intents.json');
-  let intents = JSON.parse(rawdata);
+  let intents = JSON.parse(fs.readFileSync(path));
   title_existed = false;
   intents.forEach(function(old_intent, index){
     if(old_intent.name == intent.name) {
@@ -57,7 +60,8 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
   //get current intent from front end
   var intent = {
     name: arg.intentName,
-    examples: arg.intentExamples.split('\n')
+    examples: arg.intentExamples.split('\n'),
+    entites: arg.intentEntites.split('\n')
   };
   intent = cleanIntent(intent);
 
@@ -88,30 +92,91 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
 })
 
 ipcMain.on('add-intent', (event, arg)=> {
-  var obj = {
+  var intent = {
     name: arg.intentName,
-    examples: arg.intentExamples.split('\n')
+    examples: arg.intentExamples.split('\n'),
+    entites: arg.intentEntites.split('\n')
   };
-  obj = cleanIntent(obj);
+  intent = cleanIntent(intent);
 
-  ok = true;
-  let rawdata = fs.readFileSync('assets/botFiles/intents.json');
-  let intents = JSON.parse(rawdata);
-  for(let i = 0; i < intents.length; i++){
-    if (intents[i].name == obj.name) {
-      ok = false;
-    }
-  }
-  if (!ok) {
+  validation_results = validateSingleIntent(intent);
+
+  if(validation_results.empty == true) {
+    dialog.showErrorBox('Your intent is empty!', 'You must provide title and examples of your intent!');
     return;
   }
-  intents.push(obj);
-  fs.writeFile('assets/botFiles/intents.json', JSON.stringify(intents, null, 2), (err) => {
+
+  if(validation_results.duplications != 0) {
+    dialog.showErrorBox('Your intent examples have duplications!', 'One or more of your intent examples is repeated more than once!');
+    return;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your intent title is already existed!', 'Please change the intent title as it is already existed!');
+    return;
+  }
+  let intents = JSON.parse(fs.readFileSync(path));
+  intents.push(intent);
+  fs.writeFile(path, JSON.stringify(intents, null, 2), (err) => {
     if (err)
-      throw err;
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
   });
+  event.sender.send('intents-changed');
 })
 
 ipcMain.on('load-intent', (event, arg)=> {
-    console.log("load intent");
+  let results = [];
+  var set = new Set();
+  let data = JSON.parse(fs.readFileSync(path));
+  for (let i = 0; i < data.length; i++)
+    set.add(data[i].name);
+  fs.createReadStream(paths[0])
+    .pipe(csv(['name', 'examples', 'entites']))
+    .on('data', (data) => results.push(data))
+    .on('end', () => {
+      for (let i = 0; i < results.length; i++) {
+        row = results[i];
+        if (row.hasOwnProperty('name') && row.hasOwnProperty('examples') && !set.has(row.name)) {
+          let newRow = { name: row.name, examples: row.examples.split('\n'), entites: row.entites.split('\n') };
+          data.push(newRow);
+        }
+        set.add(row.name);
+      }
+      fs.writeFile('assets/botFiles/intents.json', JSON.stringify(data, null, 2), (err) => {
+        if (err) {
+          dialog.showErrorBox('Oops.. ', 'Something went wrong');
+          return;
+        }
+        dialog.showMessageBox({
+          type: 'info',
+          message: 'Loaded Successfully',
+          detail: 'Added ' + added.toString(10) + ' Intents.',
+          buttons: ['Ok']
+        });
+        event.sender.send('intents-changed');
+      });
+    });
+})
+
+ipcMain.on('get-intents', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  event.sender.send('send-intents', data);
+})
+
+ipcMain.on('remove-intent', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
+    if (err) {
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
+  });
+  event.sender.send('intents-changed');
 })

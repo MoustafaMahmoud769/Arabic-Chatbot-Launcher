@@ -11,27 +11,48 @@
           </div>
           <div class="field">
             <label for="intent-examples">Intent Example</label>
-            <textarea name="intent-examples" id="intent-examples" rows="7"></textarea>
+            <textarea name="intent-examples" id="intent-examples" rows="4"></textarea>
+            <label for="intent-entites">Intent Entites</label>
+            <textarea name="intent-entites" id="intent-entites" rows="3" disabled></textarea>
           </div>
-          <div class="split style1">
-            <section>
-              <button type="button" id="add-intent" name="add-intent" class="button submit" >Add</button>
-              <button type="button" id="validate-curr-intent" name="validate-curr-intent" class="button submit" >Validate</button>
-            </section>
-            <section>
-              <button type="button" id="load-intent" name="load-intent" class="button submit" >Load Intent</button>
-            </section>
-          <div />
+          <div class="row">
+            <div class="col">
+              <label for="intent-entity-from">From</label>
+              <input type="text" name="intent-entity-from" id="intent-entity-from" />
+            </div>
+            <div class="col">
+              <label for="intent-entity-to">To</label>
+              <input type="text" name="intent-entity-to" id="intent-entity-to" />
+            </div>
+            <div class="col">
+              <label for="intent-entity-value">Value</label>
+              <input type="text" name="intent-entity-value" id="intent-entity-value" />
+            </div>
+            <div class="col">
+              <label for="intent-entity-name">Intent Example</label>
+              <select name="intent-entity-name" id="intent-entity-name">
+              </select>
+            </div>
+            <div class="col">
+              <br />
+              <button type="button" id="add-intent-entity" name="add-intent-entity" class="button submit" >Add</button>
+            </div>
+            <div class="col">
+              <br />
+              <button type="button" id="remove-intent-entity" name="remove-intent-entity" class="button submit" >Remove</button>
+            </div>
+          </div>
         </form>
+        <button type="button" id="add-intent" name="add-intent" class="button submit" >Add</button>
+        <button type="button" id="validate-curr-intent" name="validate-curr-intent" class="button submit" >Validate</button>
+        <button type="button" id="load-intent" name="load-intent" class="button submit" >Load Intent</button>
       </section>
-
       <section>
         <h5>Example</h5>
         <p>
-          ## intent:greet_ar<br />
+          تحية<br />
           - مرحبا<br />
           - أهلا وسهلا<br />
-          - أهلا ومرحبا<br />
           - السلام عليكم<br />
           - صباح الخير<br />
           - مساء الخير<br />
@@ -39,6 +60,10 @@
         </p>
       </section>
     </div>
+  </div>
+  <div class="container">
+    <table name="show-intents" id="show-intents" style="width:90%">
+    </table>
   </div>
 </section>
 </template>
