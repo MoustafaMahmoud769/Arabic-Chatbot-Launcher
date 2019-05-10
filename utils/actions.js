@@ -55,6 +55,28 @@ function validateSingleAction(action) {
   }
 }
 
+function isActionValidwAction(action) {
+
+  validation_results = validateSingleAction(action);
+
+  if(validation_results.empty == true) {
+    dialog.showErrorBox('Your action is empty!', 'You must provide title and examples of your action!');
+    return false;
+  }
+
+  if(validation_results.duplications != 0) {
+    dialog.showErrorBox('Your action examples have duplications!', 'One or more of your action examples is repeated more than once!');
+    return false;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your action title is already existed!', 'Please change the action title as it is already existed!');
+    return false;
+  }
+
+  return true;
+}
+
 ipcMain.on('validate-curr-action', (event, arg)=>{
 
   //get current action from front end
@@ -64,20 +86,7 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
   };
   action = cleanAction(action);
 
-  validation_results = validateSingleAction(action);
-
-  if(validation_results.empty == true) {
-    dialog.showErrorBox('Your action is empty!', 'You must provide title and examples of your action!');
-    return;
-  }
-
-  if(validation_results.duplications != 0) {
-    dialog.showErrorBox('Your action examples have duplications!', 'One or more of your action examples is repeated more than once!');
-    return;
-  }
-
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your action title is already existed!', 'Please change the action title as it is already existed!');
+  if(!isActionValidwAction(action)) {
     return;
   }
 
@@ -96,20 +105,7 @@ ipcMain.on('add-action', (event, arg)=> {
   };
   action = cleanAction(action);
 
-  validation_results = validateSingleAction(action);
-
-  if(validation_results.empty == true) {
-    dialog.showErrorBox('Your action is empty!', 'You must provide title and examples of your action!');
-    return;
-  }
-
-  if(validation_results.duplications != 0) {
-    dialog.showErrorBox('Your action examples have duplications!', 'One or more of your action examples is repeated more than once!');
-    return;
-  }
-
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your action title is already existed!', 'Please change the action title as it is already existed!');
+  if(!isActionValidwAction(action)) {
     return;
   }
 

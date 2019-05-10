@@ -157,7 +157,7 @@ function validateSingleIntent(intent) {
   }
 }
 
-function is_valid_action(intent) {
+function isIntentValidwAction(intent) {
 
   validation_results = validateSingleIntent(intent);
 
@@ -205,7 +205,7 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
   };
   intent = cleanIntent(intent);
 
-  if(!is_valid_action(intent)) {
+  if(!isIntentValidwAction(intent)) {
     return;
   }
 
@@ -225,7 +225,7 @@ ipcMain.on('add-intent', (event, arg)=> {
   };
   intent = cleanIntent(intent);
 
-  if(!is_valid_action(intent)) {
+  if(!isIntentValidwAction(intent)) {
     return;
   }
 

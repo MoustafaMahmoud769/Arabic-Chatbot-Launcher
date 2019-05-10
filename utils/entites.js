@@ -40,6 +40,23 @@ function validateSingleEntity(entity) {
   }
 }
 
+function isEntityValidwAction(entity) {
+
+  validation_results = validateSingleEntity(entity);
+
+  if(validation_results.empty == true) {
+    dialog.showErrorBox('Your entity is empty!', 'You must provide title for your entity!');
+    return false;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
+    return false;
+  }
+
+  return true;
+}
+
 ipcMain.on('validate-curr-entity', (event, arg)=>{
 
   //get current entity from front end
@@ -48,15 +65,7 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
   };
   entity = cleanEntity(entity);
 
-  validation_results = validateSingleEntity(entity);
-
-  if(validation_results.empty == true) {
-    dialog.showErrorBox('Your entity is empty!', 'You must provide title for your entity!');
-    return;
-  }
-
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
+  if(!isEntityValidwAction(entity)) {
     return;
   }
 
@@ -74,17 +83,11 @@ ipcMain.on('add-entity', (event, arg)=> {
     name: arg.entityName
   };
   entity = cleanEntity(entity)
-  validation_results = validateSingleEntity(entity);
 
-  if(validation_results.empty == true) {
-    dialog.showErrorBox('Your entity is empty!', 'You must provide title and examples of your entity!');
+  if(!isEntityValidwAction(intent)) {
     return;
   }
 
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
-    return;
-  }
   let entites = JSON.parse(fs.readFileSync(path));
   entites.push(entity);
   fs.writeFile(path, JSON.stringify(entites, null, 2), (err) => {

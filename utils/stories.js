@@ -144,14 +144,7 @@ function validateSingleStory(story) {
   }
 }
 
-ipcMain.on('validate-curr-story', (event, arg)=>{
-
-  //get current story from front end
-  var story = {
-    name: arg.storyName,
-    examples: arg.storyBody.split('\n')
-  };
-  story = cleanStory(story);
+function isStoryValidwAction(story) {
 
   validation_results = validateSingleStory(story);
 
@@ -182,6 +175,20 @@ ipcMain.on('validate-curr-story', (event, arg)=>{
 
   if(validation_results.title_existed == true) {
     dialog.showErrorBox('Your story title is already existed!', 'Please change the story title as it is already existed!');
+    return;
+  }
+}
+
+ipcMain.on('validate-curr-story', (event, arg)=>{
+
+  //get current story from front end
+  var story = {
+    name: arg.storyName,
+    examples: arg.storyBody.split('\n')
+  };
+  story = cleanStory(story);
+
+  if(!isStoryValidwAction(story)) {
     return;
   }
 
@@ -201,38 +208,10 @@ ipcMain.on('add-story', (event, arg)=> {
   };
   story = cleanStory(story);
 
-  validation_results = validateSingleStory(story);
-
-  if(validation_results.empty == true) {
-    dialog.showErrorBox('Your story is empty!', 'You must provide title and examples of your story!');
+  if(!isStoryValidwAction(story)) {
     return;
   }
-
-  if(validation_results.invalid == true) {
-    dialog.showErrorBox('Your story have invalid lines!', 'Error in this line "' + validation_results.invalid_str + '"!');
-    return;
-  }
-
-  if(validation_results.no_action == true) {
-    dialog.showErrorBox('Your story have intent that does not have an action!', 'Error in this intent "' + validation_results.no_action_str + '"!');
-    return;
-  }
-
-  if(validation_results.invalid_intent == true) {
-    dialog.showErrorBox('Your story have intent that does not exist!', 'Error in this intent "' + validation_results.invalid_intent_str + '"!');
-    return;
-  }
-
-  if(validation_results.invalid_action == true) {
-    dialog.showErrorBox('Your story have action that does not exist!', 'Error in this action "' + validation_results.invalid_action_str + '"!');
-    return;
-  }
-
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your story title is already existed!', 'Please change the story title as it is already existed!');
-    return;
-  }
-
+  
   let stories = JSON.parse(fs.readFileSync(path));
   stories.push(story);
   fs.writeFile(path, JSON.stringify(stories, null, 2), (err) => {
