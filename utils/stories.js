@@ -150,33 +150,35 @@ function isStoryValidwAction(story) {
 
   if(validation_results.empty == true) {
     dialog.showErrorBox('Your story is empty!', 'You must provide title and examples of your story!');
-    return;
+    return false;
   }
 
   if(validation_results.invalid == true) {
     dialog.showErrorBox('Your story have invalid lines!', 'Error in this line "' + validation_results.invalid_str + '"!');
-    return;
+    return false;
   }
 
   if(validation_results.no_action == true) {
     dialog.showErrorBox('Your story have intent that does not have an action!', 'Error in this intent "' + validation_results.no_action_str + '"!');
-    return;
+    return false;
   }
 
   if(validation_results.invalid_intent == true) {
     dialog.showErrorBox('Your story have intent that does not exist!', 'Error in this intent "' + validation_results.invalid_intent_str + '"!');
-    return;
+    return false;
   }
 
   if(validation_results.invalid_action == true) {
     dialog.showErrorBox('Your story have action that does not exist!', 'Error in this action "' + validation_results.invalid_action_str + '"!');
-    return;
+    return false;
   }
 
   if(validation_results.title_existed == true) {
     dialog.showErrorBox('Your story title is already existed!', 'Please change the story title as it is already existed!');
-    return;
+    return false;
   }
+
+  return true;
 }
 
 ipcMain.on('validate-curr-story', (event, arg)=>{
@@ -211,7 +213,7 @@ ipcMain.on('add-story', (event, arg)=> {
   if(!isStoryValidwAction(story)) {
     return;
   }
-  
+
   let stories = JSON.parse(fs.readFileSync(path));
   stories.push(story);
   fs.writeFile(path, JSON.stringify(stories, null, 2), (err) => {
