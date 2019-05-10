@@ -157,42 +157,44 @@ function validateSingleIntent(intent) {
   }
 }
 
-function isIntentValidwAction(intent) {
-
-  validation_results = validateSingleIntent(intent);
-
+function findIntentError(validation_results, options) {
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your intent is empty!', 'You must provide title and examples of your intent!');
-    return false;
+    return {"title": 'Your intent is empty!', "body": "You must provide title for your intent!"};
   }
 
   if(validation_results.duplications != 0) {
-    dialog.showErrorBox('Your intent examples have duplications!', 'One or more of your intent examples is repeated more than once!');
-    return false;
+    return {"title": 'Your intent examples have duplications!', "body": "One or more of your intent examples is repeated more than once!"};
   }
 
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your intent title is already existed!', 'Please change the intent title as it is already existed!');
-    return false;
+  if(validation_results.title_existed == true && options['dups'] != false) {
+    return {"title": 'Your intent title is already existed!', "body": "Please change the intent title as it is already existed!"};
   }
 
   if(validation_results.indices_error == true) {
-    dialog.showErrorBox('Your intent has entity with non-numeric indices!', 'The entity number ' + (validation_results.indices_error_i + 1) + ' has non-numeric indices, please fix it!');
-    return false;
+    return {"title": 'Your intent has entity with non-numeric indices!', "body": 'The entity number ' + (validation_results.indices_error_i + 1) + ' has non-numeric indices, please fix it!'};
   }
 
   if(validation_results.entity_error == true) {
-    dialog.showErrorBox('Your intent has entity with invalid [logically] indices!', 'The entity number ' + (validation_results.entity_error_i + 1) + ' has error in its indices, please fix it!');
-    return false;
+    return {"title": 'Your intent has entity with invalid [logically] indices!', "body": 'The entity number ' + (validation_results.entity_error_i + 1) + ' has error in its indices, please fix it!'};
   }
 
   if(validation_results.overlapping_indices == true) {
-    dialog.showErrorBox('Your example has multiple entities with overlapping indices!', 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].value + 1) + ' has multiple entities with overlapping indices, please fix it!');
-    return false;
+    return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].value + 1) + ' has multiple entities with overlapping indices, please fix it!'};
+  }
+  return false;
+}
+
+function isIntentValidwAction(intent) {
+
+  validation_results = validateSingleIntent(intent);
+  error = findIntentError(validation_results);
+
+  if(error == false) {
+    return true;
   }
 
-  //TODO: check for similarity with other intents!!
-  return true;
+  dialog.showErrorBox(error['title'], error['body']);
+  return false;
 }
 
 ipcMain.on('validate-curr-intent', (event, arg)=>{
@@ -296,3 +298,8 @@ ipcMain.on('remove-intent', (event, arg)=> {
   });
   event.sender.send('intents-changed');
 })
+
+module.exports = {
+    validateSingleIntent: validateSingleIntent,
+    findIntentError: findIntentError,
+}

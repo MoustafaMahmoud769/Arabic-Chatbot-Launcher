@@ -40,21 +40,27 @@ function validateSingleEntity(entity) {
   }
 }
 
-function isEntityValidwAction(entity) {
-
-  validation_results = validateSingleEntity(entity);
-
+function findEntityError(validation_results, options) {
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your entity is empty!', 'You must provide title for your entity!');
-    return false;
+    return {"title": 'Your entity is empty!', "body": "You must provide title for your entity!"};
   }
 
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your entity title is already existed!', 'Please change the entity title as it is already existed!');
-    return false;
+  if(validation_results.title_existed == true  && options['dups'] != false) {
+    return {"title": 'Your entity title is already existed!', "body": "Please change the entity title as it is already existed!"};
+  }
+  return false;
+}
+
+function isEntityValidwAction(entity) {
+  validation_results = validateSingleEntity(entity);
+  error = findEntityError(validation_results);
+
+  if(error == false) {
+    return true;
   }
 
-  return true;
+  dialog.showErrorBox(error['title'], error['body']);
+  return false;
 }
 
 ipcMain.on('validate-curr-entity', (event, arg)=>{
@@ -84,7 +90,7 @@ ipcMain.on('add-entity', (event, arg)=> {
   };
   entity = cleanEntity(entity)
 
-  if(!isEntityValidwAction(intent)) {
+  if(!isEntityValidwAction(entity)) {
     return;
   }
 
@@ -153,3 +159,8 @@ ipcMain.on('remove-entity', (event, arg)=> {
   });
   event.sender.send('entites-changed');
 })
+
+module.exports = {
+    validateSingleEntity: validateSingleEntity,
+    findEntityError: findEntityError,
+}
