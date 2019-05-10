@@ -13,42 +13,45 @@
             <label for="story-body">Story Body</label>
             <textarea name="story-body" id="story-body" rows="7" disabled></textarea>
           </div>
-          <div class="">
-            <label for="intents-list">Intents</label>
-            <select id="intents-list">
-            </select>
-            <br />
-            <label for="actions-list">Actions</label>
-            <select id="actions-list">
-            </select>
-            <br />
+          <div class="row">
+            <div class="col">
+              <label for="intents-list">Intents</label>
+              <select id="intents-list">
+              </select>
+            </div>
+            <div class="col">
+              <label for="actions-list">Actions</label>
+              <select id="actions-list">
+              </select>
+            </div>
+            <div class="col">
+              <br />
+              <button type="button" id="remove-body" name="remove-body" class="button submit" >Remove</button>
+            </div>
           </div>
-          <div class="split style1">
-            <section>
-              <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
-              <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
-            </section>
-            <section>
-              <button type="button" id="load-story" name="load-story" class="button submit" >Load Sheet</button>
-            </section>
-          <div />
         </form>
+        <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
+        <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
+        <button type="button" id="load-story" name="load-story" class="button submit" >Load Sheet</button>
       </section>
-
       <section>
         <h5>Example</h5>
         <p>
-          <b>## story_ar</b><br />
-            * greet_ar<br />
-              - utter_ask_name<br />
-            * name_ar<br />
-              - utter_greet<br />
-              - utter_introduce<br />
-            * start_ar<br />
-              - utter_info<br />
+          <b>بداية المحادثة</b><br />
+            * القاء التحية<br />
+              - السؤال عن الاسم<br />
+            * اعطاء الاسم<br />
+              - القاء التحية لشخص<br />
+              - تقديم نفسك<br />
+            * السؤال عن تاريخ انطلاقك<br />
+              - الرد عن تاريخ انطلاق<br />
         </p>
       </section>
     </div>
+  </div>
+  <div class="container">
+    <table name="show-stories" id="show-stories" style="width:100%">
+    </table>
   </div>
 </section>
 </template>

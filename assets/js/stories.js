@@ -1,30 +1,110 @@
 const { ipcRenderer } = require('electron')
-const csv = require('csv-parser')
-const fs = require('fs')
 
 ipcRenderer.on('open-dialog-paths-selected-story', (event, arg)=> {
-  story.handler.outputSelectedPathsFromOpenDialog(arg);
+  stories.handler.outputSelectedPathsFromOpenDialog(arg);
 })
 
-window.story = window.story || {},
+ipcRenderer.on('send-intents', (event, arg)=> {
+  stories.handler.updateIntentsChoices(arg);
+})
+
+ipcRenderer.on('send-actions', (event, arg)=> {
+  stories.handler.updateActionsChoices(arg);
+})
+
+ipcRenderer.on('send-stories', (event, arg)=> {
+  stories.handler.update(arg);
+})
+
+ipcRenderer.on('stories-changed', (event, arg)=> {
+  stories.messaging.UpdateTable();
+})
+
+window.stories = window.stories || {},
 function(n) {
-    story.messaging = {
+    stories.messaging = {
 
       SendCurrentStory: function(eventName) {
         let storyName = document.getElementById("story-name").value;
         let storyBody = document.getElementById("story-body").value;
         let args = {storyName, storyBody};
         ipcRenderer.send(eventName, args);
+      },
+
+      addStory: function() {
+        stories.messaging.SendCurrentStory('add-story');
         document.getElementById("story-name").value = '';
         document.getElementById("story-body").value = '';
       },
 
-      addStory: function() {
-        story.messaging.SendCurrentStory('add-story');
+      validateCurrentStory: function() {
+        stories.messaging.SendCurrentStory('validate-curr-story');
       },
 
-      validateCurrentStory: function() {
-        story.messaging.SendCurrentStory('validate-curr-story');
+      UpdateTable: function() {
+        ipcRenderer.send('get-stories');
+      },
+
+      appendIntent: function() {
+        newtext = document.getElementById('intents-list').value;
+        if (newtext == '')
+          return;
+        selected = '* ' + newtext + '\n';
+        text = document.getElementById('story-body').value + selected;
+        document.getElementById('story-body').value = text;
+      },
+
+      appendAction: function() {
+        newtext = document.getElementById('actions-list').value;
+        if (newtext == '')
+          return;
+        selected = '- ' + newtext + '\n';
+        text = document.getElementById('story-body').value + selected;
+        document.getElementById('story-body').value = text;
+      },
+
+      removeBody: function() {
+        let cur = document.getElementById('story-body').value.split('\n');
+        if (cur[cur.length - 1] == '')
+          cur.pop();
+        cur.pop();
+        document.getElementById('story-body').value = cur.join('\n');
+      },
+
+      init: function() {
+        $('#remove-body').click( function () {
+          stories.messaging.removeBody()
+        })
+
+        $('#add-story').click( function () {
+          stories.messaging.addStory()
+        })
+
+        $('#validate-curr-story').click( function () {
+          stories.messaging.validateCurrentStory()
+        })
+
+        $('#tab5').click( function() {
+          intents.messaging.UpdateTable()
+          actions.messaging.UpdateTable()
+          stories.messaging.UpdateTable()
+        })
+
+        $('#intents-list').click( function() {
+          stories.messaging.appendIntent()
+        })
+
+        $('#actions-list').click( function() {
+          stories.messaging.appendAction()
+        })
+      }
+
+    };
+
+    stories.handler = {
+
+      loadStory: function() {
+        ipcRenderer.send('show-open-dialog-story');
       },
 
       setOptions: function(optionName, data) {
@@ -46,99 +126,72 @@ function(n) {
         }
       },
 
-      addChoices: function() {
-        var loc = window.location.pathname;
-        var dir = loc.substring(0, loc.lastIndexOf('/')) + '/assets/botFiles/';
-        let rawdata = fs.readFileSync(dir + 'intents.json');
-        let data = JSON.parse(rawdata);
-        story.messaging.setOptions('intents-list', data);
-        rawdata = fs.readFileSync(dir + 'actions.json');
-        data = JSON.parse(rawdata);
-        story.messaging.setOptions('actions-list', data);
+      updateIntentsChoices: function(data) {
+        stories.handler.setOptions('intents-list', data);
       },
 
-      appendIntent: function() {
-        selected = '* ' + document.getElementById('intents-list').value + '\n';
-        text = document.getElementById('story-body').value + selected;
-        console.log(text);
-        document.getElementById('story-body').value = text;
+      updateActionsChoices: function(data) {
+        stories.handler.setOptions('actions-list', data);
       },
 
-      appendAction: function() {
-        selected = '- ' + document.getElementById('actions-list').value + '\n';
-        text = document.getElementById('story-body').value + selected;
-        console.log(text);
-        document.getElementById('story-body').value = text;
+      addHeader: function(tableRef) {
+        tableRef.innerHTML = '';
+        var header = tableRef.createTHead();
+        var row = header.insertRow(0);
+        var cell = row.insertCell(0);
+        cell.innerHTML = " <b>Name</b>";
+        cell = row.insertCell(1);
+        cell.innerHTML = " <b>Examples</b>";
+        cell = row.insertCell(2);
+        cell.innerHTML = " <b>Delete</b>";
       },
 
-      init: function() {
-        $('#add-story').click( function () {
-          story.messaging.addStory()
-        })
+      addRow: function(tableRef, data) {
+        let newRow = tableRef.insertRow(-1);
+        let newCell1 = newRow.insertCell(-1);
+        let newText1 = document.createTextNode(data.name);
+        newCell1.appendChild(newText1);
+        let newCell2 = newRow.insertCell(-1);
+        let newText2 = document.createTextNode(data.examples.join('\n'));
+        newCell2.appendChild(newText2);
+        let newCell3 = newRow.insertCell(-1);
+        let element = document.createElement("input");
+        element.name = "Delete";
+        element.type = "input";
+        element.value = "Delete";
+        element.onclick = function() {
+          stories.handler.remove(data.name);
+        };
+        newCell3.appendChild(element);
+      },
 
-        $('#validate-curr-story').click( function () {
-          story.messaging.validateCurrentStory()
-        })
-        $('#tab5').click( function() {
-          story.messaging.addChoices()
-        })
+      remove: function(name) {
+        ipcRenderer.send('remove-story', name);
+      },
 
-        $('#intents-list').click( function() {
-          story.messaging.appendIntent()
-        })
-
-        $('#actions-list').click( function() {
-          story.messaging.appendAction()
-        })
-
-      }
-    };
-
-    story.handler = {
-
-      loadStory: function() {
-        ipcRenderer.send('show-open-dialog-story');
+      update: function(data) {
+        let tableRef = document.getElementById('show-stories');
+        stories.handler.addHeader(tableRef);
+        for(let i = 0; i < data.length; i++){
+          stories.handler.addRow(tableRef, data[i]);
+        }
       },
 
       outputSelectedPathsFromOpenDialog: function(paths) {
         if (!paths)
           return;
-        let results = [];
-        var set = new Set();
-        var loc = window.location.pathname;
-        var dir = loc.substring(0, loc.lastIndexOf('/')) + '/assets/botFiles/stories.json';
-        let rawdata = fs.readFileSync(dir);
-        let data = JSON.parse(rawdata);
-        for (let i = 0; i < data.length; i++)
-          set.add(data[i].name);
-        fs.createReadStream(paths[0])
-          .pipe(csv(['name', 'examples']))
-          .on('data', (data) => results.push(data))
-          .on('end', () => {
-            for (let i = 0; i < results.length; i++) {
-              row = results[i];
-              if (row.hasOwnProperty('name') && row.hasOwnProperty('examples') && !set.has(row.name)) {
-                let newRow = { name: row.name, examples: row.examples.split('\n') };
-                data.push(newRow);
-              }
-              set.add(row.name);
-            }
-            fs.writeFile('assets/botFiles/stories.json', JSON.stringify(data, null, 2), (err) => {
-              if (err)
-                throw err;
-            });
-          });
+        ipcRenderer.send('load-story', paths[0]);
       },
 
       init: function() {
         $('#load-story').click( function () {
-          story.handler.loadStory()
+          stories.handler.loadStory()
         })
       }
     };
 
     n(function() {
-        story.messaging.init();
-        story.handler.init();
+        stories.messaging.init();
+        stories.handler.init();
     })
 }(jQuery);

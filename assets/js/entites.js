@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron')
-const fs = require('fs')
 
 ipcRenderer.on('open-dialog-paths-selected-entity', (event, arg)=> {
   entites.handler.outputSelectedPathsFromOpenDialog(arg);
@@ -21,11 +20,11 @@ function(n) {
         let entityName = document.getElementById("entity").value;
         let args = { entityName };
         ipcRenderer.send(eventName, args);
-        document.getElementById("entity").value = '';
       },
 
       addEntity: function() {
         entites.messaging.SendCurrentEntity('add-entity');
+        document.getElementById("entity").value = '';
       },
 
       validateCurrentEntity: function() {

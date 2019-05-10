@@ -1,6 +1,10 @@
 const { ipcMain, dialog } = require('electron')
-var fs = require('fs')
+const fs = require('fs')
+const csv = require('csv-parser')
+
 var tools = require('./tools')
+
+const path = 'assets/botFiles/actions.json';
 
 function cleanAction(entityObj) {
   entityObj.name = tools.strip(entityObj.name);
@@ -36,8 +40,7 @@ function validateSingleAction(action) {
   /**
    * check for title existed before?
    */
-  let rawdata = fs.readFileSync('assets/botFiles/actions.json');
-  let actions = JSON.parse(rawdata);
+  let actions = JSON.parse(fs.readFileSync(path));
   title_existed = false;
   actions.forEach(function(old_action, index){
     if(old_action.name == action.name) {
@@ -87,31 +90,94 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
 })
 
 ipcMain.on('add-action', (event, arg)=> {
-  var obj = {
+  var action = {
     name: arg.actionName,
     examples: arg.actionExamples.split('\n')
   };
-  obj = cleanAction(obj)
+  action = cleanAction(action);
 
+  validation_results = validateSingleAction(action);
 
-  ok = true;
-  let rawdata = fs.readFileSync('assets/botFiles/actions.json');
-  let actions = JSON.parse(rawdata);
-  for(let i = 0; i < actions.length; i++){
-    if (actions[i].name == obj.name) {
-      ok = false;
-    }
-  }
-  if (!ok) {
+  if(validation_results.empty == true) {
+    dialog.showErrorBox('Your action is empty!', 'You must provide title and examples of your action!');
     return;
   }
-  actions.push(obj);
-  fs.writeFile('assets/botFiles/actions.json', JSON.stringify(actions, null, 2), (err) => {
-    if (err)
-      throw err;
+
+  if(validation_results.duplications != 0) {
+    dialog.showErrorBox('Your action examples have duplications!', 'One or more of your action examples is repeated more than once!');
+    return;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your action title is already existed!', 'Please change the action title as it is already existed!');
+    return;
+  }
+
+  let actions = JSON.parse(fs.readFileSync(path));
+  actions.push(action);
+  fs.writeFile(path, JSON.stringify(actions, null, 2), (err) => {
+    if (err) {
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
   });
+  event.sender.send('actions-changed');
 })
 
 ipcMain.on('load-action', (event, arg)=> {
-    console.log("load action");
+  let results = [];
+  var set = new Set();
+  let data = JSON.parse(fs.readFileSync(path));
+  for (let i = 0; i < data.length; i++)
+    set.add(data[i].name);
+  var added = 0;
+  fs.createReadStream(arg)
+    .pipe(csv(['name', 'examples']))
+    .on('data', (data) => results.push(data))
+    .on('end', () => {
+      for (let i = 0; i < results.length; i++) {
+        row = results[i];
+        if (row.hasOwnProperty('name') && !set.has(row.name)) {
+          var newRow = { name: row.name, examples: row.examples.split('\n') };
+          data.push(newRow);
+          added++;
+        }
+        set.add(row.name);
+      }
+      fs.writeFile(path, JSON.stringify(data, null, 2), (err) => {
+        if (err) {
+          dialog.showErrorBox('Oops.. ', 'Something went wrong');
+          return;
+        }
+        dialog.showMessageBox({
+          type: 'info',
+          message: 'Loaded Successfully',
+          detail: 'Added ' + added.toString(10) + ' Actions.',
+          buttons: ['Ok']
+        });
+        event.sender.send('actions-changed');
+      });
+    });
+})
+
+ipcMain.on('get-actions', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  event.sender.send('send-actions', data);
+})
+
+ipcMain.on('remove-action', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
+    if (err) {
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
+  });
+  event.sender.send('actions-changed');
 })

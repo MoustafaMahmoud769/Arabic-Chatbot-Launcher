@@ -148,6 +148,7 @@ ipcMain.on('load-intent', (event, arg)=> {
   let data = JSON.parse(fs.readFileSync(path));
   for (let i = 0; i < data.length; i++)
     set.add(data[i].name);
+  let added = 0;
   fs.createReadStream(paths[0])
     .pipe(csv(['name', 'examples', 'entites']))
     .on('data', (data) => results.push(data))
@@ -155,8 +156,9 @@ ipcMain.on('load-intent', (event, arg)=> {
       for (let i = 0; i < results.length; i++) {
         row = results[i];
         if (row.hasOwnProperty('name') && row.hasOwnProperty('examples') && !set.has(row.name)) {
-          let newRow = { name: row.name, examples: row.examples.split('\n'), entites: row.entites.split('\n') };
+          let newRow = { name: row.name, examples: row.examples.split('\n'), entites: parseEntites(row.entites) };
           data.push(newRow);
+          ++added;
         }
         set.add(row.name);
       }

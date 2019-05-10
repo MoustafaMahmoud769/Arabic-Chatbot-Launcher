@@ -1,6 +1,4 @@
 const { ipcRenderer } = require('electron')
-const csv = require('csv-parser')
-const fs = require('fs')
 
 ipcRenderer.on('open-dialog-paths-selected-intent', (event, arg)=> {
   intents.handler.outputSelectedPathsFromOpenDialog(arg);
@@ -28,9 +26,6 @@ function(n) {
         let intentEntites = document.getElementById("intent-entites").value;
         let args = {intentName, intentExamples, intentEntites};
         ipcRenderer.send(eventName, args);
-        document.getElementById("intent-name").value = '';
-        document.getElementById("intent-examples").value = '';
-        document.getElementById("intent-entites").value = '';
       },
 
       addIntentEntity: function() {
@@ -58,6 +53,9 @@ function(n) {
 
       addIntent: function() {
         intents.messaging.SendCurrentIntent('add-intent');
+        document.getElementById("intent-name").value = '';
+        document.getElementById("intent-examples").value = '';
+        document.getElementById("intent-entites").value = '';
       },
 
       validateCurrentIntent: function() {

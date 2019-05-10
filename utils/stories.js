@@ -1,6 +1,10 @@
 const { ipcMain, dialog } = require('electron')
-var fs = require('fs')
+const fs = require('fs')
+const csv = require('csv-parser')
+
 var tools = require('./tools')
+
+const path = 'assets/botFiles/stories.json';
 
 function cleanStory(storyObj) {
   storyObj.name = tools.strip(storyObj.name);
@@ -117,7 +121,7 @@ function validateSingleStory(story) {
   /**
    * check for title existed before?
    */
-  let rawdata = fs.readFileSync('assets/botFiles/stories.json');
+  let rawdata = fs.readFileSync(path);
   let stories = JSON.parse(rawdata);
   title_existed = false;
   stories.forEach(function(old_story, index){
@@ -191,29 +195,109 @@ ipcMain.on('validate-curr-story', (event, arg)=>{
 
 
 ipcMain.on('add-story', (event, arg)=> {
-  var obj = {
+  var story = {
     name: arg.storyName,
     examples: arg.storyBody.split('\n')
   };
-  obj = cleanStory(obj);
-  ok = true;
-  let rawdata = fs.readFileSync('assets/botFiles/stories.json');
-  let stories = JSON.parse(rawdata);
-  for(let i = 0; i < stories.length; i++){
-    if (stories[i].name == obj.name) {
-      ok = false;
-    }
-  }
-  if (!ok) {
+  story = cleanStory(story);
+
+  validation_results = validateSingleStory(story);
+
+  if(validation_results.empty == true) {
+    dialog.showErrorBox('Your story is empty!', 'You must provide title and examples of your story!');
     return;
   }
-  stories.push(obj);
-  fs.writeFile('assets/botFiles/stories.json', JSON.stringify(stories, null, 2), (err) => {
-    if (err)
-      throw err;
+
+  if(validation_results.invalid == true) {
+    dialog.showErrorBox('Your story have invalid lines!', 'Error in this line "' + validation_results.invalid_str + '"!');
+    return;
+  }
+
+  if(validation_results.no_action == true) {
+    dialog.showErrorBox('Your story have intent that does not have an action!', 'Error in this intent "' + validation_results.no_action_str + '"!');
+    return;
+  }
+
+  if(validation_results.invalid_intent == true) {
+    dialog.showErrorBox('Your story have intent that does not exist!', 'Error in this intent "' + validation_results.invalid_intent_str + '"!');
+    return;
+  }
+
+  if(validation_results.invalid_action == true) {
+    dialog.showErrorBox('Your story have action that does not exist!', 'Error in this action "' + validation_results.invalid_action_str + '"!');
+    return;
+  }
+
+  if(validation_results.title_existed == true) {
+    dialog.showErrorBox('Your story title is already existed!', 'Please change the story title as it is already existed!');
+    return;
+  }
+
+  let stories = JSON.parse(fs.readFileSync(path));
+  stories.push(story);
+  fs.writeFile(path, JSON.stringify(stories, null, 2), (err) => {
+    if (err) {
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
   });
+  event.sender.send('stories-changed');
 })
 
 ipcMain.on('load-story', (event, arg)=> {
-    console.log("load story");
+  let results = [];
+  var set = new Set();
+  let data = JSON.parse(fs.readFileSync(path));
+  for (let i = 0; i < data.length; i++)
+    set.add(data[i].name);
+  var added = 0;
+  fs.createReadStream(arg)
+    .pipe(csv(['name', 'examples']))
+    .on('data', (data) => results.push(data))
+    .on('end', () => {
+      for (let i = 0; i < results.length; i++) {
+        row = results[i];
+        if (row.hasOwnProperty('name') && !set.has(row.name)) {
+          var newRow = { name: row.name, examples: row.examples.split('\n') };
+          data.push(newRow);
+          added++;
+        }
+        set.add(row.name);
+      }
+      fs.writeFile(path, JSON.stringify(data, null, 2), (err) => {
+        if (err) {
+          dialog.showErrorBox('Oops.. ', 'Something went wrong');
+          return;
+        }
+        dialog.showMessageBox({
+          type: 'info',
+          message: 'Loaded Successfully',
+          detail: 'Added ' + added.toString(10) + ' Stories.',
+          buttons: ['Ok']
+        });
+        event.sender.send('stories-changed');
+      });
+    });
+})
+
+ipcMain.on('get-stories', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  event.sender.send('send-stories', data);
+})
+
+ipcMain.on('remove-story', (event, arg)=> {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
+    if (err) {
+      dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
+  });
+  event.sender.send('stories-changed');
 })
