@@ -184,6 +184,7 @@ ipcMain.on('validate-curr-story', (event, arg)=>{
   dialog.showMessageBox({
     type: 'info',
     message: 'This is a valid story!',
+    buttons: ['Ok']
   });
 
 })

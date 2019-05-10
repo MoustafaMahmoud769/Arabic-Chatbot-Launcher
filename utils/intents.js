@@ -103,6 +103,7 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
   dialog.showMessageBox({
     type: 'info',
     message: 'This is a valid intent!',
+    buttons: ['Ok']
   });
 
 })

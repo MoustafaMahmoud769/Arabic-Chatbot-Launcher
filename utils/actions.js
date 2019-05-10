@@ -81,6 +81,7 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
   dialog.showMessageBox({
     type: 'info',
     message: 'This is a valid action!',
+    buttons: ['Ok']
   });
 
 })

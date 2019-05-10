@@ -64,6 +64,7 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
     type: 'info',
     message: 'This is a valid entity!',
     detail: '',
+    buttons: ['Ok']
   });
 
 })
