@@ -152,6 +152,7 @@ function(n) {
         let newCell4 = newRow.insertCell(-1);
         let element = document.createElement("input");
         element.name = "Delete";
+        element.className = "btn btn-magick";
         element.type = "input";
         element.value = "Delete";
         element.onclick = function() {
