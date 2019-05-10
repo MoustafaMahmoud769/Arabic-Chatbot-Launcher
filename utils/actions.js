@@ -55,26 +55,34 @@ function validateSingleAction(action) {
   }
 }
 
-function isActionValidwAction(action) {
-
-  validation_results = validateSingleAction(action);
+function findActionError(validation_results, options) {
 
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your action is empty!', 'You must provide title and examples of your action!');
-    return false;
+    return {"title": 'Your action is empty!', "body": "You must provide title and examples of your action!"};
   }
 
   if(validation_results.duplications != 0) {
-    dialog.showErrorBox('Your action examples have duplications!', 'One or more of your action examples is repeated more than once!');
-    return false;
+    return {"title": 'Your action examples have duplications!', "body": "One or more of your action examples is repeated more than once!"};
   }
 
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your action title is already existed!', 'Please change the action title as it is already existed!');
-    return false;
+  if(validation_results.title_existed == true && options['dups'] != false) {
+    return {"title": 'Your action title is already existed!', "body": "Please change the action title as it is already existed!"};
   }
 
-  return true;
+  return false;
+}
+
+function isActionValidwAction(action) {
+
+  validation_results = validateSingleAction(action);
+  error = findActionError(validation_results);
+
+  if(error == false) {
+    return true;
+  }
+
+  dialog.showErrorBox(error['title'], error['body']);
+  return false;
 }
 
 ipcMain.on('validate-curr-action', (event, arg)=>{
@@ -177,3 +185,8 @@ ipcMain.on('remove-action', (event, arg)=> {
   });
   event.sender.send('actions-changed');
 })
+
+module.exports = {
+    validateSingleAction: validateSingleAction,
+    findActionError: findActionError,
+}

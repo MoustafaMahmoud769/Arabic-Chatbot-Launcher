@@ -144,41 +144,43 @@ function validateSingleStory(story) {
   }
 }
 
-function isStoryValidwAction(story) {
-
-  validation_results = validateSingleStory(story);
-
+function findStoryError(validation_results, options) {
   if(validation_results.empty == true) {
-    dialog.showErrorBox('Your story is empty!', 'You must provide title and examples of your story!');
-    return false;
+    return {"title": 'Your story is empty!', "body": "You must provide title for your story!"};
   }
 
   if(validation_results.invalid == true) {
-    dialog.showErrorBox('Your story have invalid lines!', 'Error in this line "' + validation_results.invalid_str + '"!');
-    return false;
+    return {"title": 'Your story have invalid lines!', "body": 'Error in this line "' + validation_results.invalid_str + '"!'};
   }
 
   if(validation_results.no_action == true) {
-    dialog.showErrorBox('Your story have intent that does not have an action!', 'Error in this intent "' + validation_results.no_action_str + '"!');
-    return false;
+    return {"title": 'Your story have intent that does not have an action!', "body": 'Error in this intent "' + validation_results.no_action_str + '"!'};
   }
 
   if(validation_results.invalid_intent == true) {
-    dialog.showErrorBox('Your story have intent that does not exist!', 'Error in this intent "' + validation_results.invalid_intent_str + '"!');
-    return false;
+    return {"title": 'Your story have intent that does not exist!', "body": 'Error in this intent "' + validation_results.invalid_intent_str + '"!'};
   }
 
   if(validation_results.invalid_action == true) {
-    dialog.showErrorBox('Your story have action that does not exist!', 'Error in this action "' + validation_results.invalid_action_str + '"!');
-    return false;
+    return {"title": 'Your story have action that does not exist!', "body": 'Error in this action "' + validation_results.invalid_action_str + '"!'};
   }
 
-  if(validation_results.title_existed == true) {
-    dialog.showErrorBox('Your story title is already existed!', 'Please change the story title as it is already existed!');
-    return false;
+  if(validation_results.title_existed == true && options['dups'] != false) {
+    return {"title": 'Your story title is already existed!', "body": 'Please change the story title as it is already existed!'};
+  }
+  return false;
+}
+
+function isStoryValidwAction(story) {
+  validation_results = validateSingleStory(story);
+  error = findStoryError(validation_results);
+
+  if(error == false) {
+    return true;
   }
 
-  return true;
+  dialog.showErrorBox(error['title'], error['body']);
+  return false;
 }
 
 ipcMain.on('validate-curr-story', (event, arg)=>{
@@ -282,3 +284,8 @@ ipcMain.on('remove-story', (event, arg)=> {
   });
   event.sender.send('stories-changed');
 })
+
+module.exports = {
+    validateSingleStory: validateSingleStory,
+    findStoryError: findStoryError,
+}
