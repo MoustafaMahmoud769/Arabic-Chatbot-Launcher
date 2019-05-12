@@ -21,7 +21,7 @@ if ! [[ $key =~ ^[0-9a-zA-Z]+$ ]]; then
     echo 'Invalid Bot name'; exit
 fi
 
-cd backend 2>&1 | grep "error"
+cd backend
 if ! [ -d "$BOT" ]; then
   mkdir $BOT
 fi
