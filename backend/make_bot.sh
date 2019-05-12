@@ -1,6 +1,6 @@
-  #!/bin/bash
+#!/bin/bash
 # To run: bash make_bot.sh <bot_name>
-set -x
+# set -x
 
 BOT=$1
 key=$1
@@ -21,24 +21,37 @@ if ! [[ $key =~ ^[0-9a-zA-Z]+$ ]]; then
     echo 'Invalid Bot name'; exit
 fi
 
-if [ -d "$BOT" ]; then
-  echo 'Bot name already exists'; exit
+cd backend 2>&1 | grep "error"
+if ! [ -d "$BOT" ]; then
+  mkdir $BOT
 fi
-cd backend
-mkdir $BOT
-mkdir $BOT/config
-mkdir $BOT/data
-mkdir $BOT/data/core
-mkdir $BOT/data/nlu
+if ! [ -d "$BOT/data" ]; then
+  mkdir $BOT/data
+fi
+if ! [ -d "$BOT/data/core" ]; then
+  mkdir $BOT/data/core
+fi
+if ! [ -d "$BOT/data/nlu" ]; then
+  mkdir $BOT/data/nlu
+fi
 
-cp Makefile $BOT/Makefile
-cp nlu_config.yml $BOT/config/nlu_config.yml
-cp endpoints.yml $BOT/config/endpoints.yml
-cp docker-compose.yml $BOT/docker-compose.yml
+cp templates/Makefile $BOT/Makefile
+cp templates/nlu_config.yml $BOT/nlu_config.yml
+cp templates/credentials.yml $BOT/credentials.yml
+# cp templates/endpoints.yml $BOT/endpoints.yml
+# cp docker-compose.yml $BOT/docker-compose.yml
 
-python3 parser.py $BOT
+error=$(python3 parser.py $BOT | grep "error")
+if ! [ -z "$error" ]; then
+  echo 'Error parsing data'; exit
+fi
 
-cd $BOT && make all
+error=$(cd $BOT && make all 2>&1 | grep "error")
+if ! [ -z "$error" ]; then
+  echo 'Error training bot'; exit
+fi
+echo 'Bot Trained Successfully'
+
 # cd $BOT && \
 # docker run \
 #   -v $(pwd):/app/project \
