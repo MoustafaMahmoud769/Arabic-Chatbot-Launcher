@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 # To run: bash make_bot.sh <bot_name>
 set -x
 
@@ -24,6 +24,7 @@ fi
 if [ -d "$BOT" ]; then
   echo 'Bot name already exists'; exit
 fi
+cd backend
 mkdir $BOT
 mkdir $BOT/config
 mkdir $BOT/data

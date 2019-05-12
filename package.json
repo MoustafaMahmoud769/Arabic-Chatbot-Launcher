@@ -23,6 +23,7 @@
     "start": "electron ."
   },
   "dependencies": {
-    "csv-parser": "^2.2.0"
+    "csv-parser": "^2.2.0",
+    "shelljs": "^0.8.3"
   }
 }

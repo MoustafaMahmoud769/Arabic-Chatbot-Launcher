@@ -80,15 +80,15 @@ function(n) {
 
       init: function() {
         $('#validate-my-model').click( function () {
-          launch.messaging.addIntent()
+          launch.messaging.validateMyModel()
         })
 
         $('#launch-my-model').click( function () {
-          launch.messaging.loadIntent()
+          launch.messaging.launchMyModel()
         })
 
         $('#launch-example-model').click( function () {
-          launch.messaging.loadIntent()
+          launch.messaging.launchExampleModel()
         })
 
         $('#btn-chat').click( function() {

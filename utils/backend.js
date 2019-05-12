@@ -145,3 +145,8 @@ function full_conversion() {
 	// data to be written to Marwan file
 	return JSON.stringify(data)
 }
+
+module.exports = {
+    full_validation: full_validation,
+    full_conversion: full_conversion,
+}
