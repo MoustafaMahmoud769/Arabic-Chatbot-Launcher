@@ -12,8 +12,12 @@ function(n) {
         ipcRenderer.send('launch-my-model', 'an-argument')
       },
 
-      launchExampleModel: function() {
-        ipcRenderer.send('launch-example-model', 'an-argument')
+      startExampleModel: function() {
+        ipcRenderer.send('start-example-model', null);
+      },
+
+      stopExampleModel: function() {
+        ipcRenderer.send('sto-example-model', null);
       },
 
       addMessage: function() {
@@ -23,7 +27,8 @@ function(n) {
         let span = document.createElement("SPAN");
         span.className = "chat-img pull-right";
         let img = document.createElement("IMG");
-        // img.src = "./asset/icons/human.png";
+        img.src = "./asset/icons/human.png";
+        img.alt = "None";
         img.width = "70px";
         img.height = "60px";
         img.style = "img-circle";
@@ -43,17 +48,27 @@ function(n) {
         divChat.appendChild(p);
         li.appendChild(divChat);
         ul.appendChild(li);
+        launch.messaging.sendMessage(document.getElementById("msg-body").value);
         document.getElementById("msg-body").value = '';
       },
 
-      addReply: function() {
+      sendMessage: function(msg) {
+        $.post( "localhost:5002/webhooks/rest/webhook", { "message": msg, "sender": "User" }, function( data ) {
+          for (let i = 0; i < data.length; ++i) {
+            launch.messaging.addReply(data[i].text);
+          }
+        }, "json");
+      },
+
+      addReply: function(reply) {
         let ul = document.getElementById('chat-content');
         let li = document.createElement("LI");
         li.className = "left clearfix";
         let span = document.createElement("SPAN");
         span.className = "chat-img pull-left";
         let img = document.createElement("IMG");
-        img.src = "";
+        img.src = "None";
+        img.alt = "None";
         img.width = "70px";
         img.height = "60px";
         img.style = "img-circle";
@@ -69,13 +84,10 @@ function(n) {
         divHead.appendChild(strong);
         divChat.appendChild(divHead);
         let p = document.createElement("P");
-        p.innerHTML = 'ﻻ';
+        p.innerHTML = reply;
         divChat.appendChild(p);
         li.appendChild(divChat);
         ul.appendChild(li);
-      },
-
-      sendMessage: function() {
       },
 
       init: function() {
@@ -87,14 +99,16 @@ function(n) {
           launch.messaging.launchMyModel()
         })
 
-        $('#launch-example-model').click( function () {
-          launch.messaging.launchExampleModel()
+        $('#start-example-model').click( function () {
+          launch.messaging.startExampleModel()
+        })
+
+        $('#stop-example-model').click( function () {
+          launch.messaging.stopExampleModel()
         })
 
         $('#btn-chat').click( function() {
           launch.messaging.addMessage()
-          launch.messaging.sendMessage()
-          launch.messaging.addReply()
         })
 
       }
@@ -102,8 +116,8 @@ function(n) {
 
     launch.handler = {
 
+      
       init: function() {
-
       }
     };
 
