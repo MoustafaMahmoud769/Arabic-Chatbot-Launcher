@@ -17,7 +17,7 @@ function(n) {
       },
 
       stopExampleModel: function() {
-        ipcRenderer.send('sto-example-model', null);
+        ipcRenderer.send('stop-example-model', null);
       },
 
       addMessage: function() {
@@ -53,11 +53,29 @@ function(n) {
       },
 
       sendMessage: function(msg) {
-        $.post( "localhost:5002/webhooks/rest/webhook", { "message": msg, "sender": "User" }, function( data ) {
-          for (let i = 0; i < data.length; ++i) {
-            launch.messaging.addReply(data[i].text);
-          }
-        }, "json");
+        console.log(msg);
+        $.ajax({
+            url: 'http://localhost:5002/webhooks/rest/webhook',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: '{ "message": "' + msg + '", "sender": "User" }',
+            processData: false,
+            async: false
+        }).done(function (data, textStatus, jQxhr) {
+            console.log("Done");
+            for (let i = 0; i < data.length; ++i) {
+              launch.messaging.addReply(data[i].text);
+            }
+        }).fail(function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        });
+        // $.post( "localhost:5002/webhooks/rest/webhook", { "message": msg, "sender": "User" }, function( data ) {
+        //   console.log(data);
+        //   for (let i = 0; i < data.length; ++i) {
+        //     launch.messaging.addReply(data[i].text);
+        //   }
+        // }, "json");
       },
 
       addReply: function(reply) {
@@ -116,7 +134,7 @@ function(n) {
 
     launch.handler = {
 
-      
+
       init: function() {
       }
     };

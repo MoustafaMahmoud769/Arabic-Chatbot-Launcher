@@ -4,6 +4,8 @@
 
 BOT=$1
 
+cd backend
+
 if ! [ -d "$BOT" ]; then
   echo 'Bot does not exist'; exit
 fi

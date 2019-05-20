@@ -77,7 +77,7 @@ ipcMain.on('launch-my-model', (event, arg)=> {
 
 ipcMain.on('start-example-model', (event, arg)=> {
   preprocess();
-  shell.exec('backend/start_bot.sh $`path here`', function(code, stdout, stderr) {
+  shell.exec('backend/start_bot.sh AR-Trakhees-Demo', function(code, stdout, stderr) {
 		console.log('Exit code:', code);
 		console.log('Program output:', stdout);
 		console.log('Program stderr:', stderr);
