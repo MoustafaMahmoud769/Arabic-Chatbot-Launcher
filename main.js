@@ -1,4 +1,5 @@
 const setupEvents = require('./installers/setupEvents')
+
 if (setupEvents.handleSquirrelEvent()) {
   return;
 }
@@ -11,18 +12,19 @@ var path = require('path')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden',
+  mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 800,
     height: 600,
     minWidth: 800,
     minHeight: 600,
     backgroundColor: '#312450',
     show: false,
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+    icon: path.join(__dirname, 'assets/icons/png/512x512.png')
   })
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
