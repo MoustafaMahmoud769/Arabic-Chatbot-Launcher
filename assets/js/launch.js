@@ -119,9 +119,12 @@ function(n) {
     launch.handler = {
 
       logValidation: function(data) {
-        console.log(data);
-        data = JSON.stringify(data);
-        document.getElementById('model-validation').innerHTML = data;
+        text = '';
+        for (let i = 0; i < data.length; ++i) {
+          text += '<h5>' + data[i].title + '<h5><br/>';
+          text += '<h6>' + data[i].body + '<h6><br/>';
+        }
+        document.getElementById('model-validation').innerHTML = text;
       },
 
       init: function() {
