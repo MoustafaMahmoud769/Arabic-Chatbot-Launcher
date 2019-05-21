@@ -22,6 +22,7 @@ if ! [[ $key =~ ^[0-9a-zA-Z]+$ ]]; then
 fi
 
 cd backend
+rm -rf $BOT
 if ! [ -d "$BOT" ]; then
   mkdir $BOT
 fi

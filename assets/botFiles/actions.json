@@ -1,15 +1,20 @@
 [
   {
-    "name": "saksadndas",
+    "name": "utter_greet",
     "examples": [
-      "kadsk/kas",
-      "sadkasjdjkahskdhk"
+      "how are you human"
     ]
   },
   {
-    "name": "saklsladj",
+    "name": "asdf",
     "examples": [
-      "jdasdajasjdas"
+      "asdf"
+    ]
+  },
+  {
+    "name": "sfsf",
+    "examples": [
+      "asdf"
     ]
   }
 ]
