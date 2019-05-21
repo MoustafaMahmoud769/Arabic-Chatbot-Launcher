@@ -5,6 +5,7 @@ const csv = require('csv-parser')
 var tools = require('./tools')
 
 const path = 'assets/botFiles/intents.json';
+const entities_path = 'assets/botFiles/entites.json';
 
 function parseEntites(data) {
   let cur = data.split('\n');
@@ -80,12 +81,18 @@ function validateSingleIntent(intent) {
   }
 
   /**
+   * load all entities
+   */
+  let entities = JSON.parse(fs.readFileSync(entities_path));
+
+  /**
    * validate every entity entry
    */
   entity_error = false;
   entity_error_i = -1;
   overlapping_indices = false;
   overlapping_indices_i = -1;
+  entity_title_existed = true
 
   map_of_ind = {}
   for (m=0; m<intent.entites.length; m++) {
@@ -93,6 +100,19 @@ function validateSingleIntent(intent) {
     from = intent.entites[m].from
     to = intent.entites[m].to
     ind = intent.entites[m].value
+    name = intent.entites[m].name
+
+    //check if existed - only for full validation
+    entity_title_existed = false
+    entities.forEach(function(entity, index){
+      if(entity.name == name) {
+        entity_title_existed = true;
+      }
+    });
+
+    if(entity_title_existed === false) {
+      break;
+    }
 
     if (!isNaN(from) && !isNaN(to) && !isNaN(ind)) {
 
@@ -147,6 +167,7 @@ function validateSingleIntent(intent) {
   return {
     empty: empty,
     title_existed: title_existed,
+    entity_title_existed: entity_title_existed,
     duplications: duplications,
     indices_error: indices_error,
     indices_error_i: indices_error_i,
@@ -170,9 +191,14 @@ function findIntentError(validation_results, options) {
     return {"title": 'Your intent title is already existed!', "body": "Please change the intent title as it is already existed!"};
   }
 
+  if(validation_results.entity_title_existed == false) {
+    return {"title": 'Your intent has undefined entity', "body": "Please define the missing entities."};
+  }
+
   if(validation_results.indices_error == true) {
     return {"title": 'Your intent has entity with non-numeric indices!', "body": 'The entity number ' + (validation_results.indices_error_i + 1) + ' has non-numeric indices, please fix it!'};
   }
+
 
   if(validation_results.entity_error == true) {
     return {"title": 'Your intent has entity with invalid [logically] indices!', "body": 'The entity number ' + (validation_results.entity_error_i + 1) + ' has error in its indices, please fix it!'};
