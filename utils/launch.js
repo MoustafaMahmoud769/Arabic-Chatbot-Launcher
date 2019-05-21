@@ -36,15 +36,30 @@ function preprocess() {
 }
 
 ipcMain.on('validate-my-model', (event, arg)=> {
-    errors = backend.full_validation();
+  errors = backend.full_validation();
 	dialog.showMessageBox({
 		type: 'info',
 		message: 'Your models have ' + errors.length + ' errors!',
 		buttons: ['Ok']
 	});
+	event.sender.send('model-validated', errors);
 })
 
-ipcMain.on('launch-my-model', (event, arg)=> {
+ipcMain.on('start-my-model', (event, arg)=> {
+  preprocess();
+  shell.exec('backend/start_bot.sh $`path goes here`', function(code, stdout, stderr) {
+		console.log('Exit code:', code);
+		console.log('Program output:', stdout);
+		console.log('Program stderr:', stderr);
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Done! : ' + stdout,
+			buttons: ['Ok']
+		});
+	});
+})
+
+ipcMain.on('build-my-model', (event, arg)=> {
 	//validate & convert data
 	data_error_free = backend.full_conversion();
 	if(data_error_free === false) {
@@ -64,6 +79,20 @@ ipcMain.on('launch-my-model', (event, arg)=> {
 	});
 	preprocess();
 	shell.exec('backend/make_bot.sh SuperDuperBot', function(code, stdout, stderr) {
+		console.log('Exit code:', code);
+		console.log('Program output:', stdout);
+		console.log('Program stderr:', stderr);
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Done! : ' + stdout,
+			buttons: ['Ok']
+		});
+	});
+})
+
+ipcMain.on('stop-my-model', (event, arg)=> {
+  preprocess();
+  shell.exec('backend/stop_bot.sh', function(code, stdout, stderr) {
 		console.log('Exit code:', code);
 		console.log('Program output:', stdout);
 		console.log('Program stderr:', stderr);

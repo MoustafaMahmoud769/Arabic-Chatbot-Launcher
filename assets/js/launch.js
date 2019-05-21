@@ -1,15 +1,27 @@
 const { ipcRenderer } = require('electron')
 
+ipcRenderer.on('model-validated', (event, arg)=> {
+  launch.handler.logValidation(arg);
+})
+
 window.launch = window.launch || {},
 function(n) {
     launch.messaging = {
 
       validateMyModel: function() {
-        ipcRenderer.send('validate-my-model', 'an-argument')
+        ipcRenderer.send('validate-my-model', null)
       },
 
-      launchMyModel: function() {
-        ipcRenderer.send('launch-my-model', 'an-argument')
+      startMyModel: function() {
+        ipcRenderer.send('start-my-model', null)
+      },
+
+      buildMyModel: function() {
+        ipcRenderer.send('build-my-model', null)
+      },
+
+      stopMyModel: function() {
+        ipcRenderer.send('stop-my-model', null)
       },
 
       startExampleModel: function() {
@@ -20,40 +32,29 @@ function(n) {
         ipcRenderer.send('stop-example-model', null);
       },
 
+      getTime: function() {
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        return date + ' ' + time;
+      },
+
       addMessage: function() {
-        let ul = document.getElementById('chat-content');
-        let li = document.createElement("LI");
-        li.className = "right clearfix";
-        let span = document.createElement("SPAN");
-        span.className = "chat-img pull-right";
-        let img = document.createElement("IMG");
-        img.src = "./asset/icons/human.png";
-        img.alt = "None";
-        img.width = "70px";
-        img.height = "60px";
-        img.style = "img-circle";
-        span.appendChild(img);
-        li.appendChild(span);
-        let divChat = document.createElement("DIV");
-        divChat.className = "chat-body clearfix";
-        let divHead = document.createElement("DIV");
-        divHead.className = "header";
-        let strong = document.createElement("STRONG");
-        strong.className = "pull-right primary-font";
-        strong.innerHTML = 'أنت';
-        divHead.appendChild(strong);
-        divChat.appendChild(divHead);
-        let p = document.createElement("P");
-        p.innerHTML = document.getElementById("msg-body").value;
-        divChat.appendChild(p);
-        li.appendChild(divChat);
-        ul.appendChild(li);
-        launch.messaging.sendMessage(document.getElementById("msg-body").value);
-        document.getElementById("msg-body").value = '';
+        if (document.getElementById('msg-body').value.trim() === '')
+          return;
+        text = document.getElementById('msgs-container').innerHTML;
+        newMsg = '<div class="outgoing_msg"><div class="sent_msg"><p>';
+        newMsg += document.getElementById('msg-body').value;
+        newMsg += '</p><span class="time_date">';
+        newMsg += launch.messaging.getTime();
+        newMsg += '</span> </div></div>'
+        text += newMsg;
+        document.getElementById('msgs-container').innerHTML = text;
+        launch.messaging.sendMessage(document.getElementById('msg-body').value);
+        document.getElementById('msg-body').value = '';
       },
 
       sendMessage: function(msg) {
-        console.log(msg);
         $.ajax({
             url: 'http://localhost:5002/webhooks/rest/webhook',
             dataType: 'json',
@@ -70,42 +71,17 @@ function(n) {
         }).fail(function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
         });
-        // $.post( "localhost:5002/webhooks/rest/webhook", { "message": msg, "sender": "User" }, function( data ) {
-        //   console.log(data);
-        //   for (let i = 0; i < data.length; ++i) {
-        //     launch.messaging.addReply(data[i].text);
-        //   }
-        // }, "json");
       },
 
       addReply: function(reply) {
-        let ul = document.getElementById('chat-content');
-        let li = document.createElement("LI");
-        li.className = "left clearfix";
-        let span = document.createElement("SPAN");
-        span.className = "chat-img pull-left";
-        let img = document.createElement("IMG");
-        img.src = "None";
-        img.alt = "None";
-        img.width = "70px";
-        img.height = "60px";
-        img.style = "img-circle";
-        span.appendChild(img);
-        li.appendChild(span);
-        let divChat = document.createElement("DIV");
-        divChat.className = "chat-body clearfix";
-        let divHead = document.createElement("DIV");
-        divHead.className = "header";
-        let strong = document.createElement("STRONG");
-        strong.className = "pull-left primary-font";
-        strong.innerHTML = 'فراسة';
-        divHead.appendChild(strong);
-        divChat.appendChild(divHead);
-        let p = document.createElement("P");
-        p.innerHTML = reply;
-        divChat.appendChild(p);
-        li.appendChild(divChat);
-        ul.appendChild(li);
+        text = document.getElementById('msgs-container').innerHTML;
+        newMsg = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="assets/icons/bot.png" alt="Image Not Found !"> </div><div class="received_msg"><div class="received_withd_msg"><p>';
+        newMsg += reply;
+        newMsg += '</p><span class="time_date">';
+        newMsg += launch.messaging.getTime();
+        newMsg += '</span></div></div></div>';
+        text += newMsg;
+        document.getElementById('msgs-container').innerHTML = text;
       },
 
       init: function() {
@@ -113,8 +89,16 @@ function(n) {
           launch.messaging.validateMyModel()
         })
 
-        $('#launch-my-model').click( function () {
-          launch.messaging.launchMyModel()
+        $('#start-my-model').click( function () {
+          launch.messaging.startMyModel()
+        })
+
+        $('#build-my-model').click( function () {
+          launch.messaging.buildMyModel()
+        })
+
+        $('#stop-my-model').click( function () {
+          launch.messaging.stopMyModel()
         })
 
         $('#start-example-model').click( function () {
@@ -126,7 +110,7 @@ function(n) {
         })
 
         $('#btn-chat').click( function() {
-          launch.messaging.addMessage()
+          launch.messaging.addMessage('sasa')
         })
 
       }
@@ -134,8 +118,14 @@ function(n) {
 
     launch.handler = {
 
+      logValidation: function(data) {
+        console.log(data);
+        data = JSON.stringify(data);
+        document.getElementById('model-validation').innerHTML = data;
+      },
 
       init: function() {
+
       }
     };
 

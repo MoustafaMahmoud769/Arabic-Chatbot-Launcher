@@ -5,15 +5,21 @@
       <div class="inner">
         <h2>Your Custom Model</h2>
         <h4>Summary</h4>
-        <p>
-          Your Model have :
+        <p id="model-validation">
+
         </p>
-        <div class="split style1">
+        <div class="row">
           <section>
             <button type="button" id="validate-my-model" name="validate-my-model" class="button submit" >Validate</button>
           </section>
           <section>
-            <button type="button" id="launch-my-model" name="launch-my-model" class="button submit" >Launch</button>
+            <button type="button" id="start-my-model" name="start-my-model" class="button submit" >Start Server</button>
+          </section>
+          <section>
+            <button type="button" id="build-my-model" name="build-my-model" class="button submit" >Build</button>
+          </section>
+          <section>
+            <button type="button" id="stop-my-model" name="stop-my-model" class="button submit" >Stop Server</button>
           </section>
         <div />
       </div>
@@ -39,24 +45,19 @@
 
   <section>
     <div class="content">
-      <div class="inner">
-          <div class="panel panel-primary">
-              <div class="panel-collapse collapse" id="collapseOne">
-                  <div class="panel-body">
-                      <ul id="chat-content" class="chat">
-                      </ul>
-                  </div>
-                  <br />
-                  <div class="panel-footer">
-                      <div class="input-group">
-                          <textarea name="msg-body" id="msg-body" rows="1" placeholder="Type Your Message Here ..."></textarea>
-                          <br />
-                          <button type="button" class="btn btn-info btn-lg btn-block" id="btn-chat" name="btn-chat">Send</button>
-                      </div>
-                  </div>
-              </div>
+        <div class="container">
+          <h3 class=" text-center">Messaging</h3>
+          <div class="messaging">
+            <div id = "msgs-container" class="msg_history">
+            </div>
+            <div class="type_msg">
+                <div class="input_msg_write">
+                  <textarea name="msg-body" id="msg-body" rows="2" placeholder="اكتب شيئاً هنا ..." class="txt-msg"></textarea>
+                  <button type="button" id="btn-chat" name="btn-chat" class="button submit msg_send_btn" ><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                </div>
             </div>
           </div>
+        </div>
     </div>
   </section>
 
