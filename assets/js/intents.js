@@ -130,31 +130,28 @@ function(n) {
       },
 
       handleEntites: function(data) {
-        let ret = []
+        text = '';
         for (let i = 0; i < data.length; ++i) {
-          let text = data[i].from + '\t' + data[i].to + '\t' + data[i].value + '\t' + data[i].name;
-          ret.push(text);
+          text += data[i].from + '\t' + data[i].to + '\t' + data[i].value + '\t' + data[i].name + '<br />';
         }
-        return ret.join('\n');
+        return text;
       },
 
       addRow: function(tableRef, data) {
         let newRow = tableRef.insertRow(-1);
         let newCell1 = newRow.insertCell(-1);
-        let newText1 = document.createTextNode(data.name);
-        newCell1.appendChild(newText1);
+        newCell1.innerHTML = data.name;
         let newCell2 = newRow.insertCell(-1);
-        let newText2 = document.createTextNode(data.examples.join('\n'));
-        newCell2.appendChild(newText2);
+        for (let i = 0; i < data.examples.length; ++i) {
+          newCell2.innerHTML += data.examples[i] + '<br />';
+        }
         let newCell3 = newRow.insertCell(-1);
-        let newText3 = document.createTextNode(intents.handler.handleEntites(data.entites));
-        newCell3.appendChild(newText3);
+        newCell3.innerHTML += intents.handler.handleEntites(data.entites);
         let newCell4 = newRow.insertCell(-1);
         let element = document.createElement("input");
-        element.name = "Delete";
-        element.className = "btn btn-magick";
-        element.type = "input";
         element.value = "Delete";
+        element.className = "button submit";
+        element.type = "input";
         element.onclick = function() {
           intents.handler.remove(data.name);
         };

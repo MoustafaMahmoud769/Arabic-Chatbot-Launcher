@@ -73,17 +73,16 @@ function(n) {
       addRow: function(tableRef, data) {
         let newRow = tableRef.insertRow(-1);
         let newCell1 = newRow.insertCell(-1);
-        let newText1 = document.createTextNode(data.name);
-        newCell1.appendChild(newText1);
+        newCell1.innerHTML = data.name;
         let newCell2 = newRow.insertCell(-1);
-        let newText2 = document.createTextNode(data.examples.join('\n'));
-        newCell2.appendChild(newText2);
+        for (let i = 0; i <  data.examples.length; ++i) {
+            newCell2.innerHTML += data.examples[i] + '<br />';
+        }
         let newCell3 = newRow.insertCell(-1);
         let element = document.createElement("input");
-        element.name = "Delete";
-        element.className = "btn btn-magick";
-        element.type = "input";
         element.value = "Delete";
+        element.className = "button submit";
+        element.type = "input";
         element.onclick = function() {
           actions.handler.remove(data.name);
         };

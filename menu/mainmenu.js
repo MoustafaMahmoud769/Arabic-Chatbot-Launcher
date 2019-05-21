@@ -62,7 +62,7 @@ const template = [
         role: 'close', label:'Close'
       }
     ]
-  },
+  }
   // {
   //   role: 'help', label:'Help',
   //   submenu: [

@@ -50,7 +50,7 @@ function(n) {
         newMsg += '</span> </div></div>'
         text += newMsg;
         document.getElementById('msgs-container').innerHTML = text;
-        launch.messaging.sendMessage(document.getElementById('msg-body').value);
+        launch.messaging.sendMessage(document.getElementById('msg-body').value.trim());
         document.getElementById('msg-body').value = '';
       },
 
@@ -110,9 +110,15 @@ function(n) {
         })
 
         $('#btn-chat').click( function() {
-          launch.messaging.addMessage('sasa')
+          launch.messaging.addMessage()
         })
 
+        $('#msg-body').keypress(function(event){
+        	var keycode = (event.keyCode ? event.keyCode : event.which);
+        	if(keycode == '13'){
+        		launch.messaging.addMessage()
+          }
+        })
       }
     };
 
