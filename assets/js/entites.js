@@ -69,14 +69,12 @@ function(n) {
       addRow: function(tableRef, data) {
         let newRow = tableRef.insertRow(-1);
         let newCell1 = newRow.insertCell(-1);
-        let newText1 = document.createTextNode(data.name);
-        newCell1.appendChild(newText1);
+        newCell1.innerHTML = data.name;
         let newCell2 = newRow.insertCell(-1);
         let element = document.createElement("input");
-        element.name = "Delete";
-        element.className = "btn btn-magick";
-        element.type = "input";
         element.value = "Delete";
+        element.className = "button submit";
+        element.type = "input";
         element.onclick = function() {
           entites.handler.remove(data.name);
         };
