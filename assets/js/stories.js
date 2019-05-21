@@ -52,6 +52,7 @@ function(n) {
         selected = '* ' + newtext + '\n';
         text = document.getElementById('story-body').value + selected;
         document.getElementById('story-body').value = text;
+        document.getElementById('intents-list').value = '';
       },
 
       appendAction: function() {
@@ -61,6 +62,7 @@ function(n) {
         selected = '- ' + newtext + '\n';
         text = document.getElementById('story-body').value + selected;
         document.getElementById('story-body').value = text;
+        document.getElementById('actions-list').value = '';
       },
 
       removeBody: function() {
@@ -68,7 +70,7 @@ function(n) {
         if (cur[cur.length - 1] == '')
           cur.pop();
         cur.pop();
-        document.getElementById('story-body').value = cur.join('\n');
+        document.getElementById('story-body').value = cur.join('\n') + '\n';
       },
 
       init: function() {
@@ -90,11 +92,11 @@ function(n) {
           stories.messaging.UpdateTable()
         })
 
-        $('#intents-list').click( function() {
+        $('#intents-list').change( function() {
           stories.messaging.appendIntent()
         })
 
-        $('#actions-list').click( function() {
+        $('#actions-list').change( function() {
           stories.messaging.appendAction()
         })
       }
@@ -110,6 +112,10 @@ function(n) {
       setOptions: function(optionName, data) {
         var sel = document.getElementById(optionName);
         sel.innerHTML = '';
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode('None') );
+        opt.value = '';
+        sel.appendChild(opt);
         if (data.length !== 0) {
           for (let i = 0; i < data.length; i++) {
             var opt = document.createElement('option');
@@ -117,12 +123,6 @@ function(n) {
             opt.value = data[i].name;
             sel.appendChild(opt);
           }
-        }
-        else {
-          var opt = document.createElement('option');
-          opt.appendChild(document.createTextNode('None') );
-          opt.value = '';
-          sel.appendChild(opt);
         }
       },
 
