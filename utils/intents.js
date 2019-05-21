@@ -109,12 +109,12 @@ function validateSingleIntent(intent) {
         entity_error_i = i;
         break;
       }
-      if(to < 0 || to >= intent.examples[ind].length) {
+      if(to < 0 || to > intent.examples[ind].length) {
         entity_error = true;
         entity_error_i = i;
         break;
       }
-      if(from >= to) {
+      if(from > to) {
         entity_error = true;
         entity_error_i = i;
         break;
