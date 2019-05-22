@@ -1,4 +1,6 @@
 const { ipcRenderer } = require('electron')
+var net = require('net');
+var Promise = require('bluebird');
 
 ipcRenderer.on('model-validated', (event, arg)=> {
   launch.handler.logValidation(arg);
@@ -6,6 +8,42 @@ ipcRenderer.on('model-validated', (event, arg)=> {
 
 window.launch = window.launch || {},
 function(n) {
+
+    function checkConnection(host, port, timeout) {
+        return new Promise(function(resolve, reject) {
+            timeout = timeout || 1000;     // default of 1 seconds
+            var timer = setTimeout(function() {
+                reject("timeout");
+                socket.end();
+            }, timeout);
+            var socket = net.createConnection(port, host, function() {
+                clearTimeout(timer);
+                resolve();
+                socket.end();
+            });
+            socket.on('error', function(err) {
+                clearTimeout(timer);
+                reject(err);
+            });
+        });
+    }
+
+    function checkConnectionTimeOut() {
+      setTimeout(function(){
+        checkConnection("127.0.0.1", 5002, 1000).then(function() {
+          document.getElementById('connection-state').innerHTML = "Online";
+          document.getElementById('connection-state').style.color = "green";
+          checkConnectionTimeOut();
+        }, function(err) {
+          document.getElementById('connection-state').innerHTML = "Offline";
+          document.getElementById('connection-state').style.color = "red";
+          checkConnectionTimeOut();
+        })
+      },1000);
+    }
+
+    checkConnectionTimeOut();
+  
     launch.messaging = {
 
       validateMyModel: function() {
