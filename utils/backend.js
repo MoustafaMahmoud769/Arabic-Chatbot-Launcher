@@ -57,7 +57,7 @@ function full_validation() {
 }
 
 function full_conversion() {
-	
+
 	// full validation first!
 	if(full_validation().length != 0) {
 		return false;
@@ -109,11 +109,11 @@ function full_conversion() {
 		entities = {}
 		for(j=0; j<intents[i].entites.length; j++) {
 			ent = intents[i].entites[j];
-			if(ent['value'] in entities) {
-				entities[ent['value']].push(ent)
+			if(ent['index'] in entities) {
+				entities[ent['index']].push(ent)
 			} else {
-				entities[ent['value']] = []
-				entities[ent['value']].push(ent)
+				entities[ent['index']] = []
+				entities[ent['index']].push(ent)
 			}
 		}
 

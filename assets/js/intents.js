@@ -30,7 +30,7 @@ function(n) {
       getTextSelection: function(){
         var field = document.getElementById("intent-examples");
         var startPos = field.selectionStart;
-        var endPos = field.selectionEnd;        
+        var endPos = field.selectionEnd;
         var field_value = field.value;
         var selectedText = field_value.substring(startPos,endPos);
 
@@ -65,7 +65,9 @@ function(n) {
         attr.push(document.getElementById("intent-entity-from").value);
         attr.push(document.getElementById("intent-entity-to").value);
         attr.push(document.getElementById("intent-entity-idx").value);
+        attr.push(document.getElementById("intent-examples").value.split('\n')[parseInt(document.getElementById("intent-entity-idx").value)].substring(parseInt(attr[0]), parseInt(attr[1])));
         attr.push(document.getElementById("intent-entity-name").value);
+
         let text = attr.join('\t') + '\n';
         let cur = document.getElementById("intent-entites").value;
         cur += text;
