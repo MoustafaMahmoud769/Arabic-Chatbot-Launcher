@@ -173,7 +173,7 @@ function findStoryError(validation_results, options) {
 
 function isStoryValidwAction(story) {
   validation_results = validateSingleStory(story);
-  error = findStoryError(validation_results);
+  error = findStoryError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;

@@ -213,7 +213,7 @@ function findIntentError(validation_results, options) {
 function isIntentValidwAction(intent) {
 
   validation_results = validateSingleIntent(intent);
-  error = findIntentError(validation_results);
+  error = findIntentError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;
