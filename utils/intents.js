@@ -7,7 +7,7 @@ var tools = require('./tools')
 const path = 'assets/botFiles/intents.json';
 const entities_path = 'assets/botFiles/entites.json';
 
-function parseEntites(data) {
+function parseEntites(data, examples) {
   let cur = data.split('\n');
   if (cur[cur.length - 1] == '')
     cur.pop();
@@ -15,7 +15,7 @@ function parseEntites(data) {
   for (let i = 0; i < cur.length; ++i) {
     let obj = cur[i].split('\t');
     var entity = {
-      from: parseInt(obj[0]), to: parseInt(obj[1]), value: parseInt(obj[2]), name: obj[3]
+      from: parseInt(obj[0]), to: parseInt(obj[1]), index: parseInt(obj[2]), name: obj[4], value: examples[parseInt(obj[2])].substring(obj[0], obj[1])
     };
     ret.push(entity);
   }
@@ -73,7 +73,7 @@ function validateSingleIntent(intent) {
   for (i=0; i<intent.entites.length; i++) {
     if (isNaN(intent.entites[i].from) ||
         isNaN(intent.entites[i].to) ||
-        isNaN(intent.entites[i].value) ) {
+        isNaN(intent.entites[i].index) ) {
       indices_error = true;
       indices_error_i = i;
       break;
@@ -99,7 +99,7 @@ function validateSingleIntent(intent) {
 
     from = intent.entites[m].from
     to = intent.entites[m].to
-    ind = intent.entites[m].value
+    ind = intent.entites[m].index
     name = intent.entites[m].name
 
     //check if existed - only for full validation
@@ -205,7 +205,7 @@ function findIntentError(validation_results, options) {
   }
 
   if(validation_results.overlapping_indices == true) {
-    return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].value + 1) + ' has multiple entities with overlapping indices, please fix it!'};
+    return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].index + 1) + ' has multiple entities with overlapping indices, please fix it!'};
   }
   return false;
 }
@@ -229,7 +229,7 @@ ipcMain.on('validate-curr-intent', (event, arg)=>{
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: parseEntites(arg.intentEntites)
+    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n'))
   };
   intent = cleanIntent(intent);
 
@@ -249,7 +249,7 @@ ipcMain.on('add-intent', (event, arg)=> {
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: parseEntites(arg.intentEntites)
+    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n'))
   };
   intent = cleanIntent(intent);
 
