@@ -223,8 +223,8 @@ ipcMain.on('add-story', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('stories-changed');
   });
-  event.sender.send('stories-changed');
 })
 
 ipcMain.on('load-story', (event, arg)=> {
@@ -281,8 +281,8 @@ ipcMain.on('remove-story', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('stories-changed');
   });
-  event.sender.send('stories-changed');
 })
 
 module.exports = {

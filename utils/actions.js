@@ -124,8 +124,8 @@ ipcMain.on('add-action', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('actions-changed');
   });
-  event.sender.send('actions-changed');
 })
 
 ipcMain.on('load-action', (event, arg)=> {
@@ -182,8 +182,8 @@ ipcMain.on('remove-action', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('actions-changed');
   });
-  event.sender.send('actions-changed');
 })
 
 module.exports = {

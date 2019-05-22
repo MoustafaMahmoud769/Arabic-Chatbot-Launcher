@@ -97,10 +97,12 @@ ipcMain.on('add-entity', (event, arg)=> {
   let entites = JSON.parse(fs.readFileSync(path));
   entites.push(entity);
   fs.writeFile(path, JSON.stringify(entites, null, 2), (err) => {
-    if (err)
+    if (err) {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
+      return;
+    }
+    event.sender.send('entites-changed');
   });
-  event.sender.send('entites-changed');
 })
 
 ipcMain.on('load-entity', (event, arg)=> {
@@ -156,8 +158,8 @@ ipcMain.on('remove-entity', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('entites-changed');
   });
-  event.sender.send('entites-changed');
 })
 
 module.exports = {

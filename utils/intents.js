@@ -260,11 +260,12 @@ ipcMain.on('add-intent', (event, arg)=> {
   let intents = JSON.parse(fs.readFileSync(path));
   intents.push(intent);
   fs.writeFile(path, JSON.stringify(intents, null, 2), (err) => {
-    if (err)
+    if (err) {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
+    }
+    event.sender.send('intents-changed');
   });
-  event.sender.send('intents-changed');
 })
 
 ipcMain.on('load-intent', (event, arg)=> {
@@ -321,8 +322,8 @@ ipcMain.on('remove-intent', (event, arg)=> {
       dialog.showErrorBox('Oops.. ', 'Something went wrong');
       return;
     }
+    event.sender.send('intents-changed');
   });
-  event.sender.send('intents-changed');
 })
 
 module.exports = {
