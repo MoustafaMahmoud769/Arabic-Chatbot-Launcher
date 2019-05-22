@@ -15,7 +15,7 @@ function full_validation() {
 
 	// validate entities
 	let entities = JSON.parse(fs.readFileSync(entities_path));
-	for(i=0; i<entities.length; i++) {
+	for(var i=0; i<entities.length; i++) {
 		validation_results = entitiesObj.validateSingleEntity(entities[i]);
   		error = entitiesObj.findEntityError(validation_results, {"dups": false});
   		if(error != false) {
@@ -25,7 +25,7 @@ function full_validation() {
 
 	//validate actions
 	let actions = JSON.parse(fs.readFileSync(actions_path));
-	for(i=0; i<actions.length; i++) {
+	for(var i=0; i<actions.length; i++) {
 		validation_results = actionsObj.validateSingleAction(actions[i]);
   		error = actionsObj.findActionError(validation_results, {"dups": false});
   		if(error != false) {
@@ -35,7 +35,7 @@ function full_validation() {
 
 	//validate intents
 	let intents = JSON.parse(fs.readFileSync(intents_path));
-	for(i=0; i<intents.length; i++) {
+	for(var i=0; i<intents.length; i++) {
 		validation_results = intentsObj.validateSingleIntent(intents[i]);
   		error = intentsObj.findIntentError(validation_results, {"dups": false});
   		if(error != false) {
@@ -45,7 +45,7 @@ function full_validation() {
 
 	//validate stories
 	let stories = JSON.parse(fs.readFileSync(stories_path));
-	for(i=0; i<stories.length; i++) {
+	for(var i=0; i<stories.length; i++) {
 		validation_results = storiesObj.validateSingleStory(stories[i]);
   		error = storiesObj.findStoryError(validation_results, {"dups": false});
   		if(error != false) {
