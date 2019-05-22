@@ -40,8 +40,10 @@ function(n) {
       },
 
       addMessage: function() {
-        if (document.getElementById('msg-body').value.trim() === '')
+        if (document.getElementById('msg-body').value.trim() === ''){
+          document.getElementById('msg-body').value = '';
           return;
+        }
         text = document.getElementById('msgs-container').innerHTML;
         newMsg = '<div class="outgoing_msg"><div class="sent_msg"><p>';
         newMsg += document.getElementById('msg-body').value;
@@ -52,6 +54,8 @@ function(n) {
         document.getElementById('msgs-container').innerHTML = text;
         launch.messaging.sendMessage(document.getElementById('msg-body').value.trim());
         document.getElementById('msg-body').value = '';
+        var element = document.getElementById("msgs-container");
+        element.scrollTop = element.scrollHeight;
       },
 
       sendMessage: function(msg) {
@@ -115,8 +119,9 @@ function(n) {
 
         $('#msg-body').keypress(function(event){
         	var keycode = (event.keyCode ? event.keyCode : event.which);
-        	if(keycode == '13'){
-        		launch.messaging.addMessage()
+        	if(keycode == '13' && !event.shiftKey){
+            event.preventDefault();
+        		launch.messaging.addMessage();
           }
         })
       }

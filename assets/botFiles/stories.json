@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "name": "story",
+    "examples": [
+      "* greet",
+      "- utter_greet"
+    ]
+  },
+  {
+    "name": "asdf",
+    "examples": [
+      "* greet",
+      "- asdf",
+      "* greet",
+      "- asdf",
+      "* greet",
+      "- asdf"
+    ]
+  }
+]
