@@ -53,7 +53,7 @@ function findEntityError(validation_results, options) {
 
 function isEntityValidwAction(entity) {
   validation_results = validateSingleEntity(entity);
-  error = findEntityError(validation_results);
+  error = findEntityError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;

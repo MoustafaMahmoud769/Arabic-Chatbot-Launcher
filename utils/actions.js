@@ -75,7 +75,7 @@ function findActionError(validation_results, options) {
 function isActionValidwAction(action) {
 
   validation_results = validateSingleAction(action);
-  error = findActionError(validation_results);
+  error = findActionError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;
