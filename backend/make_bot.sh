@@ -49,7 +49,7 @@ fi
 
 error=$(cd $BOT && make all 2>&1 | grep "error")
 if ! [ -z "$error" ]; then
-  echo 'Error training bot'; exit
+  echo $error; exit
 fi
 echo 'Bot Trained Successfully'
 

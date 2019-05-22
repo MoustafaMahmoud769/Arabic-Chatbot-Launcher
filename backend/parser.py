@@ -6,6 +6,8 @@ intents = {}
 
 def write_stories(stories_, path):
     with open(path + "/data/core/stories.md", "w", encoding="utf-8") as stories:
+        stories.write("## fallback\n")
+        stories.write(" - utter_default\n\n")
         idx = 0
         for story in stories_:
             stories.write("## story " + str(idx) + "\n")
@@ -15,7 +17,10 @@ def write_stories(stories_, path):
                 if "intent" in item:
                     stories.write("* " + item["intent"] + str(intents[item["intent"]]).replace("{}", "").replace("'", "\"") + "\n")
                 else:
-                    stories.write(" - " + item["action"] + "\n")
+                    if not item["action"].startswith("utter_"):
+                        stories.write(" - utter_" + item["action"] + "\n")
+                    else:
+                        stories.write(" - " + item["action"] + "\n")
             stories.write("\n")
             idx += 1
 
@@ -45,13 +50,22 @@ def write_domain(data, path):
             domain.write("\n")
 
         domain.write("actions:\n")
+        domain.write(" - utter_default\n")
         for action in data["actions"].keys():
-            domain.write(" - " + action + "\n")
+            if not action.startswith("utter_"):
+                domain.write(" - utter_" + action + "\n")
+            else:
+                domain.write(" - " + action + "\n")
         domain.write("\n")
 
         domain.write("templates:\n")
+        domain.write(" utter_default:\n")
+        domain.write("  - \"آسف لم افهم ذلك\"\n")
         for action in data["actions"].keys():
-            domain.write(" " + action + ":\n")
+            if not action.startswith("utter_"):
+                domain.write(" utter_" + action + ":\n")
+            else:
+                domain.write(" " + action + ":\n")
             for alt in data["actions"][action]:
                 domain.write("  - \"" + alt + "\"\n")
         domain.write("\n")
