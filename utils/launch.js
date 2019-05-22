@@ -79,8 +79,9 @@ ipcMain.on('start-my-model', (event, arg)=> {
 			message: 'Done! : ' + stdout,
 			buttons: ['Ok']
 		});
-		free_lock(1);
+		
 	});
+  setTimeout(function(){free_lock(1);}, 2000);
   free_lock(1);
 })
 
@@ -155,8 +156,8 @@ ipcMain.on('start-example-model', (event, arg)=> {
 			message: 'Done! : ' + stdout,
 			buttons: ['Ok']
 		});
-		free_lock(1);
 	});
+  setTimeout(function(){free_lock(1);}, 2000);
   free_lock(1);
 })
 
