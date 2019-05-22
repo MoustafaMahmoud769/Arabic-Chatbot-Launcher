@@ -19,13 +19,45 @@ ipcRenderer.on('intents-changed', (event, arg)=> {
 window.intents = window.intents || {},
 function(n) {
     intents.messaging = {
-
       SendCurrentIntent: function(eventName) {
         let intentName = document.getElementById("intent-name").value;
         let intentExamples = document.getElementById("intent-examples").value;
         let intentEntites = document.getElementById("intent-entites").value;
         let args = {intentName, intentExamples, intentEntites};
         ipcRenderer.send(eventName, args);
+      },
+
+      getTextSelection: function(){
+        var field = document.getElementById("intent-examples");
+        var startPos = field.selectionStart;
+        var endPos = field.selectionEnd;        
+        var field_value = field.value;
+        var selectedText = field_value.substring(startPos,endPos);
+
+        //check only all selection in one line
+        selectedTextLines = selectedText.split("\n");
+        if(selectedTextLines.length != 1) {
+          return;
+        }
+
+        //break text to lines
+        var lines = field_value.split("\n");
+        var sumToFar = 0;
+        var line = -1;
+        for(i=0; i<lines.length; i++) {
+          if(startPos >= sumToFar && endPos <= sumToFar+lines[i].length) {
+            line = i;
+            break;
+          }
+          sumToFar += lines[i].length + 1;
+        }
+        var realStart = startPos - sumToFar;
+        var realEnd = endPos - sumToFar;
+
+        //set them to the user
+        document.getElementById("intent-entity-from").value = realStart;
+        document.getElementById("intent-entity-to").value = realEnd;
+        document.getElementById("intent-entity-idx").value = line;
       },
 
       addIntentEntity: function() {
@@ -70,11 +102,15 @@ function(n) {
         $('#add-intent-entity').click( function () {
           intents.messaging.addIntentEntity()
         })
-
         $('#remove-intent-entity').click( function () {
           intents.messaging.removeIntentEntity()
         })
-
+        $('#intent-examples').click( function () {
+          intents.messaging.getTextSelection()
+        })
+        $('#intent-examples').mousemove( function () {
+          intents.messaging.getTextSelection()
+        })
         $('#add-intent').click( function () {
           intents.messaging.addIntent()
         })
