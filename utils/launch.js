@@ -55,7 +55,7 @@ ipcMain.on('validate-my-model', (event, arg)=> {
   if(!acquire_lock("validation")) {
   	return;
   }
-  errors = backend.full_validation();
+ let errors = backend.full_validation();
 	dialog.showMessageBox({
 		type: 'info',
 		message: 'Your models have ' + errors.length + ' errors!',

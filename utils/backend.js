@@ -11,13 +11,13 @@ const entities_path = 'assets/botFiles/entites.json';
 const stories_path = 'assets/botFiles/stories.json';
 
 function full_validation() {
-	errors = []
+	let errors = []
 
 	// validate entities
 	let entities = JSON.parse(fs.readFileSync(entities_path));
-	for(var i=0; i<entities.length; i++) {
-		validation_results = entitiesObj.validateSingleEntity(entities[i]);
-  		error = entitiesObj.findEntityError(validation_results, {"dups": false});
+	for(let i=0; i<entities.length; i++) {
+		let validation_results = entitiesObj.validateSingleEntity(entities[i]);
+  		let error = entitiesObj.findEntityError(validation_results, {"dups": false});
   		if(error != false) {
   			errors.push(error);
   		}
@@ -25,9 +25,9 @@ function full_validation() {
 
 	//validate actions
 	let actions = JSON.parse(fs.readFileSync(actions_path));
-	for(var i=0; i<actions.length; i++) {
-		validation_results = actionsObj.validateSingleAction(actions[i]);
-  		error = actionsObj.findActionError(validation_results, {"dups": false});
+	for(let i=0; i<actions.length; i++) {
+		let validation_results = actionsObj.validateSingleAction(actions[i]);
+  		let error = actionsObj.findActionError(validation_results, {"dups": false});
   		if(error != false) {
   			errors.push(error);
   		}
@@ -35,19 +35,24 @@ function full_validation() {
 
 	//validate intents
 	let intents = JSON.parse(fs.readFileSync(intents_path));
-	for(var i=0; i<intents.length; i++) {
-		validation_results = intentsObj.validateSingleIntent(intents[i]);
-  		error = intentsObj.findIntentError(validation_results, {"dups": false});
+	for(let i=0; i<intents.length; i++) {
+		let validation_results = intentsObj.validateSingleIntent(intents[i]);
+  		let error = intentsObj.findIntentError(validation_results, {"dups": false});
   		if(error != false) {
   			errors.push(error);
   		}
 	}
 
+	//Number of total intents should be at least 2
+	if(intents.length < 2) {
+		errors.push({"title": 'Your intents are tiny!', "body": "You must provide at least two intents!"});
+	}
+
 	//validate stories
 	let stories = JSON.parse(fs.readFileSync(stories_path));
-	for(var i=0; i<stories.length; i++) {
-		validation_results = storiesObj.validateSingleStory(stories[i]);
-  		error = storiesObj.findStoryError(validation_results, {"dups": false});
+	for(let i=0; i<stories.length; i++) {
+		let validation_results = storiesObj.validateSingleStory(stories[i]);
+  		let error = storiesObj.findStoryError(validation_results, {"dups": false});
   		if(error != false) {
   			errors.push(error);
   		}
@@ -63,7 +68,7 @@ function full_conversion() {
 		return false;
 	}
 
-	data = {}
+	let data = {}
 	data.stories = []
 	data.rasa_nlu_data = {}
 	data.rasa_nlu_data.common_examples = []
@@ -74,15 +79,15 @@ function full_conversion() {
 
 	// do stories
 	let stories = JSON.parse(fs.readFileSync(stories_path));
-	for(i=0; i<stories.length; i++) {
-		current_story = []
-		for(j=0; j<stories[i].examples.length; j++) {
-			example = stories[i].examples[j];
+	for(let i=0; i<stories.length; i++) {
+		let current_story = []
+		for(let j=0; j<stories[i].examples.length; j++) {
+			let example = stories[i].examples[j];
 			if(example[0] == '*') {
-				int = tools.strip(example.substr(1, example.length));
+				let int = tools.strip(example.substr(1, example.length));
 				current_story.push({"intent": int})
 			} else {
-				act = tools.strip(example.substr(1, example.length));
+				let act = tools.strip(example.substr(1, example.length));
 				current_story.push({"action": act})
 			}
 		}
@@ -91,9 +96,9 @@ function full_conversion() {
 
 	// do actions
 	let actions = JSON.parse(fs.readFileSync(actions_path));
-	for(i=0; i<actions.length; i++) {
-		current_action = []
-		for(j=0; j<actions[i].examples.length; j++) {
+	for(let i=0; i<actions.length; i++) {
+		let current_action = []
+		for(let j=0; j<actions[i].examples.length; j++) {
 			current_action.push(actions[i].examples[j]);
 		}
 		data.actions[actions[i]['name']] = current_action;
@@ -103,12 +108,12 @@ function full_conversion() {
 	let intents = JSON.parse(fs.readFileSync(intents_path));
 
 	// process every intent alone
-	for(i=0; i<intents.length; i++) {
+	for(let i=0; i<intents.length; i++) {
 
 		// load all entities first
-		entities = {}
-		for(j=0; j<intents[i].entites.length; j++) {
-			ent = intents[i].entites[j];
+		let entities = {}
+		for(let j=0; j<intents[i].entites.length; j++) {
+			let ent = intents[i].entites[j];
 			if(ent['index'] in entities) {
 				entities[ent['index']].push(ent)
 			} else {
@@ -118,17 +123,17 @@ function full_conversion() {
 		}
 
 		// create an entry for each intent example
-		for(j=0; j<intents[i].examples.length; j++) {
-			example = intents[i].examples[j];
+		for(let j=0; j<intents[i].examples.length; j++) {
+			let example = intents[i].examples[j];
 			// create the intent-example
-			intent_example = {}
+			let intent_example = {}
 			intent_example['intent'] = intents[i]['name'];
 			intent_example['text'] = example;
 			// set entities if found
 			if (j in entities) {
 				intent_example['entities'] = []
-				for (k=0; k<entities[j].length; k++) {
-					entity = entities[j][k];
+				for (let k=0; k<entities[j].length; k++) {
+					let entity = entities[j][k];
 					intent_example['entities'].push({
 			            "start": entity['from'],
 			            "end": entity['to'],

@@ -1,4 +1,4 @@
-const { ipcMain, dialog } = require('electron')
+const { ipcMain, dialog, BrowserWindow } = require('electron')
 const fs = require('fs')
 const csv = require('csv-parser')
 
@@ -19,7 +19,7 @@ function validateSingleAction(action) {
   /**
    * check if name or examples are empty!
    */
-   empty = false;
+   let empty = false;
    if(action.name == '' ||
       action.examples.length == 0) {
     empty = true;
@@ -28,9 +28,9 @@ function validateSingleAction(action) {
   /**
    * check for duplications in action examples
    */
-   duplications = 0;
-   for(i=0; i<action.examples.length; i++) {
-    for(j=i+1; j<action.examples.length; j++) {
+   let duplications = 0;
+   for(let i=0; i<action.examples.length; i++) {
+    for(let j=i+1; j<action.examples.length; j++) {
       if(action.examples[i] == action.examples[j]) {
         duplications++;
       }
@@ -41,7 +41,7 @@ function validateSingleAction(action) {
    * check for title existed before?
    */
   let actions = JSON.parse(fs.readFileSync(path));
-  title_existed = false;
+  let title_existed = false;
   actions.forEach(function(old_action, index){
     if(old_action.name == action.name) {
       title_existed = true;
@@ -72,10 +72,10 @@ function findActionError(validation_results, options) {
   return false;
 }
 
-function isActionValidwAction(action) {
+function isActionValidwAction(action, dups=true) {
 
-  validation_results = validateSingleAction(action);
-  error = findActionError(validation_results, {"dups": true});
+  let validation_results = validateSingleAction(action);
+  let error = findActionError(validation_results, {"dups": dups});
 
   if(error == false) {
     return true;
@@ -84,6 +84,7 @@ function isActionValidwAction(action) {
   dialog.showErrorBox(error['title'], error['body']);
   return false;
 }
+
 
 ipcMain.on('validate-curr-action', (event, arg)=>{
 
@@ -125,6 +126,7 @@ ipcMain.on('add-action', (event, arg)=> {
       return;
     }
     event.sender.send('actions-changed');
+    event.sender.send('action-added');
   });
 })
 

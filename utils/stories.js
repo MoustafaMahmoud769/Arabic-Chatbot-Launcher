@@ -19,7 +19,7 @@ function validateSingleStory(story) {
   /**
    * check if name or examples are empty!
    */
-   empty = false;
+   let empty = false;
    if(story.name == '' ||
       story.examples.length == 0) {
     empty = true;
@@ -28,9 +28,9 @@ function validateSingleStory(story) {
   /**
    * check for invalid line in story body
    */
-   invalid = false;
-   invalid_str = "";
-   for(i=0; i<story.examples.length; i++) {
+   let invalid = false;
+   let invalid_str = "";
+   for(let i=0; i<story.examples.length; i++) {
       if(story.examples[i][0] != '*' &&
          story.examples[i][0] != '-') {
         invalid_str = story.examples[i];
@@ -42,10 +42,10 @@ function validateSingleStory(story) {
   /**
    * check for no_action
    */
-   no_action = false;
-   no_action_str = "";
-   curr_story = [];
-   for(i=0; i<story.examples.length; i++) {
+   let no_action = false;
+   let no_action_str = "";
+   let curr_story = [];
+   for(let i=0; i<story.examples.length; i++) {
       // intent
       if(story.examples[i][0] == '*') {
         if(curr_story.length == 1) {
@@ -71,13 +71,13 @@ function validateSingleStory(story) {
    */
    let intents_rawdata = fs.readFileSync('assets/botFiles/intents.json');
    let intents = JSON.parse(intents_rawdata);
-   invalid_intent = false;
-   invalid_intent_str = "";
-   for(i=0; i<story.examples.length; i++) {
+   let invalid_intent = false;
+   let invalid_intent_str = "";
+   for(let i=0; i<story.examples.length; i++) {
       // intent
-      found = false;
+      let found = false;
       if(story.examples[i][0] == '*') {
-        for(j=0; j<intents.length; j++) {
+        for(let j=0; j<intents.length; j++) {
           int = tools.strip(story.examples[i].substr(1, story.examples[i].length));
           if(intents[j].name == int) {
             found = true;
@@ -97,13 +97,13 @@ function validateSingleStory(story) {
    */
    let actions_rawdata = fs.readFileSync('assets/botFiles/actions.json');
    let actions = JSON.parse(actions_rawdata);
-   invalid_action = false;
-   invalid_action_str = "";
-   for(i=0; i<story.examples.length; i++) {
+   let invalid_action = false;
+   let invalid_action_str = "";
+   for(let i=0; i<story.examples.length; i++) {
       // action
-      found = false;
+      let found = false;
       if(story.examples[i][0] == '-') {
-        for(j=0; j<actions.length; j++) {
+        for(let j=0; j<actions.length; j++) {
           act = tools.strip(story.examples[i].substr(1, story.examples[i].length));
           if(actions[j].name == act) {
             found = true;
@@ -123,7 +123,7 @@ function validateSingleStory(story) {
    */
   let rawdata = fs.readFileSync(path);
   let stories = JSON.parse(rawdata);
-  title_existed = false;
+  let title_existed = false;
   stories.forEach(function(old_story, index){
     if(old_story.name == story.name) {
       title_existed = true;
@@ -172,8 +172,8 @@ function findStoryError(validation_results, options) {
 }
 
 function isStoryValidwAction(story) {
-  validation_results = validateSingleStory(story);
-  error = findStoryError(validation_results, {"dups": true});
+  let validation_results = validateSingleStory(story);
+  let error = findStoryError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;

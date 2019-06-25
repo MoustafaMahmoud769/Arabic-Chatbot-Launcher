@@ -24,7 +24,7 @@ function parseEntites(data, examples) {
 
 function cleanIntent(intentObj) {
   intentObj.name = tools.strip(intentObj.name);
-  for(i = 0; i < intentObj.examples.length; i++) {
+  for(let i = 0; i < intentObj.examples.length; i++) {
     intentObj.examples[i] = tools.strip(intentObj.examples[i]);
   }
   intentObj.examples = intentObj.examples.filter(Boolean);
@@ -36,18 +36,26 @@ function validateSingleIntent(intent) {
   /**
    * check if name or examples are empty!
    */
-   empty = false;
+   let empty = false;
    if(intent.name == '' ||
       intent.examples.length == 0) {
     empty = true;
    }
 
+   /**
+   * check number of intent examples
+   */
+   let intent_small_examples = false;
+   if(intent.examples.length < 2) {
+      intent_small_examples = true;
+   }
+
   /**
    * check for duplications in intent examples
    */
-   duplications = 0;
-   for(i=0; i<intent.examples.length; i++) {
-    for(j=i+1; j<intent.examples.length; j++) {
+   let duplications = 0;
+   for(let i=0; i<intent.examples.length; i++) {
+    for(let j=i+1; j<intent.examples.length; j++) {
       if(intent.examples[i] == intent.examples[j]) {
         duplications++;
       }
@@ -58,7 +66,7 @@ function validateSingleIntent(intent) {
    * check for title existed before?
    */
   let intents = JSON.parse(fs.readFileSync(path));
-  title_existed = false;
+  let title_existed = false;
   intents.forEach(function(old_intent, index){
     if(old_intent.name == intent.name) {
       title_existed = true;
@@ -68,9 +76,9 @@ function validateSingleIntent(intent) {
   /**
    * check for errors in indices
    */
-  indices_error = false;
-  indices_error_i = -1;
-  for (i=0; i<intent.entites.length; i++) {
+  let indices_error = false;
+  let indices_error_i = -1;
+  for (let i=0; i<intent.entites.length; i++) {
     if (isNaN(intent.entites[i].from) ||
         isNaN(intent.entites[i].to) ||
         isNaN(intent.entites[i].index) ) {
@@ -88,22 +96,22 @@ function validateSingleIntent(intent) {
   /**
    * validate every entity entry
    */
-  entity_error = false;
-  entity_error_i = -1;
-  overlapping_indices = false;
-  overlapping_indices_i = -1;
-  entity_title_existed = true
+  let entity_error = false;
+  let entity_error_i = -1;
+  let overlapping_indices = false;
+  let overlapping_indices_i = -1;
+  let entity_title_existed = true
 
-  map_of_ind = {}
-  for (m=0; m<intent.entites.length; m++) {
+  let map_of_ind = {}
+  for (let m=0; m<intent.entites.length; m++) {
 
-    from = intent.entites[m].from
-    to = intent.entites[m].to
-    ind = intent.entites[m].index
-    name = intent.entites[m].name
+    let from = intent.entites[m].from
+    let to = intent.entites[m].to
+    let ind = intent.entites[m].index
+    let name = intent.entites[m].name
 
     //check if existed - only for full validation
-    entity_title_existed = false
+    let entity_title_existed = false
     entities.forEach(function(entity, index){
       if(entity.name == name) {
         entity_title_existed = true;
@@ -142,7 +150,7 @@ function validateSingleIntent(intent) {
 
       // overlapping indices
       if (ind in map_of_ind) {
-        for(i=from; i<to; i++) {
+        for(let i=from; i<to; i++) {
           if (i in map_of_ind[ind]) {
             overlapping_indices = true;
             overlapping_indices_i = ind;
@@ -152,7 +160,7 @@ function validateSingleIntent(intent) {
         }
       } else {
         map_of_ind[ind] = {};
-        for(i=from; i<to; i++) {
+        for(let i=from; i<to; i++) {
           map_of_ind[ind][i] = 1;
         }
       }
@@ -175,10 +183,15 @@ function validateSingleIntent(intent) {
     entity_error_i: entity_error_i,
     overlapping_indices: overlapping_indices,
     overlapping_indices_i: overlapping_indices_i,
+    intent_small_examples: intent_small_examples,
   }
 }
 
 function findIntentError(validation_results, options) {
+  if (validation_results.intent_small_examples == true) {
+    return {"title": 'Intent examples are tiny!', "body": "You must at least two examples for each intent!"};
+  }
+  
   if(validation_results.empty == true) {
     return {"title": 'Your intent is empty!', "body": "You must provide title for your intent!"};
   }
@@ -199,7 +212,6 @@ function findIntentError(validation_results, options) {
     return {"title": 'Your intent has entity with non-numeric indices!', "body": 'The entity number ' + (validation_results.indices_error_i + 1) + ' has non-numeric indices, please fix it!'};
   }
 
-
   if(validation_results.entity_error == true) {
     return {"title": 'Your intent has entity with invalid [logically] indices!', "body": 'The entity number ' + (validation_results.entity_error_i + 1) + ' has error in its indices, please fix it!'};
   }
@@ -212,8 +224,8 @@ function findIntentError(validation_results, options) {
 
 function isIntentValidwAction(intent) {
 
-  validation_results = validateSingleIntent(intent);
-  error = findIntentError(validation_results, {"dups": true});
+  let validation_results = validateSingleIntent(intent);
+  let error = findIntentError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;
