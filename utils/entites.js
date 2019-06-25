@@ -102,6 +102,7 @@ ipcMain.on('add-entity', (event, arg)=> {
       return;
     }
     event.sender.send('entites-changed');
+    event.sender.send('entity-added');
   });
 })
 

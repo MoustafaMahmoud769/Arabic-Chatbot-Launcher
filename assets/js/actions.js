@@ -10,6 +10,8 @@ ipcRenderer.on('send-actions', (event, arg)=> {
 
 ipcRenderer.on('action-added', (event, arg)=> {
   document.getElementById("action-warning").innerHTML = '';
+  document.getElementById("action-name").value = '';
+  document.getElementById("action-examples").value = '';  
 })
 
 ipcRenderer.on('actions-changed', (event, arg)=> {
@@ -29,8 +31,6 @@ function(n) {
 
       addAction: function() {
         actions.messaging.SendCurrentAction('add-action');
-        document.getElementById("action-name").value = '';
-        document.getElementById("action-examples").value = '';
       },
 
       validateCurrentAction: function() {
@@ -67,7 +67,7 @@ function(n) {
         var header = tableRef.createTHead();
         var row = header.insertRow(0);
         var cell = row.insertCell(0);
-        cell.innerHTML = " <b>Name</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(1);
         cell.innerHTML = " <b></b>";
         cell = row.insertCell(2);

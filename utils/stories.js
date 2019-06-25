@@ -224,6 +224,7 @@ ipcMain.on('add-story', (event, arg)=> {
       return;
     }
     event.sender.send('stories-changed');
+    event.sender.send('story-added');
   });
 })
 

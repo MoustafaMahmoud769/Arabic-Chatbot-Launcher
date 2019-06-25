@@ -277,6 +277,7 @@ ipcMain.on('add-intent', (event, arg)=> {
       return;
     }
     event.sender.send('intents-changed');
+    event.sender.send('intent-added');
   });
 })
 

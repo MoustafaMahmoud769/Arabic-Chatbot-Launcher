@@ -15,9 +15,11 @@
             <textarea name="action-examples" id="action-examples" rows="7"></textarea>
           </div>
         </form>
-        <button type="button" id="add-action" name="add-action" class="button submit" >Add</button>
-        <button type="button" id="validate-curr-action" name="validate-curr-action" class="button submit" >Validate</button>
-        <button type="button" id="load-action" name="load-action" class="button submit" >Load sheet</button>
+        <div class="field">
+          <button type="button" id="add-action" name="add-action" class="button submit" >Add</button>
+          <button type="button" id="validate-curr-action" name="validate-curr-action" class="button submit" >Validate</button>
+          <button type="button" id="load-action" name="load-action" class="button submit" >Load sheet</button>
+        </div>
       </section>
       <section>
         <h5>Example</h5>
@@ -30,9 +32,14 @@
       </section>
     </div>
   </div>
-  <div class="container">
-    <table name="show-actions" id="show-actions" style="width:100%">
-    </table>
+  <div class="inner">
+    <div class="split style1">
+      <section>
+        <h3>Current Actions</h3>
+        <table name="show-actions" id="show-actions" style="width:100%">
+        </table>
+      </section>
+    </div>
   </div>
 </section>
 </template>
