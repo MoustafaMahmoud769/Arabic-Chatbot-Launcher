@@ -12,6 +12,13 @@ ipcRenderer.on('send-intents', (event, arg)=> {
   intents.handler.update(arg);
 })
 
+ipcRenderer.on('intent-added', (event, arg)=> {
+  document.getElementById("intent-warning").innerHTML = '';
+  document.getElementById("intent-name").value = '';
+  document.getElementById("intent-examples").value = '';
+  document.getElementById("intent-entites").value = '';
+})
+
 ipcRenderer.on('intents-changed', (event, arg)=> {
   intents.messaging.UpdateTable();
 })
@@ -87,9 +94,6 @@ function(n) {
 
       addIntent: function() {
         intents.messaging.SendCurrentIntent('add-intent');
-        document.getElementById("intent-name").value = '';
-        document.getElementById("intent-examples").value = '';
-        document.getElementById("intent-entites").value = '';
       },
 
       validateCurrentIntent: function() {
@@ -158,13 +162,11 @@ function(n) {
         var header = tableRef.createTHead();
         var row = header.insertRow(0);
         var cell = row.insertCell(0);
-        cell.innerHTML = " <b>Name</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(1);
-        cell.innerHTML = " <b>Examples</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(2);
-        cell.innerHTML = " <b>Entites</b>";
-        cell = row.insertCell(3);
-        cell.innerHTML = " <b>Delete</b>";
+        cell.innerHTML = " <b></b>";
       },
 
       handleEntites: function(data) {
@@ -176,15 +178,48 @@ function(n) {
       },
 
       addRow: function(tableRef, data) {
+        console.log(data)
+        // add new row
         let newRow = tableRef.insertRow(-1);
+        // intent name
         let newCell1 = newRow.insertCell(-1);
         newCell1.innerHTML = data.name;
-        let newCell2 = newRow.insertCell(-1);
-        for (let i = 0; i < data.examples.length; ++i) {
-          newCell2.innerHTML += data.examples[i] + '<br />';
-        }
-        let newCell3 = newRow.insertCell(-1);
-        newCell3.innerHTML += intents.handler.handleEntites(data.entites);
+        // update key
+        let newCellx = newRow.insertCell(-1);
+        let elementx = document.createElement("input");
+        elementx.value = "Display/Modify";
+        elementx.className = "button submit";
+        elementx.type = "input";
+        elementx.onclick = function() {
+          intents.handler.remove(data.name);
+          document.getElementById("intent-name").value = data.name;
+          // handle examples
+          let examples_ = ""
+          for(let i =0; i<data.examples.length; i++) {
+           examples_ += data.examples[i] + '\n';
+          }
+          // handle entities
+          let entities_ = ""
+          for(let i =0; i<data.entites.length; i++) {
+          console.log(data.entites[i].from)
+           entities_ += data.entites[i].from.toString() + '\t';
+           entities_ += data.entites[i].to.toString() + '\t';
+           entities_ += data.entites[i].index.toString() + '\t';
+           entities_ += data.entites[i].value.toString() + '\t';
+           entities_ += data.entites[i].name + '\t';
+           entities_ += '\n';
+          }
+          //
+          document.getElementById("intent-examples").value = examples_;
+          document.getElementById("intent-entites").value = entities_;
+          document.getElementById("intent-warning").innerHTML = 'This Intent was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          jQuery('html,body').animate({scrollTop:0},0);
+          console.log(data.entites)
+        };
+        newCellx.appendChild(elementx);
+        // let newCell3 = newRow.insertCell(-1);
+        // newCell3.innerHTML += intents.handler.handleEntites(data.entites);
+        // delete key
         let newCell4 = newRow.insertCell(-1);
         let element = document.createElement("input");
         element.value = "Delete";

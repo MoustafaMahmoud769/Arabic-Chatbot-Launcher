@@ -7,32 +7,36 @@
         <form method="post" action="#">
           <div class="field">
             <label for="story-name">Story Name</label>
+            <label id="story-warning" style="color:red; font-size: 12px;"></label>
             <textarea name="story-name" id="story-name" rows="1"></textarea>
           </div>
           <div class="field">
             <label for="story-body">Story Body</label>
             <textarea name="story-body" id="story-body" rows="7" disabled></textarea>
           </div>
-          <div class="row">
-            <div class="col">
-              <label for="intents-list">Intents</label>
-              <select id="intents-list">
-              </select>
-            </div>
-            <div class="col">
-              <label for="actions-list">Actions</label>
-              <select id="actions-list">
-              </select>
-            </div>
-            <div class="col">
-              <br />
-              <button type="button" id="remove-body" name="remove-body" class="button submit" >Remove</button>
+          <div class="field">
+            <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
+              <div class="col">
+                <label for="intents-list">Intents</label>
+                <select id="intents-list">
+                </select>
+              </div>
+              <div class="col">
+                <label for="actions-list">Actions</label>
+                <select id="actions-list">
+                </select>
+              </div>
+              <div class="col">
+                <button type="button" id="remove-body" name="remove-body" class="button submit" style ="position: absolute; bottom: 0px;">Remove</button>
+              </div>
             </div>
           </div>
         </form>
-        <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
-        <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
-        <button type="button" id="load-story" name="load-story" class="button submit" >Load Sheet</button>
+        <div class="field">
+          <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
+          <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
+          <button type="button" id="load-story" name="load-story" class="button submit" >Load Sheet</button>
+        </div>
       </section>
       <section>
         <h5>Example</h5>
@@ -49,9 +53,14 @@
       </section>
     </div>
   </div>
-  <div class="container">
-    <table name="show-stories" id="show-stories" style="width:100%">
-    </table>
+  <div class="inner">
+    <div class="split style1">
+      <section>
+        <h3>Current Stories</h3>
+        <table name="show-stories" id="show-stories" style="width:100%">
+        </table>
+      </section>
+    </div>
   </div>
 </section>
 </template>

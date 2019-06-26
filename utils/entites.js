@@ -16,7 +16,7 @@ function validateSingleEntity(entity) {
   /**
    * check if name or examples are empty!
    */
-   empty = false;
+   let empty = false;
    if(entity.name == '') {
     empty = true;
    }
@@ -27,7 +27,7 @@ function validateSingleEntity(entity) {
    * found out if the title is already existed?
    */
   let entites = JSON.parse(fs.readFileSync(path));
-  title_existed = false;
+  let title_existed = false;
   entites.forEach(function(old_entity, index){
     if(old_entity.name == entity.name) {
       title_existed = true;
@@ -52,8 +52,8 @@ function findEntityError(validation_results, options) {
 }
 
 function isEntityValidwAction(entity) {
-  validation_results = validateSingleEntity(entity);
-  error = findEntityError(validation_results, {"dups": true});
+  let validation_results = validateSingleEntity(entity);
+  let error = findEntityError(validation_results, {"dups": true});
 
   if(error == false) {
     return true;
@@ -102,6 +102,7 @@ ipcMain.on('add-entity', (event, arg)=> {
       return;
     }
     event.sender.send('entites-changed');
+    event.sender.send('entity-added');
   });
 })
 

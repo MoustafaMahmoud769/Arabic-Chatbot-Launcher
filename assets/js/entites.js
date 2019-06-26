@@ -8,6 +8,11 @@ ipcRenderer.on('send-entites', (event, arg)=> {
   entites.handler.update(arg);
 })
 
+ipcRenderer.on('entity-added', (event, arg)=> {
+  document.getElementById("entity-warning").innerHTML = '';
+  document.getElementById("entity").value = '';
+})
+
 ipcRenderer.on('entites-changed', (event, arg)=> {
   entites.messaging.UpdateTable();
 })
@@ -24,7 +29,6 @@ function(n) {
 
       addEntity: function() {
         entites.messaging.SendCurrentEntity('add-entity');
-        document.getElementById("entity").value = '';
       },
 
       validateCurrentEntity: function() {
@@ -61,15 +65,33 @@ function(n) {
         var header = tableRef.createTHead();
         var row = header.insertRow(0);
         var cell = row.insertCell(0);
-        cell.innerHTML = " <b>Name</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(1);
-        cell.innerHTML = " <b>Delete</b>";
+        cell.innerHTML = " <b></b>";
+        cell = row.insertCell(2);
+        cell.innerHTML = " <b></b>";
       },
 
       addRow: function(tableRef, data) {
+        // add new row
         let newRow = tableRef.insertRow(-1);
+        // action name
         let newCell1 = newRow.insertCell(-1);
         newCell1.innerHTML = data.name;
+        // update key
+        let newCellx = newRow.insertCell(-1);
+        let elementx = document.createElement("input");
+        elementx.value = "Display/Modify";
+        elementx.className = "button submit";
+        elementx.type = "input";
+        elementx.onclick = function() {
+          entites.handler.remove(data.name);
+          document.getElementById("entity").value = data.name;
+          document.getElementById("entity-warning").innerHTML = 'This Entity was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          jQuery('html,body').animate({scrollTop:0},0);
+        };
+        newCellx.appendChild(elementx);
+        // delete key
         let newCell2 = newRow.insertCell(-1);
         let element = document.createElement("input");
         element.value = "Delete";

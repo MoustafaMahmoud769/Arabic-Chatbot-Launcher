@@ -7,12 +7,15 @@
         <form method="post" action="#">
           <div class="field">
             <label for="entity">Entity</label>
+            <label id="entity-warning" style="color:red; font-size: 12px;"></label>
             <textarea name="entity" id="entity" rows="1"></textarea>
           </div>
         </form>
-        <button type="button" id="add-entity" name="add-entity" class="button submit" >Add</button>
-        <button type="button" id="validate-curr-entity" name="validate-curr-entity" class="button submit" >Validate</button>
-        <button type="button" id="load-entity" name="load-entity" class="button submit" >Load</button>
+        <div class="field">
+          <button type="button" id="add-entity" name="add-entity" class="button submit" >Add</button>
+          <button type="button" id="validate-curr-entity" name="validate-curr-entity" class="button submit" >Validate</button>
+          <button type="button" id="load-entity" name="load-entity" class="button submit" >Load</button>
+        </div>
       </section>
 
       <section>
@@ -26,9 +29,14 @@
       </section>
     </div>
   </div>
-  <div class="container">
-    <table name="show-entites" id="show-entites" style="width:100%">
-    </table>
+  <div class="inner">
+    <div class="split style1">
+      <section>
+        <h3>Current Entities</h3>
+        <table name="show-entites" id="show-entites" style="width:100%">
+        </table>
+      </section>
+    </div>
   </div>
 </section>
 </template>

@@ -20,6 +20,12 @@ ipcRenderer.on('stories-changed', (event, arg)=> {
   stories.messaging.UpdateTable();
 })
 
+ipcRenderer.on('story-added', (event, arg)=> {
+  document.getElementById("story-warning").innerHTML = '';
+  document.getElementById("story-name").value = '';
+  document.getElementById("story-body").value = '';
+})
+
 window.stories = window.stories || {},
 function(n) {
     stories.messaging = {
@@ -33,8 +39,6 @@ function(n) {
 
       addStory: function() {
         stories.messaging.SendCurrentStory('add-story');
-        document.getElementById("story-name").value = '';
-        document.getElementById("story-body").value = '';
       },
 
       validateCurrentStory: function() {
@@ -139,21 +143,38 @@ function(n) {
         var header = tableRef.createTHead();
         var row = header.insertRow(0);
         var cell = row.insertCell(0);
-        cell.innerHTML = " <b>Name</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(1);
-        cell.innerHTML = " <b>Examples</b>";
+        cell.innerHTML = " <b></b>";
         cell = row.insertCell(2);
-        cell.innerHTML = " <b>Delete</b>";
+        cell.innerHTML = " <b></b>";
       },
 
       addRow: function(tableRef, data) {
+        // add new row
         let newRow = tableRef.insertRow(-1);
+        // action name
         let newCell1 = newRow.insertCell(-1);
         newCell1.innerHTML = data.name;
-        let newCell2 = newRow.insertCell(-1);
-        for (let i = 0; i < data.examples.length; ++i) {
-          newCell2.innerHTML += data.examples[i] + '<br />';
-        }
+        // update key
+        let newCellx = newRow.insertCell(-1);
+        let elementx = document.createElement("input");
+        elementx.value = "Display/Modify";
+        elementx.className = "button submit";
+        elementx.type = "input";
+        elementx.onclick = function() {
+          stories.handler.remove(data.name);
+          document.getElementById("story-name").value = data.name;
+          let examples_ = ""
+          for(let i =0; i<data.examples.length; i++) {
+           examples_ += data.examples[i] + '\n';
+          }
+          document.getElementById("story-body").value = examples_;
+          document.getElementById("story-warning").innerHTML = 'This Story was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          jQuery('html,body').animate({scrollTop:0},0);
+        };
+        newCellx.appendChild(elementx);
+        // delete key
         let newCell3 = newRow.insertCell(-1);
         let element = document.createElement("input");
         element.value = "Delete";
