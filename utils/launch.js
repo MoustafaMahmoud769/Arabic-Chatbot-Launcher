@@ -1,3 +1,7 @@
+'use strict';
+const {Docker} = require('node-docker-api');
+const dockerode = require('dockerode');
+const tar = require('tar-fs');
 const { ipcMain, dialog } = require('electron')
 const backend = require('./backend')
 const fs = require('fs')
@@ -51,7 +55,50 @@ function acquire_lock(busyMsg) {
 function free_lock(num) {
 	busyCtr -= num;
 }
-ipcMain.on('validate-my-model', (event, arg)=> {
+ipcMain.on('validate-my-model', async (event, arg)=> {
+	///////////// Used to build and train bot docker image, inside the first then() block, you can know that build has finished
+	// const promisifyStream = stream => new Promise((resolve, reject) => {
+	//   stream.on('data', data => console.log("data: " + data.toString() + " :/data"))
+	//   stream.on('end', resolve)
+	//   stream.on('error', reject)
+	// });
+	//
+	// const docker = new Docker({ socketPath: '/var/run/docker.sock' });
+	//
+	// var tarStream = tar.pack('/Users/marwan/Downloads/rasa-chatbot-master');
+	// docker.image.build(tarStream, {
+	//   t: 'testbot'
+	// })
+	// 	.then(stream => promisifyStream(stream))
+	// 	.then(() => console.log("BUILT"))
+	// 	.then(() => console.log(docker.image.get('testbot').status()))
+	// 	.catch(error => console.log(error));
+
+	////////// Used to stop all containers, check for port 5005 until nothing is listening to know that everything was stopped.
+	// var drode = new dockerode({socketPath: '/var/run/docker.sock'});
+	// drode.listContainers(function (err, containers) {
+	//   containers.forEach(function (containerInfo) {
+	//     drode.getContainer(containerInfo.Id).stop();
+	//   });
+	// });
+
+	///////// Used to start the server of the bot, check for port 5005 afterwards to know that it has started
+	// drode.run('testbot_1', [], process.stdout, {
+	// 	Env : ["PORT=5005", "PYTHONPATH=/app/:$PYTHONPATH"],
+	//   ExposedPorts: {
+	//     '5005/tcp': {}
+	//   },
+	//   Hostconfig: {
+	//     PortBindings: {
+	//       '5005/tcp': [{
+	//         HostPort: '5005',
+	//       }],
+	//     },
+	//   },
+	// })
+	// 	.then(() => console.log("Ran"))
+	// 	.catch(error => console.log(error));
+
   if(!acquire_lock("validation")) {
   	return;
   }
@@ -79,7 +126,7 @@ ipcMain.on('start-my-model', (event, arg)=> {
 			message: 'Done! : ' + stdout,
 			buttons: ['Ok']
 		});
-		
+
 	});
   setTimeout(function(){free_lock(1);}, 2000);
   free_lock(1);
