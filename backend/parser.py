@@ -82,7 +82,7 @@ with open("data.json", "r", encoding="utf-8") as json_file:
     data = json.load(json_file)
 
 
-path = sys.argv[1]
+path = "."
 write_domain(data, path)
 write_stories(data["stories"], path)
 write_nlu(data, path)
