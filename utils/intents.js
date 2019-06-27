@@ -109,16 +109,16 @@ function validateSingleIntent(intent) {
     let to = intent.entites[m].to
     let ind = intent.entites[m].index
     let name = intent.entites[m].name
-
+    console.log(name)
     //check if existed - only for full validation
-    let entity_title_existed = false
+    entity_title_existed = false
     entities.forEach(function(entity, index){
       if(entity.name == name) {
         entity_title_existed = true;
       }
     });
 
-    if(entity_title_existed === false) {
+    if(entity_title_existed == false) {
       break;
     }
 
@@ -127,24 +127,24 @@ function validateSingleIntent(intent) {
       // check index exist
       if(ind < 0 || ind >= intent.examples.length) {
         entity_error = true;
-        entity_error_i = i;
+        entity_error_i = m;
         break;
       }
 
       //check from & to
       if(from < 0 || from > intent.examples[ind].length) {
         entity_error = true;
-        entity_error_i = i;
+        entity_error_i = m;
         break;
       }
       if(to < 0 || to > intent.examples[ind].length) {
         entity_error = true;
-        entity_error_i = i;
+        entity_error_i = m;
         break;
       }
       if(from > to) {
         entity_error = true;
-        entity_error_i = i;
+        entity_error_i = m;
         break;
       }
 
