@@ -14,7 +14,9 @@ function(n) {
             timeout = timeout || 1000;     // default of 1 seconds
             var timer = setTimeout(function() {
                 reject("timeout");
-                socket.end();
+                if (socket != null){
+                  socket.end();
+                }
             }, timeout);
             var socket = net.createConnection(port, host, function() {
                 clearTimeout(timer);
@@ -30,7 +32,7 @@ function(n) {
 
     function checkConnectionTimeOut() {
       setTimeout(function(){
-        checkConnection("127.0.0.1", 5002, 1000).then(function() {
+        checkConnection("127.0.0.1", 5005, 1000).then(function() {
           document.getElementById('connection-state').innerHTML = "Online";
           document.getElementById('connection-state').style.color = "green";
           checkConnectionTimeOut();
@@ -98,7 +100,7 @@ function(n) {
 
       sendMessage: function(msg) {
         $.ajax({
-            url: 'http://localhost:5002/webhooks/rest/webhook',
+            url: 'http://localhost:5005/webhooks/rest/webhook',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
