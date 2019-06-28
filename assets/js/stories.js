@@ -12,6 +12,10 @@ ipcRenderer.on('send-actions', (event, arg)=> {
   stories.handler.updateActionsChoices(arg);
 })
 
+ipcRenderer.on('send-slots', (event, arg)=> {
+  stories.handler.updateSlotsChoices(arg);
+})
+
 ipcRenderer.on('send-stories', (event, arg)=> {
   stories.handler.update(arg);
 })
@@ -93,6 +97,7 @@ function(n) {
         $('#tab5').click( function() {
           intents.messaging.UpdateTable()
           actions.messaging.UpdateTable()
+          slots.messaging.UpdateTable()
           stories.messaging.UpdateTable()
         })
 
@@ -101,6 +106,10 @@ function(n) {
         })
 
         $('#actions-list').change( function() {
+          stories.messaging.appendAction()
+        })
+
+        $('#slots-list').change( function() {
           stories.messaging.appendAction()
         })
       }
@@ -136,6 +145,23 @@ function(n) {
 
       updateActionsChoices: function(data) {
         stories.handler.setOptions('actions-list', data);
+      },
+
+      updateSlotsChoices: function(data) {
+        var sel = document.getElementById('slots-list');
+        sel.innerHTML = '';
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode('None') );
+        opt.value = '';
+        sel.appendChild(opt);
+        if (data.length !== 0) {
+          for (let i = 0; i < data.length; i++) {
+            var opt = document.createElement('option');
+            opt.appendChild(document.createTextNode(data[i].name) );
+            opt.value = data[i].name;
+            sel.appendChild(opt);
+          }
+        }
       },
 
       addHeader: function(tableRef) {
