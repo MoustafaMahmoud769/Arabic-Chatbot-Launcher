@@ -5,42 +5,11 @@ const tar = require('tar-fs');
 const { ipcMain, dialog } = require('electron')
 const backend = require('./backend')
 const fs = require('fs')
-const shell = require('shelljs');
+var net = require('net');
 
 var busyCtr = 0;
 var busyMessage;
-
-function preprocess() {
-  //launch backend
-	node = shell.which('node')
-	nodejs = shell.which('nodejs')
-	if (node !== null && typeof node === "string")
-	{
-		shell.config.execPath = node;
-	}
-	else if (nodejs !== null && typeof nodejs === "string")
-	{
-		shell.config.execPath = nodejs;
-	}
-	else if(node !== null && typeof node['stdout'] === "string")
-	{
-		shell.config.execPath = node['stdout']
-	}
-	else if (nodejs !== null && typeof nodejs['stdout'] === "string")
-	{
-		shell.config.execPath = nodejs['stdout']
-	}
-	else
-	{
-		dialog.showErrorBox('Oops.. ', 'Can\'t fine node binary in your system');
-		return;
-	}
-	dialog.showMessageBox({
-		type: 'info',
-		message: 'Running your command!',
-		buttons: ['Ok']
-	});
-}
+var is_server_on = false;
 
 function checkConnection(host, port, timeout) {
     return new Promise(function(resolve, reject) {
@@ -63,34 +32,51 @@ function checkConnection(host, port, timeout) {
     });
 }
 
+function update_server_status() {
+	setTimeout(function(){
+		checkConnection("127.0.0.1", 5005, 500).then(function() {
+			is_server_on = true;
+			update_server_status();
+		}, function(err) {
+			is_server_on = false;
+			update_server_status();
+		})
+	},250);
+}
+update_server_status()
+
 function release_on_run() {
 	setTimeout(function(){
-		checkConnection("127.0.0.1", 5005, 1000).then(function() {
+		if (is_server_on) {
 			dialog.showMessageBox({
 				type: 'info',
 				message: 'Done!',
 				buttons: ['Ok']
 			});
 			free_lock(2);
-		}, function(err) {
-			release_on_run();
-		})
-	},1000);
+		} else {
+			if(busyCtr == 2) {
+				release_on_run();
+			}
+		}
+	},250);
 }
 
 function release_on_stop() {
 	setTimeout(function(){
-		checkConnection("127.0.0.1", 5005, 1000).then(function() {
-			release_on_stop();
-		}, function(err) {
+		if (is_server_on) {
+			if(busyCtr == 2) {
+				release_on_stop();
+			}
+		} else {
 			dialog.showMessageBox({
 				type: 'info',
 				message: 'Done!',
 				buttons: ['Ok']
 			});
 			free_lock(2);
-		})
-	},1000);
+		}
+	},250);
 }
 
 function acquire_lock(busyMsg) {
@@ -128,6 +114,16 @@ ipcMain.on('validate-my-model', async (event, arg)=> {
 
 ipcMain.on('start-my-model', (event, arg)=> {
 
+	//if already started!
+	if(is_server_on == true) {
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Server is already running!',
+			buttons: ['Ok']
+		});
+		return;
+	}
+
 	if(!acquire_lock("starting model")) {
 		return;
 	}
@@ -149,12 +145,6 @@ ipcMain.on('start-my-model', (event, arg)=> {
 	})
 	.then(() => {
 		console.log("Ran");
-		dialog.showMessageBox({
-			type: 'info',
-			message: 'Done!',
-			buttons: ['Ok']
-		});
-		free_lock(2);
 	})
 	.catch(error => {
 		console.log(error);
@@ -166,9 +156,22 @@ ipcMain.on('start-my-model', (event, arg)=> {
 		free_lock(2);
 	});
 
+	release_on_run();
+
 })
 
 ipcMain.on('build-my-model', (event, arg)=> {
+
+	//if already started!
+	if(is_server_on == true) {
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Server is running, you must stop it first!',
+			buttons: ['Ok']
+		});
+		return;
+	}
+
 	if(!acquire_lock("building model")) {
 		return;
 	}
@@ -208,7 +211,7 @@ ipcMain.on('build-my-model', (event, arg)=> {
 	.then(stream => promisifyStream(stream))
 	.then(() => {
 		console.log("BUILT");
-		console.log(docker.image.get('testbot').status());
+		console.log(docker.image.get('testbot_1').status());
 		dialog.showMessageBox({
 			type: 'info',
 			message: 'Done!',
@@ -231,6 +234,16 @@ ipcMain.on('build-my-model', (event, arg)=> {
 
 ipcMain.on('stop-my-model', (event, arg)=> {
 
+	//if already stopped!
+	if(is_server_on == false) {
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Server is already stopped!',
+			buttons: ['Ok']
+		});
+		return;
+	}
+
 	if(!acquire_lock("stopping model")) {
 		return;
 	}
@@ -248,6 +261,16 @@ ipcMain.on('stop-my-model', (event, arg)=> {
 })
 
 ipcMain.on('start-example-model', (event, arg)=> {
+
+	//if already started!
+	if(is_server_on == true) {
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Server is already running!',
+			buttons: ['Ok']
+		});
+		return;
+	}
 
 	if(!acquire_lock("starting example model")) {
 		return;
@@ -270,12 +293,6 @@ ipcMain.on('start-example-model', (event, arg)=> {
 	})
 	.then(() => {
 		console.log("Ran");
-		dialog.showMessageBox({
-			type: 'info',
-			message: 'Done!',
-			buttons: ['Ok']
-		});
-		free_lock(2);
 	})
 	.catch(error => {
 		console.log(error);
@@ -287,9 +304,21 @@ ipcMain.on('start-example-model', (event, arg)=> {
 		free_lock(2);
 	});
 
+	release_on_run();
+
 })
 
 ipcMain.on('stop-example-model', (event, arg)=> {
+
+	//if already stopped!
+	if(is_server_on == false) {
+		dialog.showMessageBox({
+			type: 'info',
+			message: 'Server is already stopped!',
+			buttons: ['Ok']
+		});
+		return;
+	}
 
 	if(!acquire_lock("stopping model")) {
 		return;

@@ -65,6 +65,9 @@ function(n) {
         document.getElementById("intent-entity-from").value = realStart;
         document.getElementById("intent-entity-to").value = realEnd;
         document.getElementById("intent-entity-idx").value = line;
+        if (realStart >= 0 && realEnd <= lines[line].length) {
+          document.getElementById("entity-selected-text").innerHTML = lines[line].substr(realStart, realEnd-realStart+1);
+        }
       },
 
       addIntentEntity: function() {
