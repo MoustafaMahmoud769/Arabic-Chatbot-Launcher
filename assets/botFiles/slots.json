@@ -1,0 +1,35 @@
+[
+  {
+    "name": "fares",
+    "type": "categorical",
+    "fmin": "",
+    "fmax": "",
+    "clist": [
+      "fares1",
+      "fares2",
+      "fares3",
+      "fares5"
+    ]
+  },
+  {
+    "name": "sdfasf",
+    "type": "text",
+    "fmin": "",
+    "fmax": "",
+    "clist": []
+  },
+  {
+    "name": "sdfasfdsdf",
+    "type": "text",
+    "fmin": "",
+    "fmax": "",
+    "clist": []
+  },
+  {
+    "name": "mins",
+    "type": "float",
+    "fmin": "-1.0",
+    "fmax": "1.1",
+    "clist": []
+  }
+]

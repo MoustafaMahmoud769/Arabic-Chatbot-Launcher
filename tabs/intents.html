@@ -14,11 +14,12 @@
             <label for="intent-examples">Intent Example</label>
             <textarea name="intent-examples" id="intent-examples" rows="4"></textarea>
           </div>
+          <hr />
           <div class="field">
-            <label for="intent-entites">Intent Entites</label>
+            <label for="intent-entites">Entities Handling</label>
             <textarea name="intent-entites" id="intent-entites" rows="3" disabled></textarea>
           </div>
-          <div class="field">
+          <div class="field" style="display: none;">
             <div class="row">
               <div class="col">
                 <label for="intent-entity-from">From</label>
@@ -35,23 +36,27 @@
             </div>
           </div>
           <div class="field">
+            <label for="intent-entity-from">Selected Text</label>
+            <textarea disabled="true" name="entity-selected-text" id="entity-selected-text" rows="1"></textarea>
+          </div>
+          <div class="field">
+            <label for="intent-entity-name">Entity</label>
+            <select name="intent-entity-name" id="intent-entity-name">
+            </select>
+          </div>
+          </div>
+          <div class="field">
             <div class="row">
               <div class="col">
-                <label for="intent-entity-name">Intent Example</label>
-                <select name="intent-entity-name" id="intent-entity-name">
-                </select>
-              </div>
-              <div class="col">
-                <br />
                 <button type="button" id="add-intent-entity" name="add-intent-entity" class="button submit" >Add Entity</button>
               </div>
               <div class="col">
-                <br />
                 <button type="button" id="remove-intent-entity" name="remove-intent-entity" class="button submit" >Remove Entity</button>
               </div>
             </div>
           </div>
         </form>
+        <hr />
         <div class="field">
           <button type="button" id="add-intent" name="add-intent" class="button submit" >Add</button>
           <button type="button" id="validate-curr-intent" name="validate-curr-intent" class="button submit" >Validate</button>

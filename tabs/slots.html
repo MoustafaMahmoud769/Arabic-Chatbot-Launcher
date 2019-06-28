@@ -1,15 +1,92 @@
+<script type="text/javascript">
+  function display_slot_options() {
+    var e = document.getElementById("slot-type");
+    var choosed_slot = e.options[e.selectedIndex].value;
+    // hide all
+    document.getElementById("slot-text").style.display = 'none'; 
+    document.getElementById("slot-categorical").style.display = 'none'; 
+    document.getElementById("slot-bool").style.display = 'none'; 
+    document.getElementById("slot-float").style.display = 'none'; 
+    document.getElementById("slot-list").style.display = 'none'; 
+    document.getElementById("slot-unfeaturized").style.display = 'none'; 
+    // display only the chosen one
+    document.getElementById("slot-" + choosed_slot).style.display = 'block'; 
+  }
+</script>
+
 <template class="section-template">
 <section id="slots" class="wrapper style1">
   <div class="inner">
     <h2>Load Your Custom Slots</h2>
     <div class="split style1">
       <section>
+        <form method="post" slot="#">
+          <div class="field">
+            <label for="slot-name">Slot Name</label>
+            <label id="slot-warning" style="color:red; font-size: 12px;"></label>
+            <textarea name="slot-name" id="slot-name" rows="1"></textarea>
+          </div>
+          <div class="field">
+            <label for="slot-type">Slot Type</label>
+            <label id="slot-warning" style="color:red; font-size: 12px;"></label>
+            <select name="slot-type" id="slot-type" onchange="display_slot_options()">
+              <option value="text">Text</option>
+              <option value="categorical">Categorical</option>
+              <option value="bool">Bool</option>
+              <option value="float">Float</option>
+              <option value="list">List</option>
+              <option value="unfeaturized">Unfeaturized</option>
+            </select>
+          </div>
+          <!-- slots special devs! -->
+          <div class="field" id="slot-text" style="display: block;">
+            <label for="slot-examples">No information to be added to text slot.</label>
+          </div>
 
+          <div class="field" id="slot-bool" style="display: none;">
+            <label for="slot-examples">No information to be added to bool slot.</label>
+          </div>
+
+          <div class="field" id="slot-unfeaturized" style="display: none;">
+            <label for="slot-examples">No information to be added to unfeaturized slot.</label>
+          </div>
+
+          <div class="field" id="slot-list" style="display: none;">
+            <label for="slot-examples">No information to be added to list slot.</label>
+          </div>
+          <div id="slot-float" style="display: none;">
+            <div class="field">
+              <label for="slot-examples">Minimum float value</label>
+              <textarea name="float-minimum" id="float-minimum" rows="1"></textarea>
+            </div>
+            <div class="field">
+              <label for="slot-examples">Maximum float value</label>
+              <textarea name="float-maximum" id="float-maximum" rows="1"></textarea>
+            </div>
+          </div>
+          <div class="field" id="slot-categorical" style="display: none;">
+            <label for="slot-examples">Categories list</label>
+            <textarea name="categories-list" id="categories-list" rows="5"></textarea>
+          </div>
+
+        </form>
+        <div class="field">
+          <button type="button" id="add-slot" name="add-slot" class="button submit" >Add</button>
+          <button type="button" id="validate-curr-slot" name="validate-curr-slot" class="button submit" >Validate</button>
+        </div>
       </section>
-
       <section>
-        <h5>Example</h5>
-        </section>
+        <h5>Have fun :)</h5>
+      </section>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="split style1">
+      <section>
+        <h3>Current Slots</h3>
+          <table name="show-slots" id="show-slots" style="width:100%">
+        </table>
+      </section>
     </div>
   </div>
 </section>

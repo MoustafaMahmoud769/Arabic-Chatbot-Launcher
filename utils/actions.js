@@ -8,7 +8,7 @@ const path = 'assets/botFiles/actions.json';
 
 function cleanAction(entityObj) {
   entityObj.name = tools.strip(entityObj.name);
-  for(i = 0; i < entityObj.examples.length; i++) {
+  for(let i = 0; i < entityObj.examples.length; i++) {
     entityObj.examples[i] = tools.strip(entityObj.examples[i]);
   }
   entityObj.examples = entityObj.examples.filter(Boolean);
