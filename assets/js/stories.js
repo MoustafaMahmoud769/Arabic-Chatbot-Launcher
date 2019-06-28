@@ -30,6 +30,8 @@ ipcRenderer.on('story-added', (event, arg)=> {
   document.getElementById("story-body").value = '';
 })
 
+slots = []
+
 window.stories = window.stories || {},
 function(n) {
     stories.messaging = {
@@ -73,6 +75,32 @@ function(n) {
         document.getElementById('actions-list').value = '';
       },
 
+      handleSlotChange: function() {
+        slot = document.getElementById('slots-list').value;
+        if (slot == '')
+          return;
+        for (var i = 0; i <= slots.length; ++i) {
+          if (slots[i].name == slot) {
+            if (slots[i].type == "categorical") {
+              document.getElementById('value1').style = '';
+              document.getElementById('value2').style = 'visibility:hidden;';
+              var sel = document.getElementById('value1');
+              sel.innerHTML = '';
+              for (var j = 0; j <= slots[i].clist.length; ++j) {
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode(slots[i].clist[j]));
+                opt.value = slots[i].clist[j];
+                sel.appendChild(opt);
+              }
+            }
+            else {
+              document.getElementById('value1').style = 'visibility:hidden;';
+              document.getElementById('value2').style = '';
+            }
+          }
+        }
+      },
+
       removeBody: function() {
         let cur = document.getElementById('story-body').value.split('\n');
         if (cur[cur.length - 1] == '')
@@ -110,7 +138,7 @@ function(n) {
         })
 
         $('#slots-list').change( function() {
-          stories.messaging.appendAction()
+          stories.messaging.handleSlotChange()
         })
       }
 
@@ -148,6 +176,7 @@ function(n) {
       },
 
       updateSlotsChoices: function(data) {
+        slots = data;
         var sel = document.getElementById('slots-list');
         sel.innerHTML = '';
         var opt = document.createElement('option');
