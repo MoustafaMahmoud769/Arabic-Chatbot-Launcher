@@ -194,28 +194,20 @@ ipcMain.on('build-my-model', (event, arg)=> {
 
 	/////////// Used to build and train bot docker image, inside the first then() block, you can know that build has finished
 	const promisifyStream = stream => new Promise((resolve, reject) => {
-	  stream.on('data', data => console.log("data: " + data.toString() + " :/data"))
+	  stream.on('data', data => console.log(data.toString()))
 	  stream.on('end', resolve)
 	  stream.on('error', reject)
 	});
-	
+
 	const docker = new Docker({ socketPath: '/var/run/docker.sock' });
-	
-	var tarStream = tar.pack('/Users/marwan/Downloads/rasa-chatbot-master');
+
+	var tarStream = tar.pack('./backend');
 	docker.image.build(tarStream, {
-	  t: 'testbot'
+	  t: 'testbot_1'
 	})
 	.then(stream => promisifyStream(stream))
 	.then(() => {
 		console.log("BUILT");
-		dialog.showMessageBox({
-			type: 'info',
-			message: 'Done!',
-			buttons: ['Ok']
-		});
-		free_lock(2);
-	})
-	.then(() => {
 		console.log(docker.image.get('testbot').status());
 		dialog.showMessageBox({
 			type: 'info',
