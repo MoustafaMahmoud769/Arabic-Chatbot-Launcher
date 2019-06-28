@@ -198,9 +198,9 @@ ipcMain.on('build-my-model', (event, arg)=> {
 	  stream.on('end', resolve)
 	  stream.on('error', reject)
 	});
-	
+
 	const docker = new Docker({ socketPath: '/var/run/docker.sock' });
-	
+
 	var tarStream = tar.pack('./backend');
 	docker.image.build(tarStream, {
 	  t: 'testbot_1'
@@ -208,14 +208,6 @@ ipcMain.on('build-my-model', (event, arg)=> {
 	.then(stream => promisifyStream(stream))
 	.then(() => {
 		console.log("BUILT");
-		dialog.showMessageBox({
-			type: 'info',
-			message: 'Done!',
-			buttons: ['Ok']
-		});
-		free_lock(2);
-	})
-	.then(() => {
 		console.log(docker.image.get('testbot').status());
 		dialog.showMessageBox({
 			type: 'info',
