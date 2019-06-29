@@ -54,9 +54,9 @@ app.on('activate', function () {
 
 require('./utils/dialog')
 require('./utils/intents')
+require('./utils/slots')
 require('./utils/entites')
 require('./utils/actions')
 require('./utils/stories')
-require('./utils/slots')
 require('./utils/launch')
 require('./utils/backend')

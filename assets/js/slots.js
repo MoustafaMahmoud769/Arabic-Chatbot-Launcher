@@ -4,22 +4,22 @@ function display_slot_options() {
 	var e = document.getElementById("slot-type");
 	var choosed_slot = e.options[e.selectedIndex].value;
 	// hide all
-	document.getElementById("slot-text").style.display = 'none'; 
-	document.getElementById("slot-categorical").style.display = 'none'; 
-	document.getElementById("slot-bool").style.display = 'none'; 
-	document.getElementById("slot-float").style.display = 'none'; 
-	document.getElementById("slot-list").style.display = 'none'; 
-	document.getElementById("slot-unfeaturized").style.display = 'none'; 
+	document.getElementById("slot-text").style.display = 'none';
+	document.getElementById("slot-categorical").style.display = 'none';
+	document.getElementById("slot-bool").style.display = 'none';
+	document.getElementById("slot-float").style.display = 'none';
+	document.getElementById("slot-list").style.display = 'none';
+	document.getElementById("slot-unfeaturized").style.display = 'none';
 	// display only the chosen one
-	document.getElementById("slot-" + choosed_slot).style.display = 'block'; 
+	document.getElementById("slot-" + choosed_slot).style.display = 'block';
 }
 
 ipcRenderer.on('slot-added', (event, arg)=> {
   document.getElementById("slot-warning").innerHTML = '';
   document.getElementById("slot-name").value = '';
-  document.getElementById("float-minimum").value = '';  
-  document.getElementById("float-maximum").value = '';  
-  document.getElementById("categories-list").value = '';  
+  document.getElementById("float-minimum").value = '';
+  document.getElementById("float-maximum").value = '';
+  document.getElementById("categories-list").value = '';
 })
 
 ipcRenderer.on('send-slots', (event, arg)=> {
@@ -36,7 +36,7 @@ function(n) {
 
       SendCurrentSlot: function(eventName) {
         let slotName = document.getElementById("slot-name").value;
-    	let e = document.getElementById("slot-type");
+    		let e = document.getElementById("slot-type");
         let slotType = e.options[e.selectedIndex].value;
         let floatMin = document.getElementById("float-minimum").value;
         let floatMax = document.getElementById("float-maximum").value;

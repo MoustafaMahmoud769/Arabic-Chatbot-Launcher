@@ -1,3 +1,4 @@
+var slotsObj = require('./slots')
 var actionsObj = require('./actions')
 var intentsObj = require('./intents')
 var entitiesObj = require('./entites')
@@ -9,6 +10,7 @@ const actions_path = 'assets/botFiles/actions.json';
 const intents_path = 'assets/botFiles/intents.json';
 const entities_path = 'assets/botFiles/entites.json';
 const stories_path = 'assets/botFiles/stories.json';
+const slots_path = 'assets/botFiles/slots.json';
 
 function full_validation() {
 	let errors = []
@@ -38,6 +40,16 @@ function full_validation() {
 	for(let i=0; i<intents.length; i++) {
 		let validation_results = intentsObj.validateSingleIntent(intents[i]);
   		let error = intentsObj.findIntentError(validation_results, {"dups": false});
+  		if(error != false) {
+  			errors.push(error);
+  		}
+	}
+
+	//validate slots
+	let slots = JSON.parse(fs.readFileSync(slots_path));
+	for(let i=0; i<slots.length; i++) {
+		let validation_results = slotsObj.validateSingleSlot(slots[i]);
+  		let error = slotsObj.findSlotError(validation_results, {"dups": false});
   		if(error != false) {
   			errors.push(error);
   		}

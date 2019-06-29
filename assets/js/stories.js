@@ -12,6 +12,10 @@ ipcRenderer.on('send-actions', (event, arg)=> {
   stories.handler.updateActionsChoices(arg);
 })
 
+ipcRenderer.on('send-slots', (event, arg)=> {
+  stories.handler.updateSlotsChoices(arg);
+})
+
 ipcRenderer.on('send-stories', (event, arg)=> {
   stories.handler.update(arg);
 })
@@ -26,8 +30,11 @@ ipcRenderer.on('story-added', (event, arg)=> {
   document.getElementById("story-body").value = '';
 })
 
+storyslots = []
+
 window.stories = window.stories || {},
 function(n) {
+
     stories.messaging = {
 
       SendCurrentStory: function(eventName) {
@@ -69,6 +76,57 @@ function(n) {
         document.getElementById('actions-list').value = '';
       },
 
+      appendSlot: function() {
+        newtext = document.getElementById('slots-list').value;
+        if (newtext == '')
+          return;
+        newtext2 = '';
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical")
+              newtext2 = document.getElementById('value1').value;
+            else
+              newtext2 = document.getElementById('value2').value;
+          }
+        }
+        if (newtext2 == '')
+          return;
+        selected = '$ slot{\"' + newtext + '\": \"' + newtext2 + '\"}\n';
+        text = document.getElementById('story-body').value + selected;
+        document.getElementById('story-body').value = text;
+        document.getElementById('slots-list').value = '';
+        document.getElementById('value1').style = 'visibility:hidden;';
+        document.getElementById('value2').style = 'visibility:hidden;';
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      },
+
+      handleSlotChange: function() {
+        slot = document.getElementById('slots-list').value;
+        if (slot == '')
+          return;
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical") {
+              document.getElementById('value1').style = '';
+              document.getElementById('value2').style = 'visibility:hidden;';
+              var sel = document.getElementById('value1');
+              sel.innerHTML = '';
+              for (var j = 0; j < storyslots[i].clist.length; ++j) {
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode(storyslots[i].clist[j]));
+                opt.value = storyslots[i].clist[j];
+                sel.appendChild(opt);
+              }
+            }
+            else {
+              document.getElementById('value1').style = 'visibility:hidden;';
+              document.getElementById('value2').style = '';
+            }
+          }
+        }
+      },
+
       removeBody: function() {
         let cur = document.getElementById('story-body').value.split('\n');
         if (cur[cur.length - 1] == '')
@@ -93,6 +151,7 @@ function(n) {
         $('#tab5').click( function() {
           intents.messaging.UpdateTable()
           actions.messaging.UpdateTable()
+          slots.messaging.UpdateTable()
           stories.messaging.UpdateTable()
         })
 
@@ -102,6 +161,14 @@ function(n) {
 
         $('#actions-list').change( function() {
           stories.messaging.appendAction()
+        })
+
+        $('#slots-list').change( function() {
+          stories.messaging.handleSlotChange()
+        })
+
+        $('#add-story-slot').click( function () {
+          stories.messaging.appendSlot()
         })
       }
 
@@ -136,6 +203,24 @@ function(n) {
 
       updateActionsChoices: function(data) {
         stories.handler.setOptions('actions-list', data);
+      },
+
+      updateSlotsChoices: function(data) {
+        storyslots = data;
+        var sel = document.getElementById('slots-list');
+        sel.innerHTML = '';
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode('None') );
+        opt.value = '';
+        sel.appendChild(opt);
+        if (data.length !== 0) {
+          for (let i = 0; i < data.length; i++) {
+            var opt = document.createElement('option');
+            opt.appendChild(document.createTextNode(data[i].name) );
+            opt.value = data[i].name;
+            sel.appendChild(opt);
+          }
+        }
       },
 
       addHeader: function(tableRef) {

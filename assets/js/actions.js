@@ -8,15 +8,21 @@ ipcRenderer.on('send-actions', (event, arg)=> {
   actions.handler.update(arg);
 })
 
+ipcRenderer.on('send-slots', (event, arg)=> {
+  actions.handler.updateSlotsChoices(arg);
+})
+
 ipcRenderer.on('action-added', (event, arg)=> {
   document.getElementById("action-warning").innerHTML = '';
   document.getElementById("action-name").value = '';
-  document.getElementById("action-examples").value = '';  
+  document.getElementById("action-examples").value = '';
 })
 
 ipcRenderer.on('actions-changed', (event, arg)=> {
   actions.messaging.UpdateTable();
 })
+
+allslots = []
 
 window.actions = window.actions || {},
 function(n) {
@@ -41,6 +47,16 @@ function(n) {
         ipcRenderer.send('get-actions');
       },
 
+      appendSlotInAction: function() {
+        newtext = document.getElementById('slots-in-action').value;
+        if (newtext == '')
+          return;
+        selected = ' {' + newtext + '} ';
+        text = document.getElementById('action-examples').value + selected;
+        document.getElementById('action-examples').value = text;
+        document.getElementById('slots-in-action').value = '';
+      },
+
       init: function() {
         $('#add-action').click( function () {
           actions.messaging.addAction()
@@ -50,9 +66,15 @@ function(n) {
           actions.messaging.validateCurrentAction()
         })
 
+        $('#add-slots-in-action').click( function () {
+          actions.messaging.appendSlotInAction()
+        })
+
         $('#tab4').click( function() {
+          slots.messaging.UpdateTable()
           actions.messaging.UpdateTable()
         })
+
       }
     };
 
@@ -112,6 +134,30 @@ function(n) {
 
       remove: function(name) {
         ipcRenderer.send('remove-action', name);
+      },
+
+      addOption: function(selname, name, value) {
+        var sel = document.getElementById(selname);
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode(name));
+        opt.value = value;
+        sel.appendChild(opt);
+      },
+
+      updateSlotsChoices: function(data) {
+        storyslots = data;
+        var sel = document.getElementById('slots-in-buttons');
+        var sel2 = document.getElementById('slots-in-action');
+        sel.innerHTML = '';
+        sel2.innerHTML = '';
+        actions.handler.addOption('slots-in-buttons', 'None', '');
+        actions.handler.addOption('slots-in-action', 'None', '');
+        if (data.length !== 0) {
+          for (let i = 0; i < data.length; i++) {
+            actions.handler.addOption('slots-in-buttons', data[i].name, data[i].name);
+            actions.handler.addOption('slots-in-action', data[i].name, data[i].name);
+          }
+        }
       },
 
       update: function(data) {

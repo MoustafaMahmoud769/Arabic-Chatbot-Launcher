@@ -15,7 +15,7 @@ function parseEntites(data, examples) {
   for (let i = 0; i < cur.length; ++i) {
     let obj = cur[i].split('\t');
     var entity = {
-      from: parseInt(obj[0]), to: parseInt(obj[1]), index: parseInt(obj[2]), name: obj[4], value: examples[parseInt(obj[2])].substring(obj[0], obj[1])
+      from: parseInt(obj[0]), to: parseInt(obj[1]), index: parseInt(obj[2]), name: obj[4], value: obj[3]
     };
     ret.push(entity);
   }
@@ -101,6 +101,8 @@ function validateSingleIntent(intent) {
   let overlapping_indices = false;
   let overlapping_indices_i = -1;
   let entity_title_existed = true
+  let value_mismatch = false
+  let value_mismatch_text = ""
 
   let map_of_ind = {}
   for (let m=0; m<intent.entites.length; m++) {
@@ -109,7 +111,8 @@ function validateSingleIntent(intent) {
     let to = intent.entites[m].to
     let ind = intent.entites[m].index
     let name = intent.entites[m].name
-    console.log(name)
+    let val = intent.entites[m].value
+    
     //check if existed - only for full validation
     entity_title_existed = false
     entities.forEach(function(entity, index){
@@ -145,6 +148,12 @@ function validateSingleIntent(intent) {
       if(from > to) {
         entity_error = true;
         entity_error_i = m;
+        break;
+      }
+
+      if(val != intent.examples[ind].substring(from, to)) {
+        value_mismatch = true;
+        value_mismatch_text = "{" + val + ", " + name + "}";
         break;
       }
 
@@ -184,6 +193,8 @@ function validateSingleIntent(intent) {
     overlapping_indices: overlapping_indices,
     overlapping_indices_i: overlapping_indices_i,
     intent_small_examples: intent_small_examples,
+    value_mismatch: value_mismatch,
+    value_mismatch_text: value_mismatch_text,
   }
 }
 
@@ -191,7 +202,7 @@ function findIntentError(validation_results, options) {
   if (validation_results.intent_small_examples == true) {
     return {"title": 'Intent examples are tiny!', "body": "You must at least two examples for each intent!"};
   }
-  
+
   if(validation_results.empty == true) {
     return {"title": 'Your intent is empty!', "body": "You must provide title for your intent!"};
   }
@@ -218,6 +229,10 @@ function findIntentError(validation_results, options) {
 
   if(validation_results.overlapping_indices == true) {
     return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].index + 1) + ' has multiple entities with overlapping indices, please fix it!'};
+  }
+
+  if(validation_results.value_mismatch == true) {
+    return {"title": 'Your example has mismatching entity!', "body": 'The entity : ' + validation_results.value_mismatch_text + ' mismatch with the examples!'};
   }
   return false;
 }

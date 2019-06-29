@@ -17,11 +17,18 @@ ipcRenderer.on('intent-added', (event, arg)=> {
   document.getElementById("intent-name").value = '';
   document.getElementById("intent-examples").value = '';
   document.getElementById("intent-entites").value = '';
+  document.getElementById("intent-entites-cool").value = '';
 })
 
 ipcRenderer.on('intents-changed', (event, arg)=> {
   intents.messaging.UpdateTable();
 })
+
+function add_to_cool(value, entity) {
+  let cur = document.getElementById("intent-entites-cool").value;
+  cur += "{" + value + ", " + entity + "}" + '\n';
+  document.getElementById("intent-entites-cool").value = cur;
+}
 
 window.intents = window.intents || {},
 function(n) {
@@ -82,17 +89,18 @@ function(n) {
         let cur = document.getElementById("intent-entites").value;
         cur += text;
         document.getElementById("intent-entites").value = cur;
+        add_to_cool(attr[3], attr[4])
         document.getElementById("intent-entity-from").value = '';
         document.getElementById("intent-entity-to").value = '';
         document.getElementById("intent-entity-idx").value = '';
       },
 
-      removeIntentEntity: function() {
-        let cur = document.getElementById("intent-entites").value.split('\n');
+      removeIntentEntity: function(str) {
+        let cur = document.getElementById(str).value.split('\n');
         if (cur[cur.length - 1] == '')
           cur.pop();
         cur.pop();
-        document.getElementById("intent-entites").value = cur.join('\n');
+        document.getElementById(str).value = cur.join('\n');
       },
 
       addIntent: function() {
@@ -112,7 +120,8 @@ function(n) {
           intents.messaging.addIntentEntity()
         })
         $('#remove-intent-entity').click( function () {
-          intents.messaging.removeIntentEntity()
+          intents.messaging.removeIntentEntity("intent-entites")
+          intents.messaging.removeIntentEntity("intent-entites-cool")
         })
         $('#intent-examples').click( function () {
           intents.messaging.getTextSelection()
@@ -181,7 +190,6 @@ function(n) {
       },
 
       addRow: function(tableRef, data) {
-        console.log(data)
         // add new row
         let newRow = tableRef.insertRow(-1);
         // intent name
@@ -204,20 +212,19 @@ function(n) {
           // handle entities
           let entities_ = ""
           for(let i =0; i<data.entites.length; i++) {
-          console.log(data.entites[i].from)
            entities_ += data.entites[i].from.toString() + '\t';
            entities_ += data.entites[i].to.toString() + '\t';
            entities_ += data.entites[i].index.toString() + '\t';
            entities_ += data.entites[i].value.toString() + '\t';
            entities_ += data.entites[i].name + '\t';
            entities_ += '\n';
+           add_to_cool(data.entites[i].value.toString(), data.entites[i].name)
           }
           //
           document.getElementById("intent-examples").value = examples_;
           document.getElementById("intent-entites").value = entities_;
           document.getElementById("intent-warning").innerHTML = 'This Intent was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
           jQuery('html,body').animate({scrollTop:0},0);
-          console.log(data.entites)
         };
         newCellx.appendChild(elementx);
         // let newCell3 = newRow.insertCell(-1);
