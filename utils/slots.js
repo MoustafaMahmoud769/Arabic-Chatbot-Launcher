@@ -22,6 +22,49 @@ function cleanSlot(entityObj) {
   return entityObj;
 }
 
+function valid_slot_value(stored_slot, in_slot) {
+
+  //validate if float
+  let float_valid = true;
+  if(stored_slot.type == "float") {
+    // not a float!
+    if(isNaN(parseFloat(in_slot))) {
+      float_valid = false;
+    } else {
+      // max and min value
+      let val = parseFloat(in_slot);
+      if (val < stored_slot.fmin ||
+          val > stored_slot.fmax) {
+        float_valid = false;
+      }
+    }
+  }
+
+  //validate if categorical
+  let cat_valid = true;
+  if(stored_slot.type == "categorical") {
+    let temp = false;
+    for(let i=0; i<stored_slot.clist.length; i++) {
+      if(in_slot == stored_slot.clist[i]) {
+        temp = true;
+        break;
+      }
+    }
+    cat_valid = temp;
+  }
+
+  //validate if boolean
+  let bool_valid = true;
+  if(stored_slot.type == "bool") {
+    if(in_slot.toLowerCase() != "true" &&
+      in_slot.toLowerCase() != "false") {
+      bool_valid = false;
+    }
+  }
+
+  return float_valid && cat_valid && bool_valid;
+}
+
 function validateSingleSlot(slot) {
 
   /**
@@ -216,4 +259,5 @@ ipcMain.on('remove-slot', (event, arg)=> {
 module.exports = {
     validateSingleSlot: validateSingleSlot,
     findSlotError: findSlotError,
+    valid_slot_value: valid_slot_value,
 }

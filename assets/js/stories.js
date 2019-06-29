@@ -91,7 +91,7 @@ function(n) {
         }
         if (newtext2 == '')
           return;
-        selected = '$ slot{\"' + newtext + '\": \"' + newtext2 + '\"}\n';
+        selected = '$ ' + newtext + ' -> ' + newtext2 + '\n';
         text = document.getElementById('story-body').value + selected;
         document.getElementById('story-body').value = text;
         document.getElementById('slots-list').value = '';

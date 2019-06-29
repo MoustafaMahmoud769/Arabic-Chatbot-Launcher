@@ -1,6 +1,7 @@
 const { ipcMain, dialog } = require('electron')
 const fs = require('fs')
 const csv = require('csv-parser')
+var slotsObj = require('./slots')
 
 var tools = require('./tools')
 
@@ -15,7 +16,40 @@ function cleanStory(storyObj) {
   return storyObj;
 }
 
+function get_slot_data(str) {
+  
+  let slot_name = "";
+  let slot_value = "";
+  let valid = false;
+  let i = 0;
+  
+  // get slot name
+  for (i=0; i<str.length; i++) {
+    if(str[i] == " ") {
+      break;
+    }
+    slot_name += str[i];
+  }
+
+  // skip -> sign
+  i += 4
+  for (; i<str.length; i++) {
+    slot_value += str[i];
+  }
+
+  if(slot_name != "" && slot_value != "") {
+    valid = true;
+  }
+
+  return {
+    valid: valid,
+    name: slot_name,
+    value: slot_value,
+  }
+}
+
 function validateSingleStory(story) {
+
   /**
    * check if name or examples are empty!
    */
@@ -32,7 +66,9 @@ function validateSingleStory(story) {
    let invalid_str = "";
    for(let i=0; i<story.examples.length; i++) {
       if(story.examples[i][0] != '*' &&
-         story.examples[i][0] != '-') {
+         story.examples[i][0] != '-' &&
+         story.examples[i][0] != '$'
+         ) {
         invalid_str = story.examples[i];
         invalid = true;
         break;
@@ -40,7 +76,7 @@ function validateSingleStory(story) {
    }
 
   /**
-   * check for no_action
+   * check for no_action or no_slot
    */
    let no_action = false;
    let no_action_str = "";
@@ -57,7 +93,7 @@ function validateSingleStory(story) {
         curr_story.push(story.examples[i])
       }
       // action
-      if(story.examples[i][0] == '-' && curr_story.length > 0) {
+      if((story.examples[i][0] == '-' || story.examples[i][0] == '$') && curr_story.length > 0) {
         curr_story.push(story.examples[i])
       }
    }
@@ -119,6 +155,54 @@ function validateSingleStory(story) {
    }
 
   /**
+   * check for invalid_slot
+   */
+   let slots_rawdata = fs.readFileSync('assets/botFiles/slots.json');
+   let slots = JSON.parse(slots_rawdata);
+   let invalid_slot = false;
+   let invalid_slot_str = "";
+   for(let i=0; i<story.examples.length; i++) {
+      // slot
+      let found = false;
+
+      if(story.examples[i][0] == '$') {
+
+        let in_slot = tools.strip(story.examples[i].substr(1, story.examples[i].length));
+        let stored_slot;
+
+        // get name and value!
+        slot_data = get_slot_data(in_slot);
+        if(slot_data.valid == false) {
+          invalid_slot = true;
+          invalid_slot_str = story.examples[i];
+          break;
+        }
+
+        for(let j=0; j<slots.length; j++) {
+          if(slots[j].name == slot_data.name) {
+            found = true;
+            stored_slot = slots[j];
+            break;
+          }
+        }
+
+        if(!found) {
+          invalid_slot = true;
+          invalid_slot_str = story.examples[i];
+          break;
+        }
+
+        // validate the type if found
+        if(slotsObj.valid_slot_value(stored_slot, slot_data.value) == false) {
+          invalid_slot = true;
+          invalid_slot_str = story.examples[i];
+          break;
+        }
+      }
+   }
+
+
+  /**
    * check for title existed before?
    */
   let rawdata = fs.readFileSync(path);
@@ -141,6 +225,8 @@ function validateSingleStory(story) {
     invalid_intent_str: invalid_intent_str,
     invalid_action: invalid_action,
     invalid_action_str: invalid_action_str,
+    invalid_slot: invalid_slot,
+    invalid_slot_str: invalid_slot_str,
   }
 }
 
@@ -163,6 +249,10 @@ function findStoryError(validation_results, options) {
 
   if(validation_results.invalid_action == true) {
     return {"title": 'Your story have action that does not exist!', "body": 'Error in this action "' + validation_results.invalid_action_str + '"!'};
+  }
+
+  if(validation_results.invalid_slot == true) {
+    return {"title": 'Your story have slot that have errors!', "body": 'Error in this slot "' + validation_results.invalid_slot_str + '"!'};
   }
 
   if(validation_results.title_existed == true && options['dups'] != false) {
