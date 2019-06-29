@@ -113,8 +113,10 @@ function(n) {
         }
         if (displayname == '' || valuechange == '')
           return;
-        selected = '- title: \"' + displayname + '\"\n';
-        selected += '  payload: \'/choose{\"' + slotname + '\": \"'+ valuechange +'\"}\'\n';
+        selected = 'Button value: ' + displayname + '\n';
+        selected += 'Slot name: ' + slotname + '\n';
+        selected += 'Slot value: ' + valuechange + '\n';
+        selected += '\n';
         text = document.getElementById('action-slots').value + selected;
         document.getElementById('action-slots').value = text;
         document.getElementById('button-value1').value = '';
@@ -130,6 +132,7 @@ function(n) {
         let cur = document.getElementById('action-slots').value.split('\n');
         while (cur[cur.length - 1] == '')
           cur.pop();
+        cur.pop();
         cur.pop();
         cur.pop();
         document.getElementById('action-slots').value = cur.join('\n') + (cur.length > 0 ? '\n' : '');

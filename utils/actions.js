@@ -1,18 +1,95 @@
 const { ipcMain, dialog, BrowserWindow } = require('electron')
 const fs = require('fs')
 const csv = require('csv-parser')
+var slotsObj = require('./slots')
 
 var tools = require('./tools')
 
 const path = 'assets/botFiles/actions.json';
 
 function cleanAction(entityObj) {
+  //name
   entityObj.name = tools.strip(entityObj.name);
+  //examples
   for(let i = 0; i < entityObj.examples.length; i++) {
     entityObj.examples[i] = tools.strip(entityObj.examples[i]);
   }
   entityObj.examples = entityObj.examples.filter(Boolean);
+  //slots
+  for(let i = 0; i < entityObj.slots.length; i++) {
+    entityObj.slots[i] = tools.strip(entityObj.slots[i]);
+  }
+  entityObj.slots = entityObj.slots.filter(Boolean);
+  //done
   return entityObj;
+}
+
+function parse_buttons_data(slots)
+{  
+  buttons = []
+  
+  if(slots.length < 3) {
+    return buttons;
+  }
+
+  for (let i=0; i<slots.length; i+=3) {
+    new_button = {
+      value: slots[i].substring(14),
+      slot_name: slots[i+1].substring(11),
+      slot_value: slots[i+2].substring(12),
+    };
+    buttons.push(new_button);
+  }
+
+  return buttons;
+}
+
+function validate_single_button(button)
+{
+  if(button.value.length == 0) {
+    return false;
+  }
+
+  if(button.slot_name.length == 0) {
+    return false;
+  }
+  
+  if(button.slot_value.length == 0) {
+    return false;
+  }
+
+  let slots_rawdata = fs.readFileSync('assets/botFiles/slots.json');
+  let slots = JSON.parse(slots_rawdata);
+  let invalid_slot = false;
+  let invalid_slot_str = "";
+
+  // slot
+  let found = false;
+  let stored_slot;
+
+  for(let j=0; j<slots.length; j++) {
+    if(slots[j].name == button.slot_name) {
+      found = true;
+      stored_slot = slots[j];
+      break;
+    }
+  }
+
+  if(!found) {
+    invalid_slot = true;
+    invalid_slot_str = "{" + button.value + ", " + button.slot_name + ", " + button.slot_value + "}";
+  } else {
+    // validate the type if found
+    if(slotsObj.valid_slot_value(stored_slot, button.slot_value) == false) {
+      invalid_slot = true;
+      invalid_slot_str = "{" + button.value + ", " + button.slot_name + ", " + button.slot_value + "}";
+    }
+  }
+
+  return {
+    invalid_slot: invalid_slot,
+    invalid_slot_str: invalid_slot_str,
+  }
 }
 
 function validateSingleAction(action) {
@@ -43,6 +120,21 @@ function validateSingleAction(action) {
     }
    }
 
+   /**
+   * verify buttons!
+   */
+   let invalid_slot = false;
+   let invalid_slot_str = "";
+   let buttons = parse_buttons_data(action.slots)
+   for(let i=0; i<buttons.length; i++) {
+    let vsb = validate_single_button(buttons[i]);
+    if(vsb.invalid_slot == true) {
+      invalid_slot = vsb.invalid_slot;
+      invalid_slot_str = vsb.invalid_slot_str;
+      break;
+    }
+   }
+
   /**
    * check for title existed before?
    */
@@ -59,6 +151,8 @@ function validateSingleAction(action) {
     invalid_name: invalid_name,
     title_existed: title_existed,
     duplications: duplications,
+    invalid_slot: invalid_slot,
+    invalid_slot_str: invalid_slot_str
   }
 }
 
@@ -78,6 +172,10 @@ function findActionError(validation_results, options) {
 
   if(validation_results.title_existed == true && options['dups'] != false) {
     return {"title": 'Your action title is already existed!', "body": "Please change the action title as it is already existed!"};
+  }
+
+  if(validation_results.invalid_slot == true) {
+    return {"title": 'Your action has invalid button!', "body": "Please fix this button please! -> " + validation_results.invalid_slot_str};
   }
 
   return false;
@@ -102,7 +200,8 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
   //get current action from front end
   var action = {
     name: arg.actionName,
-    examples: arg.actionExamples.split('\n')
+    examples: arg.actionExamples.split('\n'),
+    slots: arg.actionSlots.split('\n')
   };
   action = cleanAction(action);
 
@@ -121,7 +220,8 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
 ipcMain.on('add-action', (event, arg)=> {
   var action = {
     name: arg.actionName,
-    examples: arg.actionExamples.split('\n')
+    examples: arg.actionExamples.split('\n'),
+    slots: arg.actionSlots.split('\n')
   };
   action = cleanAction(action);
 

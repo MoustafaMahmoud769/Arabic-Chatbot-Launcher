@@ -98,7 +98,7 @@ function full_conversion() {
 			if(example[0] == '*') {
 				let int = tools.strip(example.substr(1, example.length));
 				current_story.push({"intent": int})
-			} else {
+			} else if(example[0] == '-') {
 				let act = tools.strip(example.substr(1, example.length));
 				current_story.push({"action": act})
 			}
