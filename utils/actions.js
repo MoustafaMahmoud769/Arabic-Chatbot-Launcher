@@ -16,6 +16,7 @@ function cleanAction(entityObj) {
 }
 
 function validateSingleAction(action) {
+
   /**
    * check if name or examples are empty!
    */
@@ -24,6 +25,11 @@ function validateSingleAction(action) {
       action.examples.length == 0) {
     empty = true;
    }
+
+  /**
+   * check if valid name or not!
+   */
+   let invalid_name = !tools.valid_name(action.name);
 
   /**
    * check for duplications in action examples
@@ -50,6 +56,7 @@ function validateSingleAction(action) {
 
   return {
     empty: empty,
+    invalid_name: invalid_name,
     title_existed: title_existed,
     duplications: duplications,
   }
@@ -59,6 +66,10 @@ function findActionError(validation_results, options) {
 
   if(validation_results.empty == true) {
     return {"title": 'Your action is empty!', "body": "You must provide title and examples of your action!"};
+  }
+
+  if(validation_results.invalid_name == true) {
+    return {"title": 'Your action name is invalid!', "body": "Your action title must be [a|z] or [A|Z] or digits or special characters."};
   }
 
   if(validation_results.duplications != 0) {

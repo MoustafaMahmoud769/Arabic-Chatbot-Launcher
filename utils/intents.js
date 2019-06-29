@@ -33,6 +33,7 @@ function cleanIntent(intentObj) {
 
 
 function validateSingleIntent(intent) {
+
   /**
    * check if name or examples are empty!
    */
@@ -41,6 +42,11 @@ function validateSingleIntent(intent) {
       intent.examples.length == 0) {
     empty = true;
    }
+
+  /**
+   * check if valid name or not!
+   */
+   let invalid_name = !tools.valid_name(intent.name);
 
    /**
    * check number of intent examples
@@ -183,6 +189,7 @@ function validateSingleIntent(intent) {
 
   return {
     empty: empty,
+    invalid_name: invalid_name,
     title_existed: title_existed,
     entity_title_existed: entity_title_existed,
     duplications: duplications,
@@ -199,8 +206,13 @@ function validateSingleIntent(intent) {
 }
 
 function findIntentError(validation_results, options) {
+
   if (validation_results.intent_small_examples == true) {
     return {"title": 'Intent examples are tiny!', "body": "You must at least two examples for each intent!"};
+  }
+
+  if(validation_results.invalid_name == true) {
+    return {"title": 'Your intent name is invalid!', "body": "Your intent title must be [a|z] or [A|Z] or digits or special characters."};
   }
 
   if(validation_results.empty == true) {

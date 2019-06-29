@@ -60,6 +60,11 @@ function validateSingleStory(story) {
    }
 
   /**
+   * check if valid name or not!
+   */
+   let invalid_name = !tools.valid_name(story.name);
+
+  /**
    * check for invalid line in story body
    */
    let invalid = false;
@@ -216,6 +221,7 @@ function validateSingleStory(story) {
 
   return {
     empty: empty,
+    invalid_name: invalid_name,
     title_existed: title_existed,
     invalid: invalid,
     invalid_str: invalid_str,
@@ -230,9 +236,14 @@ function validateSingleStory(story) {
   }
 }
 
-function findStoryError(validation_results, options) {
+function findStoryError(validation_results, options){
+  
   if(validation_results.empty == true) {
     return {"title": 'Your story is empty!', "body": "You must provide title for your story!"};
+  }
+
+  if(validation_results.invalid_name == true) {
+    return {"title": 'Your name is invalid!', "body": "Your story title must be [a|z] or [A|Z] or digits or special characters."};
   }
 
   if(validation_results.invalid == true) {

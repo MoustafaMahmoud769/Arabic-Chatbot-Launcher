@@ -22,6 +22,11 @@ function validateSingleEntity(entity) {
    }
 
   /**
+   * check if valid name or not!
+   */
+   let invalid_name = !tools.valid_name(entity.name);
+
+  /**
    * found out if the one or more of the entity examples is also
    * an example of another entity.
    * found out if the title is already existed?
@@ -36,13 +41,19 @@ function validateSingleEntity(entity) {
 
   return {
     empty: empty,
+    invalid_name: invalid_name,
     title_existed: title_existed
   }
 }
 
-function findEntityError(validation_results, options) {
+function findEntityError(validation_results, options){
+
   if(validation_results.empty == true) {
     return {"title": 'Your entity is empty!', "body": "You must provide title for your entity!"};
+  }
+
+  if(validation_results.invalid_name == true) {
+    return {"title": 'Your entity name is invalid!', "body": "Your entity title must be [a|z] or [A|Z] or digits or special characters."};
   }
 
   if(validation_results.title_existed == true  && options['dups'] != false) {

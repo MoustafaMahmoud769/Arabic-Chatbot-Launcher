@@ -75,6 +75,12 @@ function validateSingleSlot(slot) {
     empty = true;
    }
 
+
+  /**
+   * check if valid name or not!
+   */
+   let invalid_name = !tools.valid_name(slot.name);
+
   /**
    * check for title existed before?
    */
@@ -132,6 +138,7 @@ function validateSingleSlot(slot) {
 
   return {
     empty: empty,
+    invalid_name: invalid_name,
     title_existed: title_existed,
     type_error: type_error,
     float_error: float_error,
@@ -144,6 +151,10 @@ function findSlotError(validation_results, options) {
 
   if(validation_results.empty == true) {
     return {"title": 'Your slot is empty!', "body": "You must provide title to your slot!"};
+  }
+
+  if(validation_results.invalid_name == true) {
+    return {"title": 'Your slot name is invalid!', "body": "Your slot title must be [a|z] or [A|Z] or digits or special characters."};
   }
 
   if(validation_results.title_existed == true && options['dups'] != false) {
