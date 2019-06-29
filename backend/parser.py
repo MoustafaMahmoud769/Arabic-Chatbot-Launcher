@@ -51,48 +51,48 @@ def write_domain(data, path):
                 domain.write(" - " + entity + "\n")
             domain.write("\n")
 
-        if len(data["slots"]) > 0:
-            domain.write("slots:\n")
-            for slot in data["slots"]:
-                domain.write(" " + slot["name"] + ":\n")
-                domain.write("  type: " + slot["type"] + "\n")
-                if "initial_value" in slot:
-                    domain.write("  initial_value: \"" + slot["initial_value"] + "\"\n")
-                if "values" in slot:
-                    domain.write("  values:" + "\n")
-                    for val in slot["values"]:
-                        domain.write("  - " + val + "\n")
-            domain.write("\n")
+        if "slots" in data:
+            if len(data["slots"]) > 0:
+                domain.write("slots:\n")
+                for slot in data["slots"]:
+                    domain.write(" " + slot["name"] + ":\n")
+                    domain.write("  type: " + slot["type"] + "\n")
+                    if "initial_value" in slot:
+                        domain.write("  initial_value: \"" + slot["initial_value"] + "\"\n")
+                    if "values" in slot:
+                        domain.write("  values:" + "\n")
+                        for val in slot["values"]:
+                            domain.write("  - " + val + "\n")
+                domain.write("\n")
 
-        domain.write("actions:\n")
-        domain.write(" - utter_default\n")
-        for action in data["actions"].keys():
-            if not action.startswith("utter_"):
-                domain.write(" - utter_" + action + "\n")
-            else:
-                domain.write(" - " + action + "\n")
-        domain.write("\n")
+        if "actions" in data:
+            domain.write("actions:\n")
+            domain.write(" - utter_default\n")
+            for action in data["actions"].keys():
+                if not action.startswith("utter_"):
+                    domain.write(" - utter_" + action + "\n")
+                else:
+                    domain.write(" - " + action + "\n")
+            domain.write("\n")
 
         domain.write("templates:\n")
         domain.write(" utter_default:\n")
         domain.write("  - \"آسف لم افهم ذلك\"\n")
-        for action in data["actions"].keys():
-            if not action.startswith("utter_"):
-                domain.write(" utter_" + action + ":\n")
-            else:
-                domain.write(" " + action + ":\n")
-            if "text" in data["actions"][action]:
-                for action_text in data["actions"][action]["text"]:
-                    domain.write("  - text: \"" + action_text + "\"\n")
-                    if "buttons" in data["actions"][action]:
-                        domain.write("    buttons:\n")
-                        for btn in data["actions"][action]["buttons"]:
-                            domain.write("    - title: \"" + btn["text"] + "\"\n")
-                            domain.write("      payload: '/slot{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
-
-            # for alt in data["actions"][action]:
-                # domain.write("  - \"" + alt + "\"\n")
-        domain.write("\n")
+        if "actions" in data:
+            for action in data["actions"].keys():
+                if not action.startswith("utter_"):
+                    domain.write(" utter_" + action + ":\n")
+                else:
+                    domain.write(" " + action + ":\n")
+                if "text" in data["actions"][action]:
+                    for action_text in data["actions"][action]["text"]:
+                        domain.write("  - text: \"" + action_text + "\"\n")
+                        if "buttons" in data["actions"][action]:
+                            domain.write("    buttons:\n")
+                            for btn in data["actions"][action]["buttons"]:
+                                domain.write("    - title: \"" + btn["text"] + "\"\n")
+                                domain.write("      payload: '/slot{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
+            domain.write("\n")
 
 def write_nlu(data, path):
     with open("data_nlu.json", "w", encoding="utf-8") as json_nlu:

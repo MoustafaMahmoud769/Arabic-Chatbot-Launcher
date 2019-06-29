@@ -148,6 +148,7 @@ ipcMain.on('start-my-model', (event, arg)=> {
 	})
 	.catch(error => {
 		console.log(error);
+		progressStart.close();
 		dialog.showMessageBox({
 			type: 'info',
 			message: 'error! : ' + error,
@@ -202,10 +203,19 @@ ipcMain.on('build-my-model', (event, arg)=> {
     detail: 'Please wait while your Bot is being built and trained...',
 		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
   });
-
+	var err = false;
 	/////////// Used to build and train bot docker image, inside the first then() block, you can know that build has finished
 	const promisifyStream = stream => new Promise((resolve, reject) => {
-	  stream.on('data', data => console.log(data.toString()))
+	  stream.on('data', data => {
+			var log = data.toString().trim().split("\r\n");
+			for (var i = 0; i < log.length; i++){
+				console.log(JSON.parse(log[i]));
+				if (JSON.parse(log[i]).hasOwnProperty("errorDetail")){
+					err = true;
+				}
+			}
+			// console.log('{"stream":"Step 1/22 : FROM ubuntu:18.04"}');
+		})
 	  stream.on('end', resolve)
 	  stream.on('error', reject)
 	});
@@ -223,15 +233,24 @@ ipcMain.on('build-my-model', (event, arg)=> {
 			progressBuild.close();
 		}
 		console.log(docker.image.get('testbot_1').status());
-		dialog.showMessageBox({
-			type: 'info',
-			message: 'Done!',
-			buttons: ['Ok']
-		});
+		if (err){
+			dialog.showMessageBox({
+				type: 'info',
+				message: 'error! : There was a problem building your bot. Please validate your data and try again',
+				buttons: ['Ok']
+			});
+		} else {
+			dialog.showMessageBox({
+				type: 'info',
+				message: 'Done!',
+				buttons: ['Ok']
+			});
+		}
 		free_lock(2);
 	})
 	.catch(error => {
 		console.log(error);
+		progressBuild.close();
 		dialog.showMessageBox({
 			type: 'info',
 			message: 'error! : ' + error,
@@ -319,6 +338,7 @@ ipcMain.on('start-example-model', (event, arg)=> {
 	})
 	.catch(error => {
 		console.log(error);
+		progressStart.close();
 		dialog.showMessageBox({
 			type: 'info',
 			message: 'error! : ' + error,
