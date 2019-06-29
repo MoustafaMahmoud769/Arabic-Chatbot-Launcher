@@ -79,6 +79,7 @@ function(n) {
 
       addIntentEntity: function() {
         let attr = [];
+
         attr.push(document.getElementById("intent-entity-from").value);
         attr.push(document.getElementById("intent-entity-to").value);
         attr.push(document.getElementById("intent-entity-idx").value);
@@ -90,9 +91,6 @@ function(n) {
         cur += text;
         document.getElementById("intent-entites").value = cur;
         add_to_cool(attr[3], attr[4])
-        document.getElementById("intent-entity-from").value = '';
-        document.getElementById("intent-entity-to").value = '';
-        document.getElementById("intent-entity-idx").value = '';
       },
 
       removeIntentEntity: function(str) {

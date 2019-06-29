@@ -151,7 +151,7 @@ function validateSingleIntent(intent) {
         entity_error_i = m;
         break;
       }
-      if(from > to) {
+      if(from >= to) {
         entity_error = true;
         entity_error_i = m;
         break;
