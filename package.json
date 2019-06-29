@@ -25,6 +25,7 @@
   "dependencies": {
     "csv-parser": "^2.2.0",
     "dockerode": "^2.5.8",
+    "electron-progressbar": "^1.2.0",
     "node-docker-api": "^1.1.22",
     "shelljs": "^0.8.3"
   }

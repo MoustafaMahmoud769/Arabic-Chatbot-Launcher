@@ -2,46 +2,40 @@
 const {Docker} = require('node-docker-api');
 const dockerode = require('dockerode');
 const tar = require('tar-fs');
-const { ipcMain, dialog } = require('electron')
+const { BrowserWindow, ipcMain, dialog } = require('electron')
 const backend = require('./backend')
 const fs = require('fs')
 var net = require('net');
+var request = require('request');
+const ProgressBar = require('electron-progressbar');
 
+var progressStart;
+var progressStop;
+var progressBuild;
 var busyCtr = 0;
 var busyMessage;
 var is_server_on = false;
 
-function checkConnection(host, port, timeout) {
-    return new Promise(function(resolve, reject) {
-        timeout = timeout || 1000;     // default of 1 seconds
-        var timer = setTimeout(function() {
-            reject("timeout");
-			if (socket != null){
-				socket.end();
-			}
-        }, timeout);
-        var socket = net.createConnection(port, host, function() {
-            clearTimeout(timer);
-            resolve();
-            socket.end();
-        });
-        socket.on('error', function(err) {
-            clearTimeout(timer);
-            reject(err);
-        });
-    });
-}
-
 function update_server_status() {
 	setTimeout(function(){
-		checkConnection("127.0.0.1", 5005, 500).then(function() {
-			is_server_on = true;
-			update_server_status();
-		}, function(err) {
-			is_server_on = false;
-			update_server_status();
-		})
-	},250);
+		request('http://localhost:5005/webhooks/rest', function (error, response, body) {
+		  if (!error && response.statusCode == 200) {
+				is_server_on = true;
+				if (progressStart != null && progressStart.isInProgress()){
+					progressStart.setCompleted();
+					progressStart.close();
+				}
+				update_server_status();
+		  } else {
+				is_server_on = false;
+				if (progressStop != null && progressStop.isInProgress()){
+					progressStop.setCompleted();
+					progressStop.close();
+				}
+				update_server_status();
+			}
+		});
+	}, 1500);
 }
 update_server_status()
 
@@ -128,6 +122,12 @@ ipcMain.on('start-my-model', (event, arg)=> {
 		return;
 	}
 
+	progressStart = new ProgressBar({
+    text: 'Starting server...',
+    detail: 'Please wait...',
+		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
+  });
+
 	/////// Used to start the server of the bot, check for port 5005 afterwards to know that it has started
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
 	drode.run('testbot_1', [], process.stdout, {
@@ -144,7 +144,7 @@ ipcMain.on('start-my-model', (event, arg)=> {
 	  },
 	})
 	.then(() => {
-		console.log("Ran");
+		console.log("Terminated");
 	})
 	.catch(error => {
 		console.log(error);
@@ -175,6 +175,8 @@ ipcMain.on('build-my-model', (event, arg)=> {
 	if(!acquire_lock("building model")) {
 		return;
 	}
+
+
 	//validate & convert data
 	let data_error_free = backend.full_conversion();
 	if(data_error_free === false) {
@@ -195,6 +197,12 @@ ipcMain.on('build-my-model', (event, arg)=> {
 		}
 	});
 
+	progressBuild = new ProgressBar({
+    text: 'Building...',
+    detail: 'Please wait while your Bot is being built and trained...',
+		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
+  });
+
 	/////////// Used to build and train bot docker image, inside the first then() block, you can know that build has finished
 	const promisifyStream = stream => new Promise((resolve, reject) => {
 	  stream.on('data', data => console.log(data.toString()))
@@ -210,7 +218,10 @@ ipcMain.on('build-my-model', (event, arg)=> {
 	})
 	.then(stream => promisifyStream(stream))
 	.then(() => {
-		console.log("BUILT");
+		if (progressBuild != null && progressBuild.isInProgress()){
+			progressBuild.setCompleted();
+			progressBuild.close();
+		}
 		console.log(docker.image.get('testbot_1').status());
 		dialog.showMessageBox({
 			type: 'info',
@@ -248,6 +259,12 @@ ipcMain.on('stop-my-model', (event, arg)=> {
 		return;
 	}
 
+	progressStop = new ProgressBar({
+    text: 'Stopping server...',
+    detail: 'Please wait...',
+		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
+  });
+
 	//////// Used to stop all containers, check for port 5005 until nothing is listening to know that everything was stopped.
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
 	drode.listContainers(function (err, containers) {
@@ -276,6 +293,12 @@ ipcMain.on('start-example-model', (event, arg)=> {
 		return;
 	}
 
+	progressStart = new ProgressBar({
+    text: 'Starting server...',
+    detail: 'Please wait...',
+		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
+  });
+
 	/////// Used to start the server of the bot, check for port 5005 afterwards to know that it has started
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
 	drode.run('testbot_1', [], process.stdout, {
@@ -292,7 +315,7 @@ ipcMain.on('start-example-model', (event, arg)=> {
 	  },
 	})
 	.then(() => {
-		console.log("Ran");
+		console.log("Terminated");
 	})
 	.catch(error => {
 		console.log(error);
@@ -323,6 +346,12 @@ ipcMain.on('stop-example-model', (event, arg)=> {
 	if(!acquire_lock("stopping model")) {
 		return;
 	}
+
+	progressStop = new ProgressBar({
+    text: 'Stopping server...',
+    detail: 'Please wait...',
+		browserWindow: {parent: BrowserWindow.getAllWindows()[0]}
+  });
 
 	//////// Used to stop all containers, check for port 5005 until nothing is listening to know that everything was stopped.
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
