@@ -14,6 +14,53 @@
             <label for="action-examples">Action Text</label>
             <textarea name="action-examples" id="action-examples" rows="7"></textarea>
           </div>
+          <div class="field">
+            <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
+              <div class="col">
+                <label for="slots-in-action">Slot In Action</label>
+                <select id="slots-in-action">
+                </select>
+              </div>
+              <div class="col">
+                <button type="button" id="add-slots-in-action" name="add-slots-in-action" class="button submit" style ="position: absolute; bottom: 0px;">Add</button>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <textarea name="action-slots" id="action-slots" rows="4"></textarea>
+          </div>
+          <div class="field">
+            <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
+              <div class="col">
+                <label for="slots-in-buttons">Slot Buttons</label>
+                <select id="slots-in-buttons">
+                </select>
+              </div>
+              <div class="col">
+                <button type="button" id="add-action-slot" name="add-action-slot" class="button submit"">Add</button>
+              </div>
+              <div class="col">
+                <button type="button" id="remove-action-slot" name="remove-action-slot" class="button submit" >Remove</button>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
+              <div class="col">
+                <label for="button-name">Name</label>
+                <select id="button-name" style="visibility:hidden;">
+                </select>
+              </div>
+              <div class="col">
+                <label for="button-value1">Value</label>
+                <select id="button-value1" style="visibility:hidden;">
+                </select>
+              </div>
+              <div class="col">
+                <textarea name="button-value2" id="button-value2" style="visibility:hidden;" row="1"></textarea>
+              </div>
+            </div>
+          </div>
         </form>
         <div class="field">
           <button type="button" id="add-action" name="add-action" class="button submit" >Add</button>

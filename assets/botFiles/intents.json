@@ -1,11 +1,17 @@
 [
   {
-    "name": "greet",
+    "name": "sdasa",
     "examples": [
-      "hi",
-      "hello",
-      "how are you",
-      "hey"
+      "sadasda",
+      "asdasdasad"
+    ],
+    "entites": []
+  },
+  {
+    "name": "sdsads",
+    "examples": [
+      "asdasdasda",
+      "sadasdassad"
     ],
     "entites": []
   }

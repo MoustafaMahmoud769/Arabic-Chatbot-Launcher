@@ -30,7 +30,7 @@ ipcRenderer.on('story-added', (event, arg)=> {
   document.getElementById("story-body").value = '';
 })
 
-allslots = []
+storyslots = []
 
 window.stories = window.stories || {},
 function(n) {
@@ -81,9 +81,9 @@ function(n) {
         if (newtext == '')
           return;
         newtext2 = '';
-        for (var i = 0; i < allslots.length; ++i) {
-          if (allslots[i].name == slot) {
-            if (allslots[i].type == "categorical")
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical")
               newtext2 = document.getElementById('value1').value;
             else
               newtext2 = document.getElementById('value2').value;
@@ -105,17 +105,17 @@ function(n) {
         slot = document.getElementById('slots-list').value;
         if (slot == '')
           return;
-        for (var i = 0; i < allslots.length; ++i) {
-          if (allslots[i].name == slot) {
-            if (allslots[i].type == "categorical") {
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical") {
               document.getElementById('value1').style = '';
               document.getElementById('value2').style = 'visibility:hidden;';
               var sel = document.getElementById('value1');
               sel.innerHTML = '';
-              for (var j = 0; j < allslots[i].clist.length; ++j) {
+              for (var j = 0; j < storyslots[i].clist.length; ++j) {
                 var opt = document.createElement('option');
-                opt.appendChild(document.createTextNode(allslots[i].clist[j]));
-                opt.value = allslots[i].clist[j];
+                opt.appendChild(document.createTextNode(storyslots[i].clist[j]));
+                opt.value = storyslots[i].clist[j];
                 sel.appendChild(opt);
               }
             }
@@ -206,7 +206,7 @@ function(n) {
       },
 
       updateSlotsChoices: function(data) {
-        allslots = data;
+        storyslots = data;
         var sel = document.getElementById('slots-list');
         sel.innerHTML = '';
         var opt = document.createElement('option');

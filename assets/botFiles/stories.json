@@ -1,20 +1,9 @@
 [
   {
-    "name": "story",
+    "name": "sadsad",
     "examples": [
-      "* greet",
-      "- utter_greet"
-    ]
-  },
-  {
-    "name": "asdf",
-    "examples": [
-      "* greet",
-      "- asdf",
-      "* greet",
-      "- asdf",
-      "* greet",
-      "- asdf"
+      "* sdasa",
+      "- sdsadasas"
     ]
   }
 ]
