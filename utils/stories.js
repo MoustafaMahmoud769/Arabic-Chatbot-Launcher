@@ -390,4 +390,5 @@ ipcMain.on('remove-story', (event, arg)=> {
 module.exports = {
     validateSingleStory: validateSingleStory,
     findStoryError: findStoryError,
+    get_slot_data: get_slot_data,
 }

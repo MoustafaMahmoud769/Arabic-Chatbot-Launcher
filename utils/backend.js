@@ -95,12 +95,21 @@ function full_conversion() {
 		let current_story = []
 		for(let j=0; j<stories[i].examples.length; j++) {
 			let example = stories[i].examples[j];
+			// intents
 			if(example[0] == '*') {
 				let int = tools.strip(example.substr(1, example.length));
 				current_story.push({"intent": int})
+			// actions
 			} else if(example[0] == '-') {
 				let act = tools.strip(example.substr(1, example.length));
 				current_story.push({"action": act})
+			// slots
+			} else if(example[0] == '$') {
+				let slt = tools.strip(example.substr(1, example.length));
+				let slt_data = storiesObj.get_slot_data(slt);
+				let slt_spec_data = {};
+				slt_spec_data[slt_data.name] = slt_data.value;
+				current_story.push({"slot": slt_spec_data});
 			}
 		}
 		data.stories.push(current_story)
@@ -109,11 +118,20 @@ function full_conversion() {
 	// do actions
 	let actions = JSON.parse(fs.readFileSync(actions_path));
 	for(let i=0; i<actions.length; i++) {
-		let current_action = []
+		// do text array
+		let current_actionـtexts = [];
 		for(let j=0; j<actions[i].examples.length; j++) {
-			current_action.push(actions[i].examples[j]);
+			current_actionـtexts.push(actions[i].examples[j]);
 		}
-		data.actions[actions[i]['name']] = current_action;
+		data.actions[actions[i]['name']] = {}
+		data.actions[actions[i]['name']].text = current_actionـtexts;
+		// do buttons array
+		let buttons_info = actionsObj.parse_buttons_data(actions[i].slots);
+		let buttons = [];
+		for(let j=0; j<buttons_info.length; j++) {
+			buttons.push({"text":buttons_info[j].value, "value":buttons_info[j].slot_value, "slot":buttons_info[j].slot_name})
+		}
+		data.actions[actions[i]['name']].buttons = buttons;
 	}
 
 	// do intents & entities

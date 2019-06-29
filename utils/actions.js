@@ -302,4 +302,5 @@ ipcMain.on('remove-action', (event, arg)=> {
 module.exports = {
   validateSingleAction: validateSingleAction,
   findActionError: findActionError,
+  parse_buttons_data: parse_buttons_data,
 }
