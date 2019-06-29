@@ -181,7 +181,6 @@ function(n) {
       },
 
       addRow: function(tableRef, data) {
-        console.log(data)
         // add new row
         let newRow = tableRef.insertRow(-1);
         // intent name
@@ -204,7 +203,6 @@ function(n) {
           // handle entities
           let entities_ = ""
           for(let i =0; i<data.entites.length; i++) {
-          console.log(data.entites[i].from)
            entities_ += data.entites[i].from.toString() + '\t';
            entities_ += data.entites[i].to.toString() + '\t';
            entities_ += data.entites[i].index.toString() + '\t';
@@ -217,7 +215,6 @@ function(n) {
           document.getElementById("intent-entites").value = entities_;
           document.getElementById("intent-warning").innerHTML = 'This Intent was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
           jQuery('html,body').animate({scrollTop:0},0);
-          console.log(data.entites)
         };
         newCellx.appendChild(elementx);
         // let newCell3 = newRow.insertCell(-1);

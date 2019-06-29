@@ -109,7 +109,6 @@ function validateSingleIntent(intent) {
     let to = intent.entites[m].to
     let ind = intent.entites[m].index
     let name = intent.entites[m].name
-    console.log(name)
     //check if existed - only for full validation
     entity_title_existed = false
     entities.forEach(function(entity, index){
@@ -191,7 +190,7 @@ function findIntentError(validation_results, options) {
   if (validation_results.intent_small_examples == true) {
     return {"title": 'Intent examples are tiny!', "body": "You must at least two examples for each intent!"};
   }
-  
+
   if(validation_results.empty == true) {
     return {"title": 'Your intent is empty!', "body": "You must provide title for your intent!"};
   }

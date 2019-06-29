@@ -206,6 +206,7 @@ ipcMain.on('validate-curr-story', (event, arg)=>{
 
 
 ipcMain.on('add-story', (event, arg)=> {
+  console.log(arg);
   var story = {
     name: arg.storyName,
     examples: arg.storyBody.split('\n')

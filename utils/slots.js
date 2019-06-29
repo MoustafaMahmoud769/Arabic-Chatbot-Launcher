@@ -12,11 +12,11 @@ function cleanSlot(entityObj) {
   entityObj.type = tools.strip(entityObj.type);
   entityObj.fmin = tools.strip(entityObj.fmin);
   entityObj.fmax = tools.strip(entityObj.fmax);
-  
+
   for(let i = 0; i < entityObj.clist.length; i++) {
     entityObj.clist[i] = tools.strip(entityObj.clist[i]);
   }
-  
+
   entityObj.clist = entityObj.clist.filter(Boolean);
 
   return entityObj;

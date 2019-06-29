@@ -30,16 +30,32 @@ ipcRenderer.on('story-added', (event, arg)=> {
   document.getElementById("story-body").value = '';
 })
 
-slots = []
+allslots = []
 
 window.stories = window.stories || {},
 function(n) {
+
     stories.messaging = {
 
       SendCurrentStory: function(eventName) {
         let storyName = document.getElementById("story-name").value;
         let storyBody = document.getElementById("story-body").value;
-        let args = {storyName, storyBody};
+        let slotname = document.getElementById("slots-list").value;
+        let slotvalue = '';
+        if (slotname !== '') {
+          for (var i = 0; i < allslots.length; ++i) {
+            if (allslots[i].name == slotname) {
+              if (allslots[i].type == "categorical") {
+                slotvalue = document.getElementById('value1').value;
+              }
+              else {
+                slotvalue = document.getElementById('value2').value;
+              }
+            }
+          }
+        }
+        let storyslot = {slotname, slotvalue};
+        let args = {storyName, storyBody, storyslot};
         ipcRenderer.send(eventName, args);
       },
 
@@ -79,17 +95,17 @@ function(n) {
         slot = document.getElementById('slots-list').value;
         if (slot == '')
           return;
-        for (var i = 0; i <= slots.length; ++i) {
-          if (slots[i].name == slot) {
-            if (slots[i].type == "categorical") {
+        for (var i = 0; i < allslots.length; ++i) {
+          if (allslots[i].name == slot) {
+            if (allslots[i].type == "categorical") {
               document.getElementById('value1').style = '';
               document.getElementById('value2').style = 'visibility:hidden;';
               var sel = document.getElementById('value1');
               sel.innerHTML = '';
-              for (var j = 0; j <= slots[i].clist.length; ++j) {
+              for (var j = 0; j < allslots[i].clist.length; ++j) {
                 var opt = document.createElement('option');
-                opt.appendChild(document.createTextNode(slots[i].clist[j]));
-                opt.value = slots[i].clist[j];
+                opt.appendChild(document.createTextNode(allslots[i].clist[j]));
+                opt.value = allslots[i].clist[j];
                 sel.appendChild(opt);
               }
             }
@@ -125,6 +141,7 @@ function(n) {
         $('#tab5').click( function() {
           intents.messaging.UpdateTable()
           actions.messaging.UpdateTable()
+          console.log('here', slots);
           slots.messaging.UpdateTable()
           stories.messaging.UpdateTable()
         })
@@ -176,7 +193,7 @@ function(n) {
       },
 
       updateSlotsChoices: function(data) {
-        slots = data;
+        allslots = data;
         var sel = document.getElementById('slots-list');
         sel.innerHTML = '';
         var opt = document.createElement('option');
