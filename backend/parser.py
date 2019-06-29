@@ -13,9 +13,11 @@ def write_stories(stories_, path):
             stories.write("## story " + str(idx) + "\n")
             assert "intent" in story[0], "Story must begin with an intent: " + str(story)
             for item in story:
-                assert len(item.keys()) == 1 and ("intent" in item or "action" in item), "Invalid story format: " + str(item)
+                assert len(item.keys()) == 1 and ("intent" in item or "action" in item or "slot" in item), "Invalid story format: " + str(item)
                 if "intent" in item:
                     stories.write("* " + item["intent"] + str(intents[item["intent"]]).replace("{}", "").replace("'", "\"") + "\n")
+                elif "slot" in item:
+                    stories.write(" - slot{\"" + list(item["slot"].keys())[0] + "\": \"" + item["slot"][list(item["slot"].keys())[0]] + "\"}" + "\n")
                 else:
                     if not item["action"].startswith("utter_"):
                         stories.write(" - utter_" + item["action"] + "\n")
@@ -37,8 +39,8 @@ def write_domain(data, path):
                     entities.add(entity["entity"])
         entities = list(entities)
 
-        domain.write("intents:\n")
         if len(intents) > 0:
+            domain.write("intents:\n")
             for intent in intents.keys():
                 domain.write(" - " + intent + "\n")
             domain.write("\n")
@@ -47,6 +49,19 @@ def write_domain(data, path):
             domain.write("entities:\n")
             for entity in entities:
                 domain.write(" - " + entity + "\n")
+            domain.write("\n")
+
+        if len(data["slots"]) > 0:
+            domain.write("slots:\n")
+            for slot in data["slots"]:
+                domain.write(" " + slot["name"] + ":\n")
+                domain.write("  type: " + slot["type"] + "\n")
+                if "initial_value" in slot:
+                    domain.write("  initial_value: \"" + slot["initial_value"] + "\"\n")
+                if "values" in slot:
+                    domain.write("  values:" + "\n")
+                    for val in slot["values"]:
+                        domain.write("  - " + val + "\n")
             domain.write("\n")
 
         domain.write("actions:\n")
@@ -66,8 +81,17 @@ def write_domain(data, path):
                 domain.write(" utter_" + action + ":\n")
             else:
                 domain.write(" " + action + ":\n")
-            for alt in data["actions"][action]:
-                domain.write("  - \"" + alt + "\"\n")
+            if "text" in data["actions"][action]:
+                for action_text in data["actions"][action]["text"]:
+                    domain.write("  - text: \"" + action_text + "\"\n")
+                    if "buttons" in data["actions"][action]:
+                        domain.write("    buttons:\n")
+                        for btn in data["actions"][action]["buttons"]:
+                            domain.write("    - title: \"" + btn["text"] + "\"\n")
+                            domain.write("      payload: '/slot{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
+
+            # for alt in data["actions"][action]:
+                # domain.write("  - \"" + alt + "\"\n")
         domain.write("\n")
 
 def write_nlu(data, path):

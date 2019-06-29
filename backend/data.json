@@ -1,1 +1,86 @@
-{"stories":[[{"intent":"phone_bill"},{"action":"utter_phone_bill"}],[{"intent":"how_are_you"},{"action":"utter_greet"}]],"rasa_nlu_data":{"common_examples":[{"intent":"phone_bill","text":"اريد الاستعلام عن فاتورة الهاتف عن طريق فوري","entities":[{"start":40,"end":44,"value":"فوري","entity":"fawry"}]},{"intent":"phone_bill","text":"كيف استعلم عن فاتورة الهاتف عن طريق فوري","entities":[{"start":36,"end":40,"value":"فوري","entity":"fawry"}]},{"intent":"how_are_you","text":"كيف حالك"},{"intent":"how_are_you","text":"كيف احوالك"}],"regex_features":[],"lookup_tables":[],"entity_synonyms":[]},"actions":{"utter_phone_bill":["تم الاستعلام عن فاتورة الهاتف"],"utter_greet":["بأحسن حال"]}}
+{
+  "slots": [
+    {
+      "name": "name",
+      "type": "text",
+      "initial_value": "human"
+    },
+    {
+      "name": "risk_level",
+      "type": "categorical",
+      "values": ["low", "medium", "high"]
+    }
+  ],
+  "stories": [
+    [
+      {
+        "intent": "how_are_you"
+      },
+      {
+        "slot": {"name": "ali"}
+      },
+      {
+        "action": "utter_greet"
+      }
+    ]
+  ],
+  "actions": {
+    "utter_greet": {
+      "text": ["hey there {name}"]
+    },
+    "uttter_ask_risk_level": {
+      "text": ["What is the risk level?", "Do you know the risk level?"],
+      "buttons": [
+        {
+          "text": "Low Risk",
+          "value": "low",
+          "slot": "risk_level"
+        },
+        {
+          "text": "Medium Risk",
+          "value": "medium",
+          "slot": "risk_level"
+        }
+      ]
+    }
+  },
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "phone_bill",
+        "text": "اريد الاستعلام عن فاتورة الهاتف عن طريق فوري",
+        "entities": [
+          {
+            "start": 40,
+            "end": 44,
+            "value": "فوري",
+            "entity": "fawry"
+          }
+        ]
+      },
+      {
+        "intent": "phone_bill",
+        "text": "كيف استعلم عن فاتورة الهاتف عن طريق فوري",
+        "entities": [
+          {
+            "start": 36,
+            "end": 40,
+            "value": "فوري",
+            "entity": "fawry"
+          }
+        ]
+      },
+      {
+        "intent": "how_are_you",
+        "text": "كيف حالك"
+      },
+      {
+        "intent": "how_are_you",
+        "text": "كيف احوالك"
+      }
+    ],
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": []
+  }
+}
