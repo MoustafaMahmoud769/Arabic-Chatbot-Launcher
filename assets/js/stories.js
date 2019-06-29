@@ -40,22 +40,7 @@ function(n) {
       SendCurrentStory: function(eventName) {
         let storyName = document.getElementById("story-name").value;
         let storyBody = document.getElementById("story-body").value;
-        let slotname = document.getElementById("slots-list").value;
-        let slotvalue = '';
-        if (slotname !== '') {
-          for (var i = 0; i < allslots.length; ++i) {
-            if (allslots[i].name == slotname) {
-              if (allslots[i].type == "categorical") {
-                slotvalue = document.getElementById('value1').value;
-              }
-              else {
-                slotvalue = document.getElementById('value2').value;
-              }
-            }
-          }
-        }
-        let storyslot = {slotname, slotvalue};
-        let args = {storyName, storyBody, storyslot};
+        let args = {storyName, storyBody};
         ipcRenderer.send(eventName, args);
       },
 
@@ -89,6 +74,31 @@ function(n) {
         text = document.getElementById('story-body').value + selected;
         document.getElementById('story-body').value = text;
         document.getElementById('actions-list').value = '';
+      },
+
+      appendSlot: function() {
+        newtext = document.getElementById('slots-list').value;
+        if (newtext == '')
+          return;
+        newtext2 = '';
+        for (var i = 0; i < allslots.length; ++i) {
+          if (allslots[i].name == slot) {
+            if (allslots[i].type == "categorical")
+              newtext2 = document.getElementById('value1').value;
+            else
+              newtext2 = document.getElementById('value2').value;
+          }
+        }
+        if (newtext2 == '')
+          return;
+        selected = '$ slot{\"' + newtext + '\": \"' + newtext2 + '\"}\n';
+        text = document.getElementById('story-body').value + selected;
+        document.getElementById('story-body').value = text;
+        document.getElementById('slots-list').value = '';
+        document.getElementById('value1').style = 'visibility:hidden;';
+        document.getElementById('value2').style = 'visibility:hidden;';
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
       },
 
       handleSlotChange: function() {
@@ -141,7 +151,6 @@ function(n) {
         $('#tab5').click( function() {
           intents.messaging.UpdateTable()
           actions.messaging.UpdateTable()
-          console.log('here', slots);
           slots.messaging.UpdateTable()
           stories.messaging.UpdateTable()
         })
@@ -156,6 +165,10 @@ function(n) {
 
         $('#slots-list').change( function() {
           stories.messaging.handleSlotChange()
+        })
+
+        $('#add-story-slot').click( function () {
+          stories.messaging.appendSlot()
         })
       }
 
