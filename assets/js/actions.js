@@ -57,6 +57,83 @@ function(n) {
         document.getElementById('slots-in-action').value = '';
       },
 
+      handleSlotChange: function() {
+        slot = document.getElementById('slots-in-buttons').value;
+        if (slot == '')
+          return;
+        document.getElementById('button-name').style = '';
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical" || storyslots[i].type == "bool") {
+              document.getElementById('button-value1').style = '';
+              document.getElementById('button-value2').style = 'visibility:hidden;';
+              var sel = document.getElementById('button-value1');
+              sel.innerHTML = '';
+              if(storyslots[i].type == "categorical") {
+                for (var j = 0; j < storyslots[i].clist.length; ++j) {
+                  var opt = document.createElement('option');
+                  opt.appendChild(document.createTextNode(storyslots[i].clist[j]));
+                  opt.value = storyslots[i].clist[j];
+                  sel.appendChild(opt);
+                }
+              }
+              else {
+                var opt1 = document.createElement('option');
+                opt1.appendChild(document.createTextNode('True'));
+                opt1.value = 'True';
+                sel.appendChild(opt1);
+                var opt2 = document.createElement('option');
+                opt2.appendChild(document.createTextNode('False'));
+                opt2.value = 'False';
+                sel.appendChild(opt2);
+              }
+            }
+            else {
+              document.getElementById('button-value1').style = 'visibility:hidden;';
+              document.getElementById('button-value2').style = '';
+            }
+          }
+        }
+      },
+
+      appendSlotButton: function() {
+        slotname = document.getElementById('slots-in-buttons').value;
+        if (slotname == '')
+          return;
+        displayname = document.getElementById('button-name').value;
+        valuechange = '';
+        for (var i = 0; i < storyslots.length; ++i) {
+          if (storyslots[i].name == slot) {
+            if (storyslots[i].type == "categorical" || storyslots[i].type == "bool")
+              valuechange = document.getElementById('button-value1').value;
+            else
+              valuechange = document.getElementById('button-value2').value;
+          }
+        }
+        if (displayname == '' || valuechange == '')
+          return;
+        selected = '- title: \"' + displayname + '\"\n';
+        selected += '  payload: \'/choose{\"' + slotname + '\": \"'+ valuechange +'\"}\'\n';
+        text = document.getElementById('action-slots').value + selected;
+        document.getElementById('action-slots').value = text;
+        document.getElementById('button-value1').value = '';
+        document.getElementById('button-value2').value = '';
+        document.getElementById('button-name').value = '';
+        document.getElementById('slots-in-buttons').value = '';
+        document.getElementById('button-value1').style = 'visibility:hidden;';
+        document.getElementById('button-value2').style = 'visibility:hidden;';
+        document.getElementById('button-name').style = 'visibility:hidden;';
+      },
+
+      removeSlotButton: function() {
+        let cur = document.getElementById('action-slots').value.split('\n');
+        while (cur[cur.length - 1] == '')
+          cur.pop();
+        cur.pop();
+        cur.pop();
+        document.getElementById('action-slots').value = cur.join('\n') + (cur.length > 0 ? '\n' : '');
+      },
+
       init: function() {
         $('#add-action').click( function () {
           actions.messaging.addAction()
@@ -70,9 +147,21 @@ function(n) {
           actions.messaging.appendSlotInAction()
         })
 
+        $('#add-action-slot').click( function () {
+          actions.messaging.appendSlotButton()
+        })
+
+        $('#remove-action-slot').click( function () {
+          actions.messaging.removeSlotButton()
+        })
+
         $('#tab4').click( function() {
           slots.messaging.UpdateTable()
           actions.messaging.UpdateTable()
+        })
+
+        $('#slots-in-buttons').change( function() {
+          actions.messaging.handleSlotChange()
         })
 
       }
@@ -158,6 +247,9 @@ function(n) {
             actions.handler.addOption('slots-in-action', data[i].name, data[i].name);
           }
         }
+        document.getElementById('button-value1').style = 'visibility:hidden;';
+        document.getElementById('button-value2').style = 'visibility:hidden;';
+        document.getElementById('button-name').style = 'visibility:hidden;';
       },
 
       update: function(data) {
