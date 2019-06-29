@@ -31,7 +31,8 @@ function(n) {
       SendCurrentAction: function(eventName) {
         let actionName = document.getElementById("action-name").value;
         let actionExamples = document.getElementById("action-examples").value;
-        let args = {actionName, actionExamples};
+        let actionSlots = document.getElementById("action-slots").value;
+        let args = {actionName, actionExamples, actionSlots};
         ipcRenderer.send(eventName, args);
       },
 
