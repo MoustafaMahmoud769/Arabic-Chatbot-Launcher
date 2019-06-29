@@ -1,14 +1,30 @@
 [
   {
+    "name": "asdfasdfas",
+    "examples": [
+      "fdasfasfasfasfsdf  {fares}"
+    ],
+    "slots": [
+      "Button value: sdfasfasfasf",
+      "Slot name: fares",
+      "Slot value: fares1",
+      "Button value: sfasfasf",
+      "Slot name: sdfasf",
+      "Slot value: asfasfas"
+    ]
+  },
+  {
     "name": "sdsadasas",
     "examples": [
       "sdasda"
-    ]
+    ],
+    "slots": []
   },
   {
     "name": "eqfdfdf",
     "examples": [
       "adff"
-    ]
+    ],
+    "slots": []
   }
 ]

@@ -16,6 +16,7 @@ ipcRenderer.on('action-added', (event, arg)=> {
   document.getElementById("action-warning").innerHTML = '';
   document.getElementById("action-name").value = '';
   document.getElementById("action-examples").value = '';
+  document.getElementById("action-slots").value = '';
 })
 
 ipcRenderer.on('actions-changed', (event, arg)=> {
@@ -204,11 +205,22 @@ function(n) {
         element4.onclick = function() {
           actions.handler.remove(data.name);
           document.getElementById("action-name").value = data.name;
+          // examples
           let examples_ = ""
           for(let i =0; i<data.examples.length; i++) {
            examples_ += data.examples[i] + '\n';
           }
           document.getElementById("action-examples").value = examples_;
+          // slots!
+          let slots_ = ""
+          for(let i =0; i<data.slots.length; i++) {
+           slots_ += data.slots[i] + '\n';
+           if((i+1) % 3 == 0) {
+             slots_ += '\n';
+           }
+          }
+          document.getElementById("action-slots").value = slots_;
+          // alert
           document.getElementById("action-warning").innerHTML = 'This Action was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
           jQuery('html,body').animate({scrollTop:0},0);
         };
