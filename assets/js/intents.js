@@ -17,11 +17,18 @@ ipcRenderer.on('intent-added', (event, arg)=> {
   document.getElementById("intent-name").value = '';
   document.getElementById("intent-examples").value = '';
   document.getElementById("intent-entites").value = '';
+  document.getElementById("intent-entites-cool").value = '';
 })
 
 ipcRenderer.on('intents-changed', (event, arg)=> {
   intents.messaging.UpdateTable();
 })
+
+function add_to_cool(value, entity) {
+  let cur = document.getElementById("intent-entites-cool").value;
+  cur += "{" + value + ", " + entity + "}" + '\n';
+  document.getElementById("intent-entites-cool").value = cur;
+}
 
 window.intents = window.intents || {},
 function(n) {
@@ -82,17 +89,18 @@ function(n) {
         let cur = document.getElementById("intent-entites").value;
         cur += text;
         document.getElementById("intent-entites").value = cur;
+        add_to_cool(attr[3], attr[4])
         document.getElementById("intent-entity-from").value = '';
         document.getElementById("intent-entity-to").value = '';
         document.getElementById("intent-entity-idx").value = '';
       },
 
-      removeIntentEntity: function() {
-        let cur = document.getElementById("intent-entites").value.split('\n');
+      removeIntentEntity: function(str) {
+        let cur = document.getElementById(str).value.split('\n');
         if (cur[cur.length - 1] == '')
           cur.pop();
         cur.pop();
-        document.getElementById("intent-entites").value = cur.join('\n');
+        document.getElementById(str).value = cur.join('\n');
       },
 
       addIntent: function() {
@@ -112,7 +120,8 @@ function(n) {
           intents.messaging.addIntentEntity()
         })
         $('#remove-intent-entity').click( function () {
-          intents.messaging.removeIntentEntity()
+          intents.messaging.removeIntentEntity("intent-entites")
+          intents.messaging.removeIntentEntity("intent-entites-cool")
         })
         $('#intent-examples').click( function () {
           intents.messaging.getTextSelection()
@@ -209,6 +218,7 @@ function(n) {
            entities_ += data.entites[i].value.toString() + '\t';
            entities_ += data.entites[i].name + '\t';
            entities_ += '\n';
+           add_to_cool(data.entites[i].value.toString(), data.entites[i].name)
           }
           //
           document.getElementById("intent-examples").value = examples_;
