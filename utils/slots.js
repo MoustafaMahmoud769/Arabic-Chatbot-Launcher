@@ -212,3 +212,8 @@ ipcMain.on('remove-slot', (event, arg)=> {
     event.sender.send('slots-changed');
   });
 })
+
+module.exports = {
+    validateSingleSlot: validateSingleSlot,
+    findSlotError: findSlotError,
+}
