@@ -11,10 +11,15 @@
             <textarea name="entity" id="entity" rows="1"></textarea>
           </div>
         </form>
-        <div class="field">
-          <button type="button" id="add-entity" name="add-entity" class="button submit" >Add</button>
+        <div class="field" style="display: block" id="normal-buttons">
+          <button type="button" id="add-entity" name="add-entity" class="button submit" ><p style="color: green;">Add</p></button>
           <button type="button" id="validate-curr-entity" name="validate-curr-entity" class="button submit" >Validate</button>
           <button type="button" id="load-entity" name="load-entity" class="button submit" >Load</button>
+        </div>
+        <div class="field" style="display: none" id="update-buttons">
+          <button type="button" id="update-entity" name="update-entity" class="button submit" ><p style="color: green;">Update</p></button>
+          <button type="button" id="validate-update-entity" name="validate-update-entity" class="button submit" >Validate</button>
+          <button type="button" id="cancel-entity" name="cancel-entity" class="button submit" ><p style="color: red;">Cancel</p></button>
         </div>
       </section>
 

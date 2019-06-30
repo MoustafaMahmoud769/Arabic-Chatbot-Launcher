@@ -64,7 +64,7 @@ function findEntityError(validation_results, options){
 
 function isEntityValidwAction(entity) {
   let validation_results = validateSingleEntity(entity);
-  let error = findEntityError(validation_results, {"dups": true});
+  let error = findEntityError(validation_results, {"dups": entity.new_input});
 
   if(error == false) {
     return true;
@@ -74,11 +74,26 @@ function isEntityValidwAction(entity) {
   return false;
 }
 
+
+function remove_entity_fn(event, arg) {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFileSync(path, JSON.stringify(edited, null, 2));
+  event.sender.send('entites-changed');
+}
+
+
 ipcMain.on('validate-curr-entity', (event, arg)=>{
 
   //get current entity from front end
   var entity = {
-    name: arg.entityName
+    name: arg.entityName,
+    new_input: arg.new_input
   };
   entity = cleanEntity(entity);
 
@@ -97,7 +112,8 @@ ipcMain.on('validate-curr-entity', (event, arg)=>{
 
 ipcMain.on('add-entity', (event, arg)=> {
   var entity = {
-    name: arg.entityName
+    name: arg.entityName,
+    new_input: arg.new_input
   };
   entity = cleanEntity(entity)
 
@@ -105,16 +121,17 @@ ipcMain.on('add-entity', (event, arg)=> {
     return;
   }
 
+  entity = {
+    name: entity.name,
+  }
+
+  remove_entity_fn(event, entity.name);
+
   let entites = JSON.parse(fs.readFileSync(path));
   entites.push(entity);
-  fs.writeFile(path, JSON.stringify(entites, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('entites-changed');
-    event.sender.send('entity-added');
-  });
+  fs.writeFileSync(path, JSON.stringify(entites, null, 2));
+  event.sender.send('entites-changed');
+  event.sender.send('entity-added');
 })
 
 ipcMain.on('load-entity', (event, arg)=> {
@@ -158,20 +175,7 @@ ipcMain.on('get-entites', (event, arg)=> {
 })
 
 ipcMain.on('remove-entity', (event, arg)=> {
-  let data = JSON.parse(fs.readFileSync(path));
-  let edited = [];
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].name == arg)
-      continue;
-    edited.push(data[i]);
-  }
-  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('entites-changed');
-  });
+  remove_entity_fn(event, arg);
 })
 
 module.exports = {

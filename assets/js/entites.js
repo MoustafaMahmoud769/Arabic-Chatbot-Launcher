@@ -8,9 +8,18 @@ ipcRenderer.on('send-entites', (event, arg)=> {
   entites.handler.update(arg);
 })
 
-ipcRenderer.on('entity-added', (event, arg)=> {
+function resert_ui() {
   document.getElementById("entity-warning").innerHTML = '';
   document.getElementById("entity").value = '';
+  // account for update
+  document.getElementById("normal-buttons").style.display = 'block';
+  document.getElementById("update-buttons").style.display = 'none'; 
+  // enable the title textarea
+  document.getElementById("entity").disabled = false; 
+}
+
+ipcRenderer.on('entity-added', (event, arg)=> {
+  resert_ui();
 })
 
 ipcRenderer.on('entites-changed', (event, arg)=> {
@@ -21,18 +30,19 @@ window.entites = window.entites || {},
 function(n) {
 
     entites.messaging = {
-      SendCurrentEntity: function(eventName) {
+      SendCurrentEntity: function(eventName, new_input_=true) {
         let entityName = document.getElementById("entity").value;
-        let args = { entityName };
+        let new_input = new_input_;
+        let args = { entityName, new_input };
         ipcRenderer.send(eventName, args);
       },
 
-      addEntity: function() {
-        entites.messaging.SendCurrentEntity('add-entity');
+      addEntity: function(new_input_=true) {
+        entites.messaging.SendCurrentEntity('add-entity', new_input_);
       },
 
-      validateCurrentEntity: function() {
-        entites.messaging.SendCurrentEntity('validate-curr-entity');
+      validateCurrentEntity: function(new_input_=true) {
+        entites.messaging.SendCurrentEntity('validate-curr-entity', new_input_);
       },
 
       UpdateTable: function() {
@@ -44,8 +54,20 @@ function(n) {
           entites.messaging.addEntity();
         })
 
+        $('#update-entity').click( function () {
+          entites.messaging.addEntity(new_input_=false);
+        })
+
         $('#validate-curr-entity').click( function () {
           entites.messaging.validateCurrentEntity()
+        })
+
+        $('#validate-update-entity').click( function () {
+          entites.messaging.validateCurrentEntity(new_input_=false)
+        })
+         
+        $('#cancel-entity').click( function () {
+          resert_ui();
         })
 
         $('#tab2').click( function() {
@@ -85,9 +107,18 @@ function(n) {
         elementx.className = "button submit";
         elementx.type = "input";
         elementx.onclick = function() {
-          entites.handler.remove(data.name);
+          // delete old one - disabled
+          // entites.handler.remove(data.name);
+          //display new buttons
+          document.getElementById("normal-buttons").style.display = 'none';
+          document.getElementById("update-buttons").style.display = 'block';
+          //display data
           document.getElementById("entity").value = data.name;
-          document.getElementById("entity-warning").innerHTML = 'This Entity was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // enable the title textarea
+          document.getElementById("entity").disabled = true; 
+          // entity warning
+          // document.getElementById("entity-warning").innerHTML = 'This Entity was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // swap up
           jQuery('html,body').animate({scrollTop:0},0);
         };
         newCellx.appendChild(elementx);
