@@ -19,9 +19,9 @@ function resert_ui() {
   document.getElementById("action-slots").value = '';
   // account for update
   document.getElementById("actions-normal-buttons").style.display = 'block';
-  document.getElementById("actions-update-buttons").style.display = 'none'; 
+  document.getElementById("actions-update-buttons").style.display = 'none';
   // enable the title textarea
-  document.getElementById("action-name").disabled = false; 
+  document.getElementById("action-name").disabled = false;
 }
 
 ipcRenderer.on('action-added', (event, arg)=> {
@@ -70,14 +70,18 @@ function(n) {
 
       handleSlotChange: function() {
         slot = document.getElementById('slots-in-buttons').value;
-        if (slot == '')
+        if (slot == ''){
+          document.getElementById('button-value1').style = 'display:none';
+          document.getElementById('button-value2').style = 'display:none;';
+          document.getElementById('button-name').style = 'visibility:hidden;';
           return;
+        }
         document.getElementById('button-name').style = '';
         for (var i = 0; i < storyslots.length; ++i) {
           if (storyslots[i].name == slot) {
             if (storyslots[i].type == "categorical" || storyslots[i].type == "bool") {
               document.getElementById('button-value1').style = '';
-              document.getElementById('button-value2').style = 'visibility:hidden;';
+              document.getElementById('button-value2').style = 'display:none;';
               var sel = document.getElementById('button-value1');
               sel.innerHTML = '';
               if(storyslots[i].type == "categorical") {
@@ -100,7 +104,7 @@ function(n) {
               }
             }
             else {
-              document.getElementById('button-value1').style = 'visibility:hidden;';
+              document.getElementById('button-value1').style = 'display:none;';
               document.getElementById('button-value2').style = '';
             }
           }
@@ -133,8 +137,8 @@ function(n) {
         document.getElementById('button-value2').value = '';
         document.getElementById('button-name').value = '';
         document.getElementById('slots-in-buttons').value = '';
-        document.getElementById('button-value1').style = 'visibility:hidden;';
-        document.getElementById('button-value2').style = 'visibility:hidden;';
+        document.getElementById('button-value1').style = 'display:none;';
+        document.getElementById('button-value2').style = 'display:none;';
         document.getElementById('button-name').style = 'visibility:hidden;';
       },
 
@@ -247,7 +251,7 @@ function(n) {
           document.getElementById("actions-normal-buttons").style.display = 'none';
           document.getElementById("actions-update-buttons").style.display = 'block';
           //disable title
-          document.getElementById("action-name").disabled = true; 
+          document.getElementById("action-name").disabled = true;
           // alert
           // document.getElementById("action-warning").innerHTML = 'This Action was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
           // swap up
@@ -292,8 +296,8 @@ function(n) {
             actions.handler.addOption('slots-in-action', data[i].name, data[i].name);
           }
         }
-        document.getElementById('button-value1').style = 'visibility:hidden;';
-        document.getElementById('button-value2').style = 'visibility:hidden;';
+        document.getElementById('button-value1').style = 'display:none;';
+        document.getElementById('button-value2').style = 'display:none;';
         document.getElementById('button-name').style = 'visibility:hidden;';
       },
 

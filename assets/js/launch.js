@@ -72,6 +72,28 @@ function(n) {
         return date + ' ' + time;
       },
 
+      addButtons: function(buttons) {
+        text = document.getElementById('msgs-container').innerHTML;
+        newBtns = '<div style="margin:0 auto; width:100%; text-align:center;" class="outgoing_msg"><p>';
+        for (var i = 0; i < buttons.length; i++){
+          var btn_text = buttons[i].title;
+          var payload = buttons[i].payload;
+
+          newBtns += '<button type="button" value=\'' + payload.replace(/"/g, '\\"').replace(/\//g, "\\/") + '\' class="button info slot-btn">';
+          newBtns += btn_text + '</button>'
+        }
+        newBtns += '</p></div>';
+        text += newBtns;
+        document.getElementById('msgs-container').innerHTML = text;
+
+        $('.slot-btn').on('click', function(){
+          launch.messaging.sendMessage($(this).val());
+        })
+
+        var element = document.getElementById("msgs-container");
+        element.scrollTop = element.scrollHeight;
+      },
+
       addMessage: function() {
         if (document.getElementById('msg-body').value.trim() === ''){
           document.getElementById('msg-body').value = '';
@@ -103,7 +125,10 @@ function(n) {
         }).done(function (data, textStatus, jQxhr) {
             console.log("Done");
             for (let i = 0; i < data.length; ++i) {
-              launch.messaging.addReply(data[i].text);
+              if (data[i].hasOwnProperty("text"))
+                launch.messaging.addReply(data[i].text);
+              if (data[i].hasOwnProperty("buttons"))
+                launch.messaging.addButtons(data[i].buttons);
             }
         }).fail(function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
@@ -119,6 +144,8 @@ function(n) {
         newMsg += '</span></div></div></div>';
         text += newMsg;
         document.getElementById('msgs-container').innerHTML = text;
+        var element = document.getElementById("msgs-container");
+        element.scrollTop = element.scrollHeight;
       },
 
       init: function() {
