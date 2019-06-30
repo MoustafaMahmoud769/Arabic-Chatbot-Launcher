@@ -30,9 +30,9 @@ function reset_ui() {
   document.getElementById("story-body").value = '';
   // account for update
   document.getElementById("stories-normal-buttons").style.display = 'block';
-  document.getElementById("stories-update-buttons").style.display = 'none'; 
+  document.getElementById("stories-update-buttons").style.display = 'none';
   // enable the title textarea
-  document.getElementById("story-name").disabled = false; 
+  document.getElementById("story-name").disabled = false;
 }
 
 ipcRenderer.on('story-added', (event, arg)=> {
@@ -116,16 +116,28 @@ function(n) {
           return;
         for (var i = 0; i < storyslots.length; ++i) {
           if (storyslots[i].name == slot) {
-            if (storyslots[i].type == "categorical") {
+            if (storyslots[i].type == "categorical" || storyslots[i].type == "bool") {
               document.getElementById('value1').style = '';
               document.getElementById('value2').style = 'visibility:hidden;';
               var sel = document.getElementById('value1');
               sel.innerHTML = '';
-              for (var j = 0; j < storyslots[i].clist.length; ++j) {
-                var opt = document.createElement('option');
-                opt.appendChild(document.createTextNode(storyslots[i].clist[j]));
-                opt.value = storyslots[i].clist[j];
-                sel.appendChild(opt);
+              if (storyslots[i].type == "categorical") {
+                for (var j = 0; j < storyslots[i].clist.length; ++j) {
+                  var opt = document.createElement('option');
+                  opt.appendChild(document.createTextNode(storyslots[i].clist[j]));
+                  opt.value = storyslots[i].clist[j];
+                  sel.appendChild(opt);
+                }
+              }
+              else {
+                var opt1 = document.createElement('option');
+                opt1.appendChild(document.createTextNode('True'));
+                opt1.value = 'True';
+                sel.appendChild(opt1);
+                var opt2 = document.createElement('option');
+                opt2.appendChild(document.createTextNode('False'));
+                opt2.value = 'False';
+                sel.appendChild(opt2)
               }
             }
             else {
@@ -164,7 +176,7 @@ function(n) {
         $('#validate-update-story').click( function () {
           stories.messaging.validateCurrentStory(new_input=false)
         })
-        
+
         $('#cancel-story').click( function () {
           reset_ui();
         })
@@ -272,7 +284,7 @@ function(n) {
           //remove story
           // stories.handler.remove(data.name);
           // title
-          document.getElementById("story-name").disabled = true; 
+          document.getElementById("story-name").disabled = true;
           document.getElementById("story-name").value = data.name;
           // examples
           let examples_ = ""
