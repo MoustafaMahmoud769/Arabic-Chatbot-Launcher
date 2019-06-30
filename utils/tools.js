@@ -67,8 +67,44 @@ function valid_name(str)
 	return true;
 }
 
+function isFloat(val)
+{
+    var floatRegex = /^-?\d+(?:[.,]\d*?)?$/;
+    if (!floatRegex.test(val))
+        return false;
+
+    val = parseFloat(val);
+    if (isNaN(val))
+        return false;
+    return true;
+}
+
+function isInt(val)
+{
+    var intRegex = /^-?\d+$/;
+    if (!intRegex.test(val))
+        return false;
+
+    var intVal = parseInt(val, 10);
+    return parseFloat(val) == intVal && !isNaN(intVal);
+}
+
+function generate_random_text(length)
+{
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
 module.exports =
 {
     strip: strip,
     valid_name: valid_name,
+    isFloat: isFloat,
+    isInt: isInt,
+    generate_random_text: generate_random_text,
 }
