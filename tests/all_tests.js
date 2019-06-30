@@ -1,2 +1,2 @@
 require('./slots_tests')
-require('./entities_tests')
+require('./intents_tests')

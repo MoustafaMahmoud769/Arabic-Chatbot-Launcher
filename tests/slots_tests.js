@@ -41,6 +41,12 @@ function test1() {
 		clist: []
 	};
 	assert(slotsObj.validateSingleSlot(slot).empty == true);
+
+	assert(slotsObj.validateSingleSlot(slot).title_existed == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 }
 
 function test2() {
@@ -54,6 +60,13 @@ function test2() {
 		clist: []
 	};
 	assert(slotsObj.validateSingleSlot(slot).invalid_name == true);
+
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).title_existed == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 }
 
 function test3() {
@@ -67,6 +80,13 @@ function test3() {
 		clist: []
 	};
 	assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).title_existed == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 }
 
 function test4() {
@@ -87,6 +107,13 @@ function test4() {
 			clist: []
 		};
 		assert(slotsObj.validateSingleSlot(slot).title_existed == true);
+
+		assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+		assert(slotsObj.validateSingleSlot(slot).empty == false);
+		assert(slotsObj.validateSingleSlot(slot).type_error == false);
+		assert(slotsObj.validateSingleSlot(slot).float_error == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 	}
 }
 
@@ -102,6 +129,13 @@ function test5() {
 			clist: []
 		};
 		assert(slotsObj.validateSingleSlot(slot).title_existed == false);
+
+		assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+		assert(slotsObj.validateSingleSlot(slot).empty == false);
+		assert(slotsObj.validateSingleSlot(slot).type_error == false);
+		assert(slotsObj.validateSingleSlot(slot).float_error == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 	}
 }
 
@@ -116,6 +150,12 @@ function test6() {
 		clist: []
 	};
 	assert(slotsObj.validateSingleSlot(slot).type_error == true);
+
+	assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 }
 
 function test7() {
@@ -126,11 +166,17 @@ function test7() {
 		let slot = {
 			name: "valid_name",
 			type: vtypes[i],
-			fmin: "",
-			fmax: "",
-			clist: []
+			fmin: "-1",
+			fmax: "1",
+			clist: ["xx"]
 		};
 		assert(slotsObj.validateSingleSlot(slot).type_error == false);
+
+		assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+		assert(slotsObj.validateSingleSlot(slot).empty == false);
+		assert(slotsObj.validateSingleSlot(slot).float_error == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 	}
 }
 
@@ -147,6 +193,12 @@ function test8() {
 			clist: []
 		};
 		assert(slotsObj.validateSingleSlot(slot).float_error == true);
+
+		assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+		assert(slotsObj.validateSingleSlot(slot).empty == false);
+		assert(slotsObj.validateSingleSlot(slot).type_error == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 	}
 }
 
@@ -163,6 +215,12 @@ function test9() {
 			clist: []
 		};
 		assert(slotsObj.validateSingleSlot(slot).float_error == false);
+
+		assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+		assert(slotsObj.validateSingleSlot(slot).empty == false);
+		assert(slotsObj.validateSingleSlot(slot).type_error == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+		assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
 	}
 }
 
@@ -178,6 +236,11 @@ function test10() {
 	};
 	assert(slotsObj.validateSingleSlot(slot).categories_empty == true);
 	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
+
+	assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
 }
 
 function test11() {
@@ -192,6 +255,11 @@ function test11() {
 	};
 	assert(slotsObj.validateSingleSlot(slot).categories_duplications == true);
 	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
+
+	assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
 }
 
 function test12() {
@@ -206,6 +274,11 @@ function test12() {
 	};
 	assert(slotsObj.validateSingleSlot(slot).categories_duplications == false);
 	assert(slotsObj.validateSingleSlot(slot).categories_empty == false);
+
+	assert(slotsObj.validateSingleSlot(slot).invalid_name == false);
+	assert(slotsObj.validateSingleSlot(slot).empty == false);
+	assert(slotsObj.validateSingleSlot(slot).type_error == false);
+	assert(slotsObj.validateSingleSlot(slot).float_error == false);
 }
 
 function run_tests() {
