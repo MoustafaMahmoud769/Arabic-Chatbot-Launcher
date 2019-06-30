@@ -57,10 +57,15 @@
           </div>
         </form>
         <hr />
-        <div class="field">
-          <button type="button" id="add-intent" name="add-intent" class="button submit" >Add</button>
+        <div class="field" style="display: block" id="intents-normal-buttons">
+          <button type="button" id="add-intent" name="add-intent" class="button submit" ><p style="color: green;">Add</p></button>
           <button type="button" id="validate-curr-intent" name="validate-curr-intent" class="button submit" >Validate</button>
           <button type="button" id="load-intent" name="load-intent" class="button submit" >Load Intent</button>
+        </div>
+        <div class="field" style="display: none" id="intents-update-buttons">
+          <button type="button" id="update-intent" name="update-intent" class="button submit" ><p style="color: green;">Update</p></button>
+          <button type="button" id="validate-update-intent" name="validate-update-intent" class="button submit" >Validate</button>
+          <button type="button" id="cancel-intent" name="cancel-intent" class="button submit" ><p style="color: red;">Cancel</p></button>
         </div>
       </section>
       <section>

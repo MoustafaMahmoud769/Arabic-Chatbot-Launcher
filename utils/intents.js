@@ -252,7 +252,7 @@ function findIntentError(validation_results, options) {
 function isIntentValidwAction(intent) {
 
   let validation_results = validateSingleIntent(intent);
-  let error = findIntentError(validation_results, {"dups": true});
+  let error = findIntentError(validation_results, {"dups": intent.new_input});
 
   if(error == false) {
     return true;
@@ -262,13 +262,27 @@ function isIntentValidwAction(intent) {
   return false;
 }
 
+function remove_intent_fn(event, arg) {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFileSync(path, JSON.stringify(edited, null, 2));
+  event.sender.send('intents-changed');
+
+}
+
 ipcMain.on('validate-curr-intent', (event, arg)=>{
 
   //get current intent from front end
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n'))
+    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n')),
+    new_input: arg.new_input
   };
   intent = cleanIntent(intent);
 
@@ -288,7 +302,8 @@ ipcMain.on('add-intent', (event, arg)=> {
   var intent = {
     name: arg.intentName,
     examples: arg.intentExamples.split('\n'),
-    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n'))
+    entites: parseEntites(arg.intentEntites, arg.intentExamples.split('\n')),
+    new_input: arg.new_input
   };
   intent = cleanIntent(intent);
 
@@ -296,16 +311,19 @@ ipcMain.on('add-intent', (event, arg)=> {
     return;
   }
 
+  intent = {
+    name: intent.name,
+    examples: intent.examples,
+    entites: intent.entites
+  };
+
+  remove_intent_fn(event, intent.name);
+
   let intents = JSON.parse(fs.readFileSync(path));
   intents.push(intent);
-  fs.writeFile(path, JSON.stringify(intents, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('intents-changed');
-    event.sender.send('intent-added');
-  });
+  fs.writeFileSync(path, JSON.stringify(intents, null, 2));
+  event.sender.send('intents-changed');
+  event.sender.send('intent-added');
 })
 
 ipcMain.on('load-intent', (event, arg)=> {
@@ -350,20 +368,7 @@ ipcMain.on('get-intents', (event, arg)=> {
 })
 
 ipcMain.on('remove-intent', (event, arg)=> {
-  let data = JSON.parse(fs.readFileSync(path));
-  let edited = [];
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].name == arg)
-      continue;
-    edited.push(data[i]);
-  }
-  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('intents-changed');
-  });
+  remove_intent_fn(event, arg);
 })
 
 module.exports = {

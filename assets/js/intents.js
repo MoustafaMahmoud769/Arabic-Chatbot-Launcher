@@ -12,12 +12,27 @@ ipcRenderer.on('send-intents', (event, arg)=> {
   intents.handler.update(arg);
 })
 
-ipcRenderer.on('intent-added', (event, arg)=> {
+function reset_ui() {
   document.getElementById("intent-warning").innerHTML = '';
   document.getElementById("intent-name").value = '';
   document.getElementById("intent-examples").value = '';
   document.getElementById("intent-entites").value = '';
   document.getElementById("intent-entites-cool").value = '';
+  // account for update
+  document.getElementById("intents-normal-buttons").style.display = 'block';
+  document.getElementById("intents-update-buttons").style.display = 'none'; 
+  // enable the title textarea
+  document.getElementById("intent-name").disabled = false;   
+  // selected text
+  document.getElementById("entity-selected-text").value = '';
+  // index
+  document.getElementById("intent-entity-from").value = 0;
+  document.getElementById("intent-entity-to").value = 0;
+  document.getElementById("intent-entity-idx").value = 0;
+}
+
+ipcRenderer.on('intent-added', (event, arg)=> {
+  reset_ui();
 })
 
 ipcRenderer.on('intents-changed', (event, arg)=> {
@@ -33,11 +48,11 @@ function add_to_cool(value, entity) {
 window.intents = window.intents || {},
 function(n) {
     intents.messaging = {
-      SendCurrentIntent: function(eventName) {
+      SendCurrentIntent: function(eventName, new_input=true) {
         let intentName = document.getElementById("intent-name").value;
         let intentExamples = document.getElementById("intent-examples").value;
         let intentEntites = document.getElementById("intent-entites").value;
-        let args = {intentName, intentExamples, intentEntites};
+        let args = {intentName, intentExamples, intentEntites, new_input};
         ipcRenderer.send(eventName, args);
       },
 
@@ -79,7 +94,10 @@ function(n) {
 
       addIntentEntity: function() {
         let attr = [];
-
+        if(document.getElementById("intent-entity-from").value ==
+          document.getElementById("intent-entity-to").value) {
+          return;
+        }
         attr.push(document.getElementById("intent-entity-from").value);
         attr.push(document.getElementById("intent-entity-to").value);
         attr.push(document.getElementById("intent-entity-idx").value);
@@ -101,12 +119,12 @@ function(n) {
         document.getElementById(str).value = cur.join('\n');
       },
 
-      addIntent: function() {
-        intents.messaging.SendCurrentIntent('add-intent');
+      addIntent: function(new_input=true) {
+        intents.messaging.SendCurrentIntent('add-intent', new_input);
       },
 
-      validateCurrentIntent: function() {
-        intents.messaging.SendCurrentIntent('validate-curr-intent');
+      validateCurrentIntent: function(new_input=true) {
+        intents.messaging.SendCurrentIntent('validate-curr-intent', new_input);
       },
 
       UpdateTable: function() {
@@ -130,11 +148,18 @@ function(n) {
         $('#add-intent').click( function () {
           intents.messaging.addIntent()
         })
-
+        $('#update-intent').click( function () {
+          intents.messaging.addIntent(new_input=false)
+        })
         $('#validate-curr-intent').click( function () {
           intents.messaging.validateCurrentIntent()
         })
-
+        $('#validate-update-intent').click( function () {
+          intents.messaging.validateCurrentIntent(new_input=false)
+        })
+        $('#cancel-intent').click( function () {
+          reset_ui();
+        })
         $('#tab3').click( function() {
           entites.messaging.UpdateTable()
           intents.messaging.UpdateTable()
@@ -200,9 +225,15 @@ function(n) {
         elementx.className = "button submit";
         elementx.type = "input";
         elementx.onclick = function() {
-          intents.handler.remove(data.name);
+          // delete old one
+          // intents.handler.remove(data.name);
+          // intent name
           document.getElementById("intent-name").value = data.name;
-          // handle examples
+          document.getElementById("intent-name").disabled = true; 
+          //display new buttons
+          document.getElementById("intents-normal-buttons").style.display = 'none';
+          document.getElementById("intents-update-buttons").style.display = 'block';
+           // handle examples
           let examples_ = ""
           for(let i =0; i<data.examples.length; i++) {
            examples_ += data.examples[i] + '\n';
@@ -218,10 +249,12 @@ function(n) {
            entities_ += '\n';
            add_to_cool(data.entites[i].value.toString(), data.entites[i].name)
           }
-          //
+          // set them
           document.getElementById("intent-examples").value = examples_;
           document.getElementById("intent-entites").value = entities_;
-          document.getElementById("intent-warning").innerHTML = 'This Intent was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // alert
+          // document.getElementById("intent-warning").innerHTML = 'This Intent was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          //swap up
           jQuery('html,body').animate({scrollTop:0},0);
         };
         newCellx.appendChild(elementx);
