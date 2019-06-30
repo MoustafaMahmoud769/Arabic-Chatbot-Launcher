@@ -24,10 +24,19 @@ ipcRenderer.on('stories-changed', (event, arg)=> {
   stories.messaging.UpdateTable();
 })
 
-ipcRenderer.on('story-added', (event, arg)=> {
+function reset_ui() {
   document.getElementById("story-warning").innerHTML = '';
   document.getElementById("story-name").value = '';
   document.getElementById("story-body").value = '';
+  // account for update
+  document.getElementById("stories-normal-buttons").style.display = 'block';
+  document.getElementById("stories-update-buttons").style.display = 'none'; 
+  // enable the title textarea
+  document.getElementById("story-name").disabled = false; 
+}
+
+ipcRenderer.on('story-added', (event, arg)=> {
+  reset_ui();
 })
 
 storyslots = []
@@ -37,19 +46,19 @@ function(n) {
 
     stories.messaging = {
 
-      SendCurrentStory: function(eventName) {
+      SendCurrentStory: function(eventName, new_input=true) {
         let storyName = document.getElementById("story-name").value;
         let storyBody = document.getElementById("story-body").value;
-        let args = {storyName, storyBody};
+        let args = {storyName, storyBody, new_input};
         ipcRenderer.send(eventName, args);
       },
 
-      addStory: function() {
-        stories.messaging.SendCurrentStory('add-story');
+      addStory: function(new_input=true) {
+        stories.messaging.SendCurrentStory('add-story', new_input);
       },
 
-      validateCurrentStory: function() {
-        stories.messaging.SendCurrentStory('validate-curr-story');
+      validateCurrentStory: function(new_input=true) {
+        stories.messaging.SendCurrentStory('validate-curr-story', new_input);
       },
 
       UpdateTable: function() {
@@ -144,8 +153,20 @@ function(n) {
           stories.messaging.addStory()
         })
 
+        $('#update-story').click( function () {
+          stories.messaging.addStory(new_input=false)
+        })
+
         $('#validate-curr-story').click( function () {
           stories.messaging.validateCurrentStory()
+        })
+
+        $('#validate-update-story').click( function () {
+          stories.messaging.validateCurrentStory(new_input=false)
+        })
+        
+        $('#cancel-story').click( function () {
+          reset_ui();
         })
 
         $('#tab5').click( function() {
@@ -248,14 +269,23 @@ function(n) {
         elementx.className = "button submit";
         elementx.type = "input";
         elementx.onclick = function() {
-          stories.handler.remove(data.name);
+          //remove story
+          // stories.handler.remove(data.name);
+          // title
+          document.getElementById("story-name").disabled = true; 
           document.getElementById("story-name").value = data.name;
+          // examples
           let examples_ = ""
           for(let i =0; i<data.examples.length; i++) {
            examples_ += data.examples[i] + '\n';
           }
           document.getElementById("story-body").value = examples_;
-          document.getElementById("story-warning").innerHTML = 'This Story was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // alert
+          // document.getElementById("story-warning").innerHTML = 'This Story was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          //display new buttons
+          document.getElementById("stories-normal-buttons").style.display = 'none';
+          document.getElementById("stories-update-buttons").style.display = 'block';
+          // swap up
           jQuery('html,body').animate({scrollTop:0},0);
         };
         newCellx.appendChild(elementx);

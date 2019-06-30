@@ -52,10 +52,15 @@
             </div>
           </div>
         </form>
-        <div class="field">
-          <button type="button" id="add-story" name="add-story" class="button submit" >Add</button>
+        <div class="field" style="display: block" id="stories-normal-buttons">
+          <button type="button" id="add-story" name="add-story" class="button submit" ><p style="color: green;">Add</p></button>
           <button type="button" id="validate-curr-story" name="validate-curr-story" class="button submit" >Validate</button>
           <button type="button" id="load-story" name="load-story" class="button submit" >Load Sheet</button>
+        </div>
+        <div class="field" style="display: none" id="stories-update-buttons">
+          <button type="button" id="update-story" name="update-story" class="button submit" ><p style="color: green;">Update</p></button>
+          <button type="button" id="validate-update-story" name="validate-update-story" class="button submit" >Validate</button>
+          <button type="button" id="cancel-story" name="cancel-story" class="button submit" ><p style="color: red;">Cancel</p></button>
         </div>
       </section>
       <section>

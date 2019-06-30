@@ -274,7 +274,7 @@ function findStoryError(validation_results, options){
 
 function isStoryValidwAction(story) {
   let validation_results = validateSingleStory(story);
-  let error = findStoryError(validation_results, {"dups": true});
+  let error = findStoryError(validation_results, {"dups": story.new_input});
 
   if(error == false) {
     return true;
@@ -284,12 +284,25 @@ function isStoryValidwAction(story) {
   return false;
 }
 
+function remove_story_fn(event, arg) {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFileSync(path, JSON.stringify(edited, null, 2));
+  event.sender.send('stories-changed');
+}
+
 ipcMain.on('validate-curr-story', (event, arg)=>{
 
   //get current story from front end
   var story = {
     name: arg.storyName,
-    examples: arg.storyBody.split('\n')
+    examples: arg.storyBody.split('\n'),
+    new_input: arg.new_input
   };
   story = cleanStory(story);
 
@@ -309,7 +322,8 @@ ipcMain.on('validate-curr-story', (event, arg)=>{
 ipcMain.on('add-story', (event, arg)=> {
   var story = {
     name: arg.storyName,
-    examples: arg.storyBody.split('\n')
+    examples: arg.storyBody.split('\n'),
+    new_input: arg.new_input
   };
   story = cleanStory(story);
 
@@ -317,16 +331,18 @@ ipcMain.on('add-story', (event, arg)=> {
     return;
   }
 
+  story = {
+    name: story.name,
+    examples: story.examples
+  };
+
+  remove_story_fn(event, story.name);
+
   let stories = JSON.parse(fs.readFileSync(path));
   stories.push(story);
-  fs.writeFile(path, JSON.stringify(stories, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('stories-changed');
-    event.sender.send('story-added');
-  });
+  fs.writeFileSync(path, JSON.stringify(stories, null, 2));
+  event.sender.send('stories-changed');
+  event.sender.send('story-added');
 })
 
 ipcMain.on('load-story', (event, arg)=> {
@@ -371,20 +387,7 @@ ipcMain.on('get-stories', (event, arg)=> {
 })
 
 ipcMain.on('remove-story', (event, arg)=> {
-  let data = JSON.parse(fs.readFileSync(path));
-  let edited = [];
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].name == arg)
-      continue;
-    edited.push(data[i]);
-  }
-  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('stories-changed');
-  });
+  remove_story_fn(event, arg);
 })
 
 module.exports = {
