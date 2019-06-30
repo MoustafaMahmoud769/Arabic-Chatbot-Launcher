@@ -180,10 +180,10 @@ function findSlotError(validation_results, options) {
   return false;
 }
 
-function isSlotValidwSlot(slot, dups=true) {
+function isSlotValidwSlot(slot) {
 
   let validation_results = validateSingleSlot(slot);
-  let error = findSlotError(validation_results, {"dups": dups});
+  let error = findSlotError(validation_results, {"dups": slot.new_input});
 
   if(error == false) {
     return true;
@@ -193,6 +193,17 @@ function isSlotValidwSlot(slot, dups=true) {
   return false;
 }
 
+function remove_slot_fn(event, arg) {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFileSync(path, JSON.stringify(edited, null, 2));
+  event.sender.send('slots-changed');
+}
 
 ipcMain.on('validate-curr-slot', (event, arg)=>{
 
@@ -202,7 +213,8 @@ ipcMain.on('validate-curr-slot', (event, arg)=>{
     type: arg.slotType,
     fmin: arg.floatMin,
     fmax: arg.floatMax,
-    clist: arg.catList.split('\n')
+    clist: arg.catList.split('\n'),
+    new_input: arg.new_input
   };
   slot = cleanSlot(slot);
 
@@ -225,7 +237,8 @@ ipcMain.on('add-slot', (event, arg)=> {
     type: arg.slotType,
     fmin: arg.floatMin,
     fmax: arg.floatMax,
-    clist: arg.catList.split('\n')
+    clist: arg.catList.split('\n'),
+    new_input: arg.new_input
   };
   slot = cleanSlot(slot);
 
@@ -233,16 +246,21 @@ ipcMain.on('add-slot', (event, arg)=> {
     return;
   }
 
+  slot = {
+    name: slot.name,
+    type: slot.type,
+    fmin: slot.fmin,
+    fmax: slot.fmax,
+    clist: slot.clist
+  };
+
+  remove_slot_fn(event, slot.name);
+
   let slots = JSON.parse(fs.readFileSync(path));
   slots.push(slot);
-  fs.writeFile(path, JSON.stringify(slots, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('slots-changed');
-    event.sender.send('slot-added');
-  });
+  fs.writeFileSync(path, JSON.stringify(slots, null, 2));
+  event.sender.send('slots-changed');
+  event.sender.send('slot-added');
 })
 
 ipcMain.on('get-slots', (event, arg)=> {
@@ -251,20 +269,7 @@ ipcMain.on('get-slots', (event, arg)=> {
 })
 
 ipcMain.on('remove-slot', (event, arg)=> {
-  let data = JSON.parse(fs.readFileSync(path));
-  let edited = [];
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].name == arg)
-      continue;
-    edited.push(data[i]);
-  }
-  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('slots-changed');
-  });
+  remove_slot_fn(event, arg);
 })
 
 module.exports = {

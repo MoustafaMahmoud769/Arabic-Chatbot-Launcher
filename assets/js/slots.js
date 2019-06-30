@@ -14,12 +14,21 @@ function display_slot_options() {
 	document.getElementById("slot-" + choosed_slot).style.display = 'block';
 }
 
-ipcRenderer.on('slot-added', (event, arg)=> {
+function reset_ui() {
   document.getElementById("slot-warning").innerHTML = '';
   document.getElementById("slot-name").value = '';
   document.getElementById("float-minimum").value = '';
   document.getElementById("float-maximum").value = '';
   document.getElementById("categories-list").value = '';
+  // account for update
+  document.getElementById("slots-normal-buttons").style.display = 'block';
+  document.getElementById("slots-update-buttons").style.display = 'none'; 
+  // enable the title textarea
+  document.getElementById("slot-name").disabled = false; 
+}
+
+ipcRenderer.on('slot-added', (event, arg)=> {
+  reset_ui();
 })
 
 ipcRenderer.on('send-slots', (event, arg)=> {
@@ -34,23 +43,23 @@ window.slots = window.slots || {},
 function(n) {
     slots.messaging = {
 
-      SendCurrentSlot: function(eventName) {
+      SendCurrentSlot: function(eventName, new_input=true) {
         let slotName = document.getElementById("slot-name").value;
     		let e = document.getElementById("slot-type");
         let slotType = e.options[e.selectedIndex].value;
         let floatMin = document.getElementById("float-minimum").value;
         let floatMax = document.getElementById("float-maximum").value;
         let catList = document.getElementById("categories-list").value;
-        let args = {slotName, slotType, floatMin, floatMax, catList};
+        let args = {slotName, slotType, floatMin, floatMax, catList, new_input};
         ipcRenderer.send(eventName, args);
       },
 
-      addSlot: function() {
-        slots.messaging.SendCurrentSlot('add-slot');
+      addSlot: function(new_input=true) {
+        slots.messaging.SendCurrentSlot('add-slot', new_input);
       },
 
-      validateCurrentSlot: function() {
-        slots.messaging.SendCurrentSlot('validate-curr-slot');
+      validateCurrentSlot: function(new_input=true) {
+        slots.messaging.SendCurrentSlot('validate-curr-slot', new_input);
       },
 
       UpdateTable: function() {
@@ -61,8 +70,17 @@ function(n) {
         $('#add-slot').click( function () {
           slots.messaging.addSlot()
         })
+        $('#update-slot').click( function () {
+          slots.messaging.addSlot(new_input=false)
+        })
         $('#validate-curr-slot').click( function () {
           slots.messaging.validateCurrentSlot()
+        })
+        $('#validate-update-slot').click( function () {
+          slots.messaging.validateCurrentSlot(new_input=false)
+        })
+        $('#cancel-slot').click( function () {
+          reset_ui();
         })
         $('#tab6').click( function() {
           slots.messaging.UpdateTable()
@@ -99,18 +117,27 @@ function(n) {
         element4.className = "button submit";
         element4.type = "input";
         element4.onclick = function() {
-          slots.handler.remove(data.name);
+          // delete old
+          // slots.handler.remove(data.name);
+          // set data
           document.getElementById("slot-name").value = data.name;
+          document.getElementById("slot-name").disabled = true;
           document.getElementById("slot-type").value = data.type;
           document.getElementById("float-minimum").value = data.fmin;
           document.getElementById("float-maximum").value = data.fmax;
+          // clist
           let clist_ = ""
           for(let i =0; i<data.clist.length; i++) {
            clist_ += data.clist[i] + '\n';
           }
           document.getElementById("categories-list").value = clist_;
-          document.getElementById("slot-warning").innerHTML = 'This Slot was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          //display new buttons
+          document.getElementById("slots-normal-buttons").style.display = 'none';
+          document.getElementById("slots-update-buttons").style.display = 'block';
+          // alert
+          // document.getElementById("slot-warning").innerHTML = 'This Slot was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
           display_slot_options();
+          //swap up
           jQuery('html,body').animate({scrollTop:0},0);
         };
         newCell4.appendChild(element4);
