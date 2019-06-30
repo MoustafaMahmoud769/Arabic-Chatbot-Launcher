@@ -181,10 +181,10 @@ function findActionError(validation_results, options) {
   return false;
 }
 
-function isActionValidwAction(action, dups=true) {
+function isActionValidwAction(action) {
 
   let validation_results = validateSingleAction(action);
-  let error = findActionError(validation_results, {"dups": dups});
+  let error = findActionError(validation_results, {"dups": action.new_input});
 
   if(error == false) {
     return true;
@@ -194,17 +194,30 @@ function isActionValidwAction(action, dups=true) {
   return false;
 }
 
+function remove_action_fn(event, arg) {
+  let data = JSON.parse(fs.readFileSync(path));
+  let edited = [];
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].name == arg)
+      continue;
+    edited.push(data[i]);
+  }
+  fs.writeFileSync(path, JSON.stringify(edited, null, 2));
+  event.sender.send('actions-changed');
+}
 
 ipcMain.on('validate-curr-action', (event, arg)=>{
 
   //get current action from front end
   var action = {
     name: arg.actionName,
+    new_input: arg.new_input,
     examples: arg.actionExamples.split('\n'),
     slots: arg.actionSlots.split('\n')
   };
   action = cleanAction(action);
-
+  console.log(action)
+  
   if(!isActionValidwAction(action)) {
     return;
   }
@@ -220,6 +233,7 @@ ipcMain.on('validate-curr-action', (event, arg)=>{
 ipcMain.on('add-action', (event, arg)=> {
   var action = {
     name: arg.actionName,
+    new_input: arg.new_input,
     examples: arg.actionExamples.split('\n'),
     slots: arg.actionSlots.split('\n')
   };
@@ -229,16 +243,19 @@ ipcMain.on('add-action', (event, arg)=> {
     return;
   }
 
+  action = {
+    name: action.name,
+    examples: action.examples,
+    slots: action.slots
+  };
+
+  remove_action_fn(event, action.name);
+
   let actions = JSON.parse(fs.readFileSync(path));
   actions.push(action);
-  fs.writeFile(path, JSON.stringify(actions, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('actions-changed');
-    event.sender.send('action-added');
-  });
+  fs.writeFileSync(path, JSON.stringify(actions, null, 2));
+  event.sender.send('actions-changed');
+  event.sender.send('action-added');
 })
 
 ipcMain.on('load-action', (event, arg)=> {
@@ -283,20 +300,7 @@ ipcMain.on('get-actions', (event, arg)=> {
 })
 
 ipcMain.on('remove-action', (event, arg)=> {
-  let data = JSON.parse(fs.readFileSync(path));
-  let edited = [];
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].name == arg)
-      continue;
-    edited.push(data[i]);
-  }
-  fs.writeFile(path, JSON.stringify(edited, null, 2), (err) => {
-    if (err) {
-      dialog.showErrorBox('Oops.. ', 'Something went wrong');
-      return;
-    }
-    event.sender.send('actions-changed');
-  });
+  remove_action_fn(event, arg);
 })
 
 module.exports = {

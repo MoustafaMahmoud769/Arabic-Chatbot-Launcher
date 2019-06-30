@@ -12,11 +12,20 @@ ipcRenderer.on('send-slots', (event, arg)=> {
   actions.handler.updateSlotsChoices(arg);
 })
 
-ipcRenderer.on('action-added', (event, arg)=> {
+function resert_ui() {
   document.getElementById("action-warning").innerHTML = '';
   document.getElementById("action-name").value = '';
   document.getElementById("action-examples").value = '';
   document.getElementById("action-slots").value = '';
+  // account for update
+  document.getElementById("actions-normal-buttons").style.display = 'block';
+  document.getElementById("actions-update-buttons").style.display = 'none'; 
+  // enable the title textarea
+  document.getElementById("action-name").disabled = false; 
+}
+
+ipcRenderer.on('action-added', (event, arg)=> {
+  resert_ui();
 })
 
 ipcRenderer.on('actions-changed', (event, arg)=> {
@@ -29,20 +38,20 @@ window.actions = window.actions || {},
 function(n) {
     actions.messaging = {
 
-      SendCurrentAction: function(eventName) {
+      SendCurrentAction: function(eventName, new_input=true) {
         let actionName = document.getElementById("action-name").value;
         let actionExamples = document.getElementById("action-examples").value;
         let actionSlots = document.getElementById("action-slots").value;
-        let args = {actionName, actionExamples, actionSlots};
+        let args = {actionName, actionExamples, actionSlots, new_input};
         ipcRenderer.send(eventName, args);
       },
 
-      addAction: function() {
-        actions.messaging.SendCurrentAction('add-action');
+      addAction: function(new_input=true) {
+        actions.messaging.SendCurrentAction('add-action', new_input);
       },
 
-      validateCurrentAction: function() {
-        actions.messaging.SendCurrentAction('validate-curr-action');
+      validateCurrentAction: function(new_input=true) {
+        actions.messaging.SendCurrentAction('validate-curr-action', new_input);
       },
 
       UpdateTable: function() {
@@ -144,8 +153,20 @@ function(n) {
           actions.messaging.addAction()
         })
 
+        $('#update-action').click( function () {
+          actions.messaging.addAction(new_input=false)
+        })
+
         $('#validate-curr-action').click( function () {
           actions.messaging.validateCurrentAction()
+        })
+
+       $('#validate-update-action').click( function () {
+          actions.messaging.validateCurrentAction(new_input=false)
+        })
+
+        $('#cancel-action').click( function () {
+          resert_ui();
         })
 
         $('#add-slots-in-action').click( function () {
@@ -203,7 +224,9 @@ function(n) {
         element4.className = "button submit";
         element4.type = "input";
         element4.onclick = function() {
-          actions.handler.remove(data.name);
+          //delete old one
+          // actions.handler.remove(data.name);
+          //display title
           document.getElementById("action-name").value = data.name;
           // examples
           let examples_ = ""
@@ -220,8 +243,14 @@ function(n) {
            }
           }
           document.getElementById("action-slots").value = slots_;
+          //display new buttons
+          document.getElementById("actions-normal-buttons").style.display = 'none';
+          document.getElementById("actions-update-buttons").style.display = 'block';
+          //disable title
+          document.getElementById("action-name").disabled = true; 
           // alert
-          document.getElementById("action-warning").innerHTML = 'This Action was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // document.getElementById("action-warning").innerHTML = 'This Action was deleted in order for you to modify it, make sure to re-insert it again if you still need it!';
+          // swap up
           jQuery('html,body').animate({scrollTop:0},0);
         };
         newCell4.appendChild(element4);
