@@ -88,6 +88,7 @@ function full_conversion() {
 	data.rasa_nlu_data.lookup_tables = []
 	data.rasa_nlu_data.entity_synonyms = []
 	data.actions = {}
+	data.slots = []
 
 	// do stories
 	let stories = JSON.parse(fs.readFileSync(stories_path));
@@ -175,6 +176,16 @@ function full_conversion() {
 			data.rasa_nlu_data.common_examples.push(intent_example);
 		}
 
+	}
+
+	// do slots
+	let slots = JSON.parse(fs.readFileSync(slots_path));
+	for(let i=0; i<slots.length; i++) {
+		let slot_ = {name: slots[i].name, type: slots[i].type}
+		if(slot_.type == "categorical") {
+			slot_.values = slots[i].clist;
+		}
+		data.slots.push(slot_);
 	}
 
 	// data to be written to Marwan file
