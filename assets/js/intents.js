@@ -20,9 +20,9 @@ function reset_ui() {
   document.getElementById("intent-entites-cool").value = '';
   // account for update
   document.getElementById("intents-normal-buttons").style.display = 'block';
-  document.getElementById("intents-update-buttons").style.display = 'none'; 
+  document.getElementById("intents-update-buttons").style.display = 'none';
   // enable the title textarea
-  document.getElementById("intent-name").disabled = false;   
+  document.getElementById("intent-name").disabled = false;
   // selected text
   document.getElementById("entity-selected-text").value = '';
   // index
@@ -116,7 +116,7 @@ function(n) {
         if (cur[cur.length - 1] == '')
           cur.pop();
         cur.pop();
-        document.getElementById(str).value = cur.join('\n');
+        document.getElementById(str).value = cur.join('\n') + '\n';
       },
 
       addIntent: function(new_input=true) {
@@ -229,7 +229,7 @@ function(n) {
           // intents.handler.remove(data.name);
           // intent name
           document.getElementById("intent-name").value = data.name;
-          document.getElementById("intent-name").disabled = true; 
+          document.getElementById("intent-name").disabled = true;
           //display new buttons
           document.getElementById("intents-normal-buttons").style.display = 'none';
           document.getElementById("intents-update-buttons").style.display = 'block';
