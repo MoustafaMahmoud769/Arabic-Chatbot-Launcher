@@ -212,7 +212,7 @@ function findIntentError(validation_results, options) {
   }
 
   if(validation_results.overlapping_indices == true) {
-    return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (intent.entites[validation_results.overlapping_indices_i].index + 1) + ' has multiple entities with overlapping indices, please fix it!'};
+    return {"title": 'Your example has multiple entities with overlapping indices!', "body": 'The intent example ' + (validation_results.overlapping_indices_i + 1) + ' has multiple entities with overlapping indices, please fix it!'};
   }
 
   if(validation_results.value_mismatch == true) {
