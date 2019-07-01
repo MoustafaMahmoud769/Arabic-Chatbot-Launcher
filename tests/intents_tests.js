@@ -28,7 +28,6 @@ function read_objects() {
 	return JSON.parse(fs.readFileSync(path));
 }
 
-
 function test1() {
 	//test empty name
 	log("Test 1 - empty name");
