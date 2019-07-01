@@ -11,10 +11,12 @@ var intentsValitdatorObj = require('./intents_validator')
 
 function parseEntites(data, examples) {
   let cur = data.split('\n');
-  if (cur[cur.length - 1] == '')
-    cur.pop();
   let ret = [];
   for (let i = 0; i < cur.length; ++i) {
+    //skip empty lines
+    if(tools.strip(cur[i]) == '') {
+      continue;
+    }
     let obj = cur[i].split('\t');
     var entity = {
       from: parseInt(obj[0]), to: parseInt(obj[1]), index: parseInt(obj[2]), name: obj[4], value: obj[3]
