@@ -1,12 +1,9 @@
 const { ipcMain, dialog } = require('electron')
 const fs = require('fs')
 const csv = require('csv-parser')
-
 var tools = require('./tools')
-
 const path = 'assets/botFiles/intents.json';
 const entities_path = 'assets/botFiles/entites.json';
-
 var intentsValitdatorObj = require('./intents_validator')
 
 function parseEntites(data, examples) {
