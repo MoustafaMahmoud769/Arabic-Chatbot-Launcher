@@ -168,7 +168,7 @@ function full_conversion() {
 					intent_example['entities'].push({
 			            "start": entity['from'],
 			            "end": entity['to'],
-			            "value": example.substr(entity['from'], entity['to']),
+			            "value": entity['value'],
 			            "entity": entity['name']
 			          });
 				}
