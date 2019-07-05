@@ -117,6 +117,7 @@ function(n) {
       },
 
       appendSlotButton: function() {
+        intent = document.getElementById('actions-intents-list').value;
         slotname = document.getElementById('slots-in-buttons').value;
         if (slotname == '')
           return;
@@ -135,6 +136,7 @@ function(n) {
         selected = 'Button value: ' + displayname + '\n';
         selected += 'Slot name: ' + slotname + '\n';
         selected += 'Slot value: ' + valuechange + '\n';
+        selected += 'Activate intent: ' + intent + '\n';
         selected += '\n';
         text = document.getElementById('action-slots').value + selected;
         document.getElementById('action-slots').value = text;
@@ -142,6 +144,7 @@ function(n) {
         document.getElementById('button-value2').value = '';
         document.getElementById('button-name').value = '';
         document.getElementById('slots-in-buttons').value = '';
+        document.getElementById('actions-intents-list').value = '';
         document.getElementById('button-value1').style = 'display:none;';
         document.getElementById('button-value2').style = 'display:none;';
         document.getElementById('button-name').style = 'visibility:hidden;';
@@ -151,6 +154,7 @@ function(n) {
         let cur = document.getElementById('action-slots').value.split('\n');
         while (cur[cur.length - 1] == '')
           cur.pop();
+        cur.pop();
         cur.pop();
         cur.pop();
         cur.pop();
@@ -248,7 +252,7 @@ function(n) {
           let slots_ = ""
           for(let i =0; i<data.slots.length; i++) {
            slots_ += data.slots[i] + '\n';
-           if((i+1) % 3 == 0) {
+           if((i+1) % 4 == 0) {
              slots_ += '\n';
            }
           }

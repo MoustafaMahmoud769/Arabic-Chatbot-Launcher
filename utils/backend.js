@@ -131,7 +131,7 @@ function full_conversion() {
 		let buttons_info = actionsObj.parse_buttons_data(actions[i].slots);
 		let buttons = [];
 		for(let j=0; j<buttons_info.length; j++) {
-			buttons.push({"text":buttons_info[j].value, "value":buttons_info[j].slot_value, "slot":buttons_info[j].slot_name})
+			buttons.push({"text":buttons_info[j].value, "value":buttons_info[j].slot_value, "slot":buttons_info[j].slot_name, "intent":buttons_info[j].intent})
 		}
 		data.actions[actions[i]['name']].buttons = buttons;
 	}
