@@ -298,6 +298,21 @@ ipcMain.on('stop-my-model', (event, arg)=> {
 
 ipcMain.on('start-example-model', (event, arg)=> {
 
+	var docker = new dockerode({socketPath: '/var/run/docker.sock'});
+	function handler(err, stream) {
+
+     stream.pipe(process.stdout, {
+      end: true
+    });
+
+     stream.on('end', function() {
+      done();
+    });
+  }
+  var data = require('fs').createReadStream('./serene_boyd.zip');
+  docker.importImage(data, handler);
+	return;
+
 	//if already started!
 	if(is_server_on == true) {
 		dialog.showMessageBox({
@@ -320,7 +335,7 @@ ipcMain.on('start-example-model', (event, arg)=> {
 
 	/////// Used to start the server of the bot, check for port 5005 afterwards to know that it has started
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
-	drode.run('testbot_1', [], process.stdout, {
+	drode.run('demobot', [], process.stdout, {
 		Env : ["PORT=5005", "PYTHONPATH=/app/:$PYTHONPATH"],
 	  ExposedPorts: {
 	    '5005/tcp': {}

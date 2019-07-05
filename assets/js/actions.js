@@ -8,6 +8,10 @@ ipcRenderer.on('send-actions', (event, arg)=> {
   actions.handler.update(arg);
 })
 
+ipcRenderer.on('send-intents', (event, arg)=> {
+  actions.handler.updateIntentsChoices(arg);
+})
+
 ipcRenderer.on('send-slots', (event, arg)=> {
   actions.handler.updateSlotsChoices(arg);
 })
@@ -56,6 +60,7 @@ function(n) {
 
       UpdateTable: function() {
         ipcRenderer.send('get-actions');
+        ipcRenderer.send('get-intents');
       },
 
       appendSlotInAction: function() {
@@ -188,6 +193,7 @@ function(n) {
         $('#tab4').click( function() {
           slots.messaging.UpdateTable()
           actions.messaging.UpdateTable()
+          intents.messaging.UpdateTable()
         })
 
         $('#slots-in-buttons').change( function() {
@@ -299,6 +305,23 @@ function(n) {
         document.getElementById('button-value1').style = 'display:none;';
         document.getElementById('button-value2').style = 'display:none;';
         document.getElementById('button-name').style = 'visibility:hidden;';
+      },
+
+      updateIntentsChoices: function(data) {
+        var sel = document.getElementById('actions-intents-list');
+        sel.innerHTML = '';
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode('None') );
+        opt.value = '';
+        sel.appendChild(opt);
+        if (data.length !== 0) {
+          for (let i = 0; i < data.length; i++) {
+            var opt = document.createElement('option');
+            opt.appendChild(document.createTextNode(data[i].name) );
+            opt.value = data[i].name;
+            sel.appendChild(opt);
+          }
+        }
       },
 
       update: function(data) {
