@@ -89,6 +89,7 @@ function full_conversion() {
 	data.rasa_nlu_data.entity_synonyms = []
 	data.actions = {}
 	data.slots = []
+	data.entities = []
 
 	// do stories
 	let stories = JSON.parse(fs.readFileSync(stories_path));
@@ -186,6 +187,13 @@ function full_conversion() {
 			slot_.values = slots[i].clist;
 		}
 		data.slots.push(slot_);
+	}
+
+	// do entities
+	let entities = JSON.parse(fs.readFileSync(entities_path));
+	for(let i=0; i<entities.length; i++) {
+		let entity_ = {name: entities[i].name}
+		data.entities.push(entity_);
 	}
 
 	// data to be written to Marwan file
