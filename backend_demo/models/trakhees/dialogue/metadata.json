@@ -1,0 +1,109 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": [
+        "license_type",
+        "freezone_license_location"
+      ]
+    },
+    "cancel_licence_form": {
+      "slots": []
+    },
+    "utter_complain": {
+      "slots": []
+    },
+    "utter_default": {
+      "slots": []
+    },
+    "action_trakhees_locations": {
+      "slots": []
+    },
+    "utter_nohelp": {
+      "slots": []
+    },
+    "utter_noworries": {
+      "slots": []
+    },
+    "utter_ask_whoisit": {
+      "slots": []
+    },
+    "utter_license": {
+      "slots": []
+    },
+    "utter_licenses_types": {
+      "slots": []
+    },
+    "utter_ask_whatistrakhees": {
+      "slots": []
+    },
+    "utter_visa_renewal": {
+      "slots": []
+    },
+    "utter_trakhees_locations": {
+      "slots": []
+    },
+    "utter_licenses_difference": {
+      "slots": []
+    },
+    "utter_ask_builder": {
+      "slots": []
+    },
+    "utter_ask_goal": {
+      "slots": []
+    },
+    "utter_ask_for_selling_licenses_requirements": {
+      "slots": []
+    },
+    "utter_ask_where_to_get_a_pro_card": {
+      "slots": []
+    },
+    "utter_ask_for_licenses_requirements": {
+      "slots": []
+    },
+    "utter_ask_for_modifications": {
+      "slots": []
+    },
+    "utter_receipt_prepaid_account": {
+      "slots": []
+    },
+    "utter_occ_health_card_req": {
+      "slots": []
+    },
+    "utter_license_fees": {
+      "slots": []
+    },
+    "utter_requirements_to_add_activity": {
+      "slots": []
+    },
+    "utter_ask_about_vat_number": {
+      "slots": []
+    },
+    "utter_ask_whatspossible": {
+      "slots": []
+    },
+    "utter_application_rejected": {
+      "slots": []
+    },
+    "utter_bye": {
+      "slots": []
+    }
+  },
+  "python": "3.6.7",
+  "max_histories": [
+    5,
+    null,
+    5,
+    2
+  ],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa_core.policies.keras_policy.KerasPolicy",
+    "rasa_core.policies.fallback.FallbackPolicy",
+    "rasa_core.policies.memoization.MemoizationPolicy",
+    "rasa_core.policies.form_policy.FormPolicy"
+  ],
+  "trained_at": "20190705-161013",
+  "rasa_core": "0.14.5",
+  "tensorflow": "1.13.1",
+  "sklearn": "0.20.3"
+}

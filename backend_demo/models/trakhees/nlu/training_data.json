@@ -1,0 +1,4622 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "bye",
+        "text": "سلام"
+      },
+      {
+        "intent": "bye",
+        "text": "مع السلامة"
+      },
+      {
+        "intent": "bye",
+        "text": "إلى اللقاء في وقت لاحق"
+      },
+      {
+        "intent": "bye",
+        "text": "الوداع"
+      },
+      {
+        "intent": "bye",
+        "text": "سلام عليكم"
+      },
+      {
+        "intent": "bye",
+        "text": "باي باي"
+      },
+      {
+        "intent": "bye",
+        "text": "وداعاً"
+      },
+      {
+        "intent": "bye",
+        "text": "أراك لاحقاً"
+      },
+      {
+        "intent": "bye",
+        "text": "نتحدث في وقت لاحق"
+      },
+      {
+        "intent": "bye",
+        "text": "يجب أن أذهب"
+      },
+      {
+        "intent": "bye",
+        "text": "اشوفك بعدين"
+      },
+      {
+        "intent": "bye",
+        "text": "وداعا بوت"
+      },
+      {
+        "intent": "bye",
+        "text": "وداعا يا صديقي"
+      },
+      {
+        "intent": "bye",
+        "text": "علي الذهاب"
+      },
+      {
+        "intent": "bye",
+        "text": "تصبح على خير"
+      },
+      {
+        "intent": "bye",
+        "text": "طابت ليلتك!"
+      },
+      {
+        "intent": "bye",
+        "text": "ليلة سعيدة!"
+      },
+      {
+        "intent": "bye",
+        "text": "طبت مساءاً!"
+      },
+      {
+        "intent": "bye",
+        "text": "أنا خارج"
+      },
+      {
+        "intent": "bye",
+        "text": "سوف نتحدث قريبا"
+      },
+      {
+        "intent": "bye",
+        "text": "صحبتك السلامة"
+      },
+      {
+        "intent": "bye",
+        "text": "تصبح على خير يا تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "الى اللقاء يا تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "سلام يا تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "مع السلامة تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "إلى اللقاء في وقت لاحق"
+      },
+      {
+        "intent": "bye",
+        "text": "الوداع يا تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "سلام عليكم يا تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "باي باي تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "وداعاً تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "أراك لاحقاً تراخيص"
+      },
+      {
+        "intent": "bye",
+        "text": "يجب أن أذهب يا تراخيص"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اريد التحدت مع شخص ما"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أريد أن اتحدث مع أحد ممثلي خدمة العملاء"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اعطني شخصا اتحدث إليه"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "خدمة العملاء من فضلك"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اريد التحدث مع انسان"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "خدمة العملاء"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "لا أريد التحدث اليك"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أنت لم تساعدني"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أنت غير مفيد"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنك أن تعطيني خدمة العملاء"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اريد التحدث الى انسان"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اسمح لي أن أتكلم مع شخص حقيقي من فضلك"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل هناك أيضا بشر يعملون لشركتك؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أنا لا أريد التحدث إلى بوت"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنني التحدث مع أي شخص يمكن أن يساعدني حقا؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أنا لا أحب التحدث إلى آلة"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنك أن توصلني بموظف تراخيص الحقيقي؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أعطني إنسان الآن"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هذا مزعج أود التحدث إلى شخص حقيقي"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أود التحدث إلى شخص"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنك أن تضعني على اتصال مع إنسان؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "التحدث إلى بوت هو شئ غبي"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "أريد التحدث إلى شخص أذكى منك"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اريد التحدث الى خدمة العملاء"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "شخص من رعاية العملاء"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنك توجيهي إلى فريقك؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "وكيل الخدمة"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "هل يمكنني التحدث مع اكيلا؟"
+      },
+      {
+        "intent": "human_hand_off",
+        "text": "اريد التحدث الى مدير"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من صنعك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "ما هي الشركة التي انتجتك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من اخترعك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "هل يمكنك إخباري من صنعك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "يمكنك مشاركة رئيسك في العمل معي؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "اريد ان اتعرف على مالكك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "اريد ان اعرف الشركة التي صممتك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "أريد أن أعرف الشركة التي ولدتك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "أريد أن أعرف الشركة التي اخترعتك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "اريد ان اعرف من اخترعك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "هل لي أن أسأل من اخترعك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من فضلك قل لي الشركة التي خلقتك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من فضلك قل لي من خلقك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "أخبرني المزيد عن مؤسسيك"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "ما هي الشركة التي جلبتك إلى الوجود؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "ما هي الشركة التي أنشأتك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "أي شركة اخترعتك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من هو رئيسك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من هو بانيك؟"
+      },
+      {
+        "intent": "ask_builder",
+        "text": "من بناك؟"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "خالد",
+            "entity": "name"
+          }
+        ],
+        "text": "اسمي خالد"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "خالد",
+            "entity": "name"
+          }
+        ],
+        "text": "ادعى خالد"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "خالد",
+            "entity": "name"
+          }
+        ],
+        "text": "خالد"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "لقمان",
+            "entity": "name"
+          }
+        ],
+        "text": "اسمي لقمان"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 4,
+            "end": 12,
+            "value": "عبد الحي",
+            "entity": "name"
+          }
+        ],
+        "text": "أنا عبد الحي"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 4,
+            "end": 8,
+            "value": "لوسي",
+            "entity": "name"
+          }
+        ],
+        "text": "أنا لوسي"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 10,
+            "end": 14,
+            "value": "محسن",
+            "entity": "name"
+          }
+        ],
+        "text": "يقولون لي محسن"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "غانم",
+            "entity": "name"
+          }
+        ],
+        "text": "غانم"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 24,
+            "end": 28,
+            "value": "ايمي",
+            "entity": "name"
+          }
+        ],
+        "text": "عادة ما يناديني الناس ب ايمي"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 17,
+            "value": "مختار الصباغ",
+            "entity": "name"
+          }
+        ],
+        "text": "اسمي مختار الصباغ"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 17,
+            "end": 21,
+            "value": "بهاء",
+            "entity": "name"
+          }
+        ],
+        "text": "يمكنك أن تناديني بهاء"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "هناء",
+            "entity": "name"
+          }
+        ],
+        "text": "ناديني هناء"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 9,
+            "end": 20,
+            "value": "أحمد النحاس",
+            "entity": "name"
+          }
+        ],
+        "text": "أنا أسمي أحمد النحاس"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "جاسم",
+            "entity": "name"
+          }
+        ],
+        "text": "جاسم"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "نصار",
+            "entity": "name"
+          }
+        ],
+        "text": "نصار هو أسمي"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 5,
+            "end": 11,
+            "value": "مونيكا",
+            "entity": "name"
+          }
+        ],
+        "text": "ادعي مونيكا"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 16,
+            "end": 20,
+            "value": "نعيم",
+            "entity": "name"
+          }
+        ],
+        "text": "بعضهم يدعونني ب نعيم"
+      },
+      {
+        "intent": "say_name",
+        "entities": [
+          {
+            "start": 19,
+            "end": 29,
+            "value": "عبد الباسط",
+            "entity": "name"
+          }
+        ],
+        "text": "أتمنى أن تناديني ب عبد الباسط"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا"
+      },
+      {
+        "intent": "greet",
+        "text": "أهلا"
+      },
+      {
+        "intent": "greet",
+        "text": "السلام عليكم"
+      },
+      {
+        "intent": "greet",
+        "text": "صباح الخير"
+      },
+      {
+        "intent": "greet",
+        "text": "مساء الخير"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا بوت"
+      },
+      {
+        "intent": "greet",
+        "text": "أهلاً بك يا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "ألو"
+      },
+      {
+        "intent": "greet",
+        "text": "أهلا مرة أخرى"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا يا رفيق"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا يا أستاذ"
+      },
+      {
+        "intent": "greet",
+        "text": "تحية طيبة"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا جميعا"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا هل يوجد احد؟"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا روبوت"
+      },
+      {
+        "intent": "greet",
+        "text": "هاي!"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "أهلا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "السلام عليكم يا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "صباح الخير يا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "مساء الخير يا تراخيص"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا بوت"
+      },
+      {
+        "intent": "greet",
+        "text": "مرحبا يا أستاذ طارق"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف حالك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "عامل ايه؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "ما هي احوالك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "عامل ايه؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "تراخيص, كيف حالك؟!"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "هل انت بخير"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "هل تحظى بيوم جيد؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "أانت بخير؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "هل تشعر انك بخير؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف تجري الامور معك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف هي الأمور معك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف هي الأمور؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف حالكم"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف هي احوالك"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف حالك هذا الصباح"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف تشعر"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف حالك اليوم"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "ما أخبارك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "ازيك؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كويس؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف كان حالك"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف تسير الأمور؟"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف يومك"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف يسير يومك"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف هو مسائك"
+      },
+      {
+        "intent": "ask_how_are_they_doing",
+        "text": "كيف الحياة"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "أخبرني عن تراخيص"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ماذا يفعل تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما فائدة تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "كيف يعمل تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "هل يمكنك أن تخبرني بالمزيد عن تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ماذا تفعل أنت في تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما هو تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "أعطني المزيد من المعلومات عن تراخيص"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "أريد أن اعرف ما يفعله تراخيص"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما الذي يفعله تراخيص بالضبط؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "أخبرني المزيد عن شركتك"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ماذا تفعلون كشركة؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما الذي تقدمه لي تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ماذا يمكنني أن أفعل بتراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_trakhees",
+        "text": "ما الذي تعرفه عن تراخيص؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "مساعدة"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "هلا ساعدتني؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ماذا يمكنك أن تفعل؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ساعدنى من فضلك"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "لا أعرف ماذا أريد"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "احتاج لبعض المساعدة"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "خيارات"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "أرني القائمة"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "أرني ما هو ممكن"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ما الذي يمكن أن تفعله؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "اذا ما الذي يمكنك مساعدتي به؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ماذا تجيد؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ماذا يمكنني ان افعل هنا"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "ما الذي يمكنني فعله في هذا الروبوت؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "عظيم! هل يمكنني فعل شيء آخر هنا؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "تحدث معي!"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "هل هناك أي خيارات أخرى؟"
+      },
+      {
+        "intent": "ask_what_is_possible",
+        "text": "سألتك إذا كنت تستطيع أن تفعل أي شيء آخر"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من أنت؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "ما اسمك؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من هذا"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "إلى من أتكلم"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "ما هو اسمك"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "مع من اتكلم"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من انت"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "ما هو اسمك بوت"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "ماذا تسمى؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من المتكلم؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من يتحدث؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من أنت وماذا تريد مني"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "أريد أن أعرف من أنت"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "مرحبا! ما هو اسمك؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "ما اسم هذا البوت؟!"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "نعم ولكن من أنت في قلبك"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "هل أنت بوت؟"
+      },
+      {
+        "intent": "ask_who_is_it",
+        "text": "من هناك؟!"
+      },
+      {
+        "intent": "deny",
+        "text": "لا"
+      },
+      {
+        "intent": "deny",
+        "text": "لا ليس كذلك"
+      },
+      {
+        "intent": "deny",
+        "text": "لا هذا خطأ"
+      },
+      {
+        "intent": "deny",
+        "text": "بالطبع لا"
+      },
+      {
+        "intent": "deny",
+        "text": "أبداً!"
+      },
+      {
+        "intent": "deny",
+        "text": "مطلقاً"
+      },
+      {
+        "intent": "deny",
+        "text": "لا أعتقد ذلك"
+      },
+      {
+        "intent": "deny",
+        "text": "لا أعتقد هذا"
+      },
+      {
+        "intent": "deny",
+        "text": "لا للأسف"
+      },
+      {
+        "intent": "deny",
+        "text": "لا سيدي"
+      },
+      {
+        "intent": "deny",
+        "text": "لا يا سيدتي"
+      },
+      {
+        "intent": "deny",
+        "text": "لا يمكن"
+      },
+      {
+        "intent": "deny",
+        "text": "مستحيل"
+      },
+      {
+        "intent": "deny",
+        "text": "لا آسف"
+      },
+      {
+        "intent": "deny",
+        "text": "لا ليس بالفعل كذلك."
+      },
+      {
+        "intent": "deny",
+        "text": "ليس لي"
+      },
+      {
+        "intent": "deny",
+        "text": "لا ولا مرة أخرى"
+      },
+      {
+        "intent": "deny",
+        "text": "لا شكرا"
+      },
+      {
+        "intent": "deny",
+        "text": "أنكر"
+      },
+      {
+        "intent": "deny",
+        "text": "أنا أرفض"
+      },
+      {
+        "intent": "deny",
+        "text": "لا يهم"
+      },
+      {
+        "intent": "deny",
+        "text": "لا أريد أن أعطيها لك"
+      },
+      {
+        "intent": "deny",
+        "text": "أنا لن أعطيها لك"
+      },
+      {
+        "intent": "deny",
+        "text": "لا لا أقبل"
+      },
+      {
+        "intent": "deny",
+        "text": "لا!!!!"
+      },
+      {
+        "intent": "deny",
+        "text": "لا أنت فعلت ذلك خطأ"
+      },
+      {
+        "intent": "deny",
+        "text": "لا لا استطيع"
+      },
+      {
+        "intent": "deny",
+        "text": "لست متأكدا"
+      },
+      {
+        "intent": "deny",
+        "text": "ليس صحيحا"
+      },
+      {
+        "intent": "deny",
+        "text": "غير صحيح بالمرة"
+      },
+      {
+        "intent": "deny",
+        "text": "أعتقد ان هذا يعني لا"
+      },
+      {
+        "intent": "deny",
+        "text": "لا اريد ذلك"
+      },
+      {
+        "intent": "deny",
+        "text": "لا اريد اي من هؤلاء"
+      },
+      {
+        "intent": "affirm",
+        "text": "نعم"
+      },
+      {
+        "intent": "affirm",
+        "text": "صحيح"
+      },
+      {
+        "intent": "affirm",
+        "text": "بالطبع"
+      },
+      {
+        "intent": "affirm",
+        "text": "بالتأكيد"
+      },
+      {
+        "intent": "affirm",
+        "text": "أكيد"
+      },
+      {
+        "intent": "affirm",
+        "text": "هذا مؤكدة"
+      },
+      {
+        "intent": "affirm",
+        "text": "بلا شك"
+      },
+      {
+        "intent": "affirm",
+        "text": "نعم فعلا"
+      },
+      {
+        "intent": "affirm",
+        "text": "أجل"
+      },
+      {
+        "intent": "affirm",
+        "text": "بلى"
+      },
+      {
+        "intent": "affirm",
+        "text": "بالطبع بكل تأكيد"
+      },
+      {
+        "intent": "affirm",
+        "text": "مؤكد"
+      },
+      {
+        "intent": "affirm",
+        "text": "حسنا"
+      },
+      {
+        "intent": "affirm",
+        "text": "ممتاز"
+      },
+      {
+        "intent": "affirm",
+        "text": "موافق!"
+      },
+      {
+        "intent": "affirm",
+        "text": "اوه رائع!"
+      },
+      {
+        "intent": "affirm",
+        "text": "قبول"
+      },
+      {
+        "intent": "affirm",
+        "text": "أنا أقبل"
+      },
+      {
+        "intent": "affirm",
+        "text": "أقبل هذا"
+      },
+      {
+        "intent": "affirm",
+        "text": "مدهش"
+      },
+      {
+        "intent": "affirm",
+        "text": "مذهل!"
+      },
+      {
+        "intent": "affirm",
+        "text": "هذا حقاً رائع"
+      },
+      {
+        "intent": "affirm",
+        "text": "كم هذا جميل!"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا جزيلا"
+      },
+      {
+        "intent": "thank",
+        "text": "متشكر جدا"
+      },
+      {
+        "intent": "thank",
+        "text": "متشكر"
+      },
+      {
+        "intent": "thank",
+        "text": "رائع، شكرا"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا لك"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا بوت"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا على ذلك"
+      },
+      {
+        "intent": "thank",
+        "text": "في صحتك"
+      },
+      {
+        "intent": "thank",
+        "text": "حسنا، شكرا!"
+      },
+      {
+        "intent": "thank",
+        "text": "رائع شكرا لك"
+      },
+      {
+        "intent": "thank",
+        "text": "شكراً لك على كل شئ"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا للمساعدة"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا هذا خبر رائع"
+      },
+      {
+        "intent": "thank",
+        "text": "شكرا على رابط المنتدى ، سوف أتحقق من ذلك"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 13,
+            "value": "مول ابن بطوطة",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "مول ابن بطوطة"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 16,
+            "value": "المدينة العالمية",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "المدينة العالمية"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 3,
+            "end": 13,
+            "value": "سوق التنين",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "في سوق التنين"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 5,
+            "end": 17,
+            "value": "مدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "حساب مدفوع مقدماً"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 13,
+            "end": 25,
+            "value": "الدفع المقدم",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "حسابي من نوع الدفع المقدم"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "مدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "مدفوع مقدماً"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "حرة",
+            "entity": "license_type"
+          }
+        ],
+        "text": "رخصة حرة"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 5,
+            "end": 11,
+            "value": "تجارية",
+            "entity": "license_type"
+          }
+        ],
+        "text": "رخصة تجارية"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "حرة",
+            "entity": "license_type"
+          }
+        ],
+        "text": "حرة"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 3,
+            "end": 16,
+            "value": "ديسكفري جاردن",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "من ديسكفري جاردن"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "الحدائق",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "الحدائق"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "نخلة جميرا",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "نخلة جميرا"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "مدفوع",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "مدفوع"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "مدفوع مقدم",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "مدفوع مقدم"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 21,
+            "end": 33,
+            "value": "مدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "الحساب رقم 85 من نوع مدفوع مقدماً"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "تجارية",
+            "entity": "license_type"
+          }
+        ],
+        "text": "تجارية"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "حرة",
+            "entity": "license_type"
+          }
+        ],
+        "text": "رخصة حرة"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "شركة",
+            "entity": "license_type"
+          }
+        ],
+        "text": "رخصة شركة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "من أين يمكنني استخراج رخصة منطقة حرة؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "هل تعلم من أين يمكن أن اعمل رخصة المنطقة الحرة؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "أريد استخراج رخصة منطقة حرة, من أين يمكن أن افعل ذلك؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "اخبرني عن أماكن استخراج رخص المناطق الحرة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "اماكن استخراج رخصة منطقة حرة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "من أين احصل على رخصة المنطقة الحرة؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 35,
+            "end": 51,
+            "value": "المدينة العالمية",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطة حرة من المدينة العالمية ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 30,
+            "end": 45,
+            "value": "سوق التنين 1 و2",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل يمكن أن احصل على الرخصة من سوق التنين 1 و2 ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 44,
+            "end": 57,
+            "value": "مول ابن بطوطة",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل تتوافر خدمة استخراج رخص المناطق الحرة في مول ابن بطوطة ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "ماذا تعرف عن اماكن استخراج رخصة منطقة حرة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 28,
+            "end": 37,
+            "value": "جزر جميرا",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "ينفع اطلع رخصة منطقة حرة من جزر جميرا"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "ساعدني في استخراج رخصة منطقة حرة لعملي من فضلك"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "الأماكن المتاحة لأستخراج رخصة منطقة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 36,
+            "end": 49,
+            "value": "ديسكفري جاردن",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطقة حرة في ديسكفري جاردن ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 43,
+            "end": 50,
+            "value": "الحدائق",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هلا أخبرتني عن امكانية استخراج رخصة حرة من الحدائق ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "ارني أماكن استخراج رخص المناطق الحرة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "الجهة المراد مراجعتها لأستخراج رخصة منطقة حرة؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 35,
+            "end": 45,
+            "value": "نخلة جميرا",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطة حرة من نخلة جميرا ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 30,
+            "end": 39,
+            "value": "نخلة ديره",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل يمكن أن احصل على الرخصة من نخلة ديره ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 44,
+            "end": 54,
+            "value": "جميرا بارك",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل تتوافر خدمة استخراج رخص المناطق الحرة في جميرا بارك ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 28,
+            "end": 38,
+            "value": "قرية جميرا",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "ينفع اطلع رخصة منطقة حرة من قرية جميرا"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 36,
+            "end": 50,
+            "value": "دبي ووتر فرونت",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطقة حرة في دبي ووتر فرونت ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 43,
+            "end": 52,
+            "value": "جزر لعالم",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هلا أخبرتني عن امكانية استخراج رخصة حرة من جزر لعالم ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 35,
+            "end": 42,
+            "value": "ليمتليس",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطة حرة من ليمتليس ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 30,
+            "end": 47,
+            "value": "داون تاون جبل علي",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل يمكن أن احصل على الرخصة من داون تاون جبل علي ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 44,
+            "end": 51,
+            "value": "الفرجان",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل تتوافر خدمة استخراج رخص المناطق الحرة في الفرجان ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 28,
+            "end": 40,
+            "value": "قرية جبل علي",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "ينفع اطلع رخصة منطقة حرة من قرية جبل علي"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 36,
+            "end": 47,
+            "value": "الخيل بلازا",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطقة حرة في الخيل بلازا ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 43,
+            "end": 65,
+            "value": "جميع مشروعات جمارك دبي",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هلا أخبرتني عن امكانية استخراج رخصة حرة من جميع مشروعات جمارك دبي ؟"
+      },
+      {
+        "intent": "trakhees_locations",
+        "entities": [
+          {
+            "start": 35,
+            "end": 53,
+            "value": "مواني دبي العالمية",
+            "entity": "freezone_license_location"
+          }
+        ],
+        "text": "هل أستطيع استخراج رخصة منطة حرة من مواني دبي العالمية ؟"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "كيفية تجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "اريد تجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "تفاصيل تجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "ما هي طريقة تجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "فيزتي انتهت وأريد أن اجددها, كيف؟"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "خطوات تجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "كيف أجدد فيزتي؟"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "ارني خطوات تجديد الفيزا بالتفصيل"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "هل تعلم كيف يمكن أن اجدد فيزتي؟"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "ساعدني في تجديد الفيزا اذا سمحت"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "الخطوات المتبعة لتجديد الفيزا"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "عايز أجدد الفيزة"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "أربد ان اجدد فزتي"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "الأوراق المطلوبة لتجديد الفيزه"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "ما الذي يجب أن افعله لأجدد الفيزا؟"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "تجديد الفيزا في أسرع وقت من فضلك"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "طريقة تجديد الفيزة"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "أريد تجديد تأشيرتي من فضلك"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "طريقة تجديد التأشيرة"
+      },
+      {
+        "intent": "visa_renewal",
+        "text": "كيفية تجديد التأشيرة؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "هل يمكنني الغاء رخصة ؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "كيفية الغاء الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "كيف الغي الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "كيف اوقف الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "اريد ايقاف الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ما هي خطوات إلغاء الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "متطلبات ايقاف الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ماذا علي ان افعل لاوقف الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "أريد ان الغي رخصتي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "خطوات إلغاء الرخصة في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ساعدني في الغاء الرخصة الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "اجراءات الغاء الرخصة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "الغاء الرخصة من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "كيف يمكنني الغاء الرخصة من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ايقاف الرخصة من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "هل يمكنني الغاء الرخصة من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "هل توجد إمكانية لألغاء أو ايقاف الرخصة الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ايقاف الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "طريقة الغاء الرخصة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "الغاء الرخصة من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "أحاول الغاء الرخصة الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "text": "ساعدني في ايقاف الرخصة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 26,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيفية الغاء رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 23,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف الغي رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 23,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف اوقف رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 11,
+            "end": 25,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اريد ايقاف رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 18,
+            "end": 32,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ما هي خطوات إلغاء رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 28,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "متطلبات ايقاف رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 23,
+            "end": 37,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ماذا علي ان افعل لاوقف رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 26,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "خطوات إلغاء رخصة منطقة حرة في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 30,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في الغاء رخصة منطقة حرة الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 28,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اجراءات الغاء رخصة منطقة حرة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 20,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة منطقة حرة من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 17,
+            "end": 31,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف يمكنني الغاء رخصة منطقة حرة من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 20,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة منطقة حرة من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 30,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل يمكنني الغاء رخصة منطقة حرة من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 32,
+            "end": 46,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل توجد إمكانية لألغاء أو ايقاف رخصة منطقة حرة الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 20,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 26,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "طريقة الغاء رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 20,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة منطقة حرة من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 26,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "أحاول الغاء رخصة منطقة حرة الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 30,
+            "value": "رخصة منطقة حرة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في ايقاف رخصة منطقة حرة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 23,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيفية الغاء رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 20,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف الغي رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 20,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف اوقف رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 11,
+            "end": 22,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اريد ايقاف رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 18,
+            "end": 29,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ما هي خطوات إلغاء رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 25,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "متطلبات ايقاف رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 23,
+            "end": 34,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ماذا علي ان افعل لاوقف رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 23,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "خطوات إلغاء رخصة تجارية في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 27,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في الغاء رخصة تجارية الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 25,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اجراءات الغاء رخصة تجارية من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 17,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة تجارية من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 17,
+            "end": 28,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف يمكنني الغاء رخصة تجارية من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 17,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة تجارية من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 27,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل يمكنني الغاء رخصة تجارية من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 32,
+            "end": 43,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل توجد إمكانية لألغاء أو ايقاف رخصة تجارية الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 17,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 23,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "طريقة الغاء رخصة تجارية"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 17,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة تجارية من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 23,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "أحاول الغاء رخصة تجارية الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 27,
+            "value": "رخصة تجارية",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في ايقاف رخصة تجارية من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيفية الغاء رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف الغي رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف اوقف رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 11,
+            "end": 20,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اريد ايقاف رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 18,
+            "end": 27,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ما هي خطوات إلغاء رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "متطلبات ايقاف رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 23,
+            "end": 32,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ماذا علي ان افعل لاوقف رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "خطوات إلغاء رخصة شركة في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في الغاء رخصة شركة الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "اجراءات الغاء رخصة شركة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 17,
+            "end": 26,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "كيف يمكنني الغاء رخصة شركة من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل يمكنني الغاء رخصة شركة من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 32,
+            "end": 41,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "هل توجد إمكانية لألغاء أو ايقاف رخصة شركة الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "طريقة الغاء رخصة شركة"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "أحاول الغاء رخصة شركة الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          }
+        ],
+        "text": "ساعدني في ايقاف رخصة شركة من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 32,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيفية الغاء رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 19,
+            "end": 29,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف الغي رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 23,
+            "end": 33,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف اوقف رخصة شركة تحت قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 11,
+            "end": 20,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 21,
+            "end": 31,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "اريد ايقاف رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 18,
+            "end": 27,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 28,
+            "end": 38,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ما هي خطوات إلغاء رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 28,
+            "end": 38,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "متطلبات ايقاف رخصة شركة تحت قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 23,
+            "end": 32,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 33,
+            "end": 43,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ماذا علي ان افعل لاوقف رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 32,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "خطوات إلغاء رخصة شركة قانون محلي في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 30,
+            "end": 40,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ساعدني في الغاء رخصة شركة تحت قانون محلي الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 24,
+            "end": 34,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "اجراءات الغاء رخصة شركة قانون محلي من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 20,
+            "end": 30,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة تحت قانون محلي من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 17,
+            "end": 26,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 27,
+            "end": 37,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف يمكنني الغاء رخصة شركة قانون محلي من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 16,
+            "end": 26,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة قانون محلي من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 26,
+            "end": 36,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "هل يمكنني الغاء رخصة شركة قانون محلي من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 32,
+            "end": 41,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 42,
+            "end": 52,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "هل توجد إمكانية لألغاء أو ايقاف رخصة شركة قانون محلي الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 20,
+            "end": 30,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة تحت قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 32,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "طريقة الغاء رخصة شركة قانون محلي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 20,
+            "end": 30,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة تحت قانون محلي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 32,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "أحاول الغاء رخصة شركة قانون محلي الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 26,
+            "end": 36,
+            "value": "قانون محلي",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ساعدني في ايقاف رخصة شركة قانون محلي من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيفية الغاء رخصة شركة فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 19,
+            "end": 22,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف الغي رخصة شركة فرع في الامارات"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 9,
+            "end": 18,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 20,
+            "end": 23,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف اوقف رخصة شركة  فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 11,
+            "end": 20,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 21,
+            "end": 24,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "اريد ايقاف رخصة شركة فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 18,
+            "end": 27,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 28,
+            "end": 31,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ما هي خطوات إلغاء رخصة شركة فرع في الامارات"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 25,
+            "end": 28,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "متطلبات ايقاف رخصة شركة  فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 23,
+            "end": 32,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 33,
+            "end": 36,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ماذا علي ان افعل لاوقف رخصة شركة فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "خطوات إلغاء رخصة شركة فرع في الامارات في تراخيص"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 27,
+            "end": 30,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ساعدني في الغاء رخصة شركة  فرع الخاصة بي من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 24,
+            "end": 27,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "اجراءات الغاء رخصة شركة فرع من داخل البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 17,
+            "end": 20,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة  فرع في الامارات من خارج البلاد"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 17,
+            "end": 26,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 27,
+            "end": 30,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "كيف يمكنني الغاء رخصة شركة فرع من خارج دبي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 16,
+            "end": 19,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة فرع من بلجيكا"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 26,
+            "end": 29,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "هل يمكنني الغاء رخصة شركة فرع من مصر؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 32,
+            "end": 41,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 42,
+            "end": 45,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "هل توجد إمكانية لألغاء أو ايقاف رخصة شركة فرع في الامارات الخاصة بي؟"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 17,
+            "end": 20,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ايقاف رخصة شركة  فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "طريقة الغاء رخصة شركة فرع"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 6,
+            "end": 15,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 17,
+            "end": 20,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "الغاء رخصة شركة  فرع من فضلك"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 12,
+            "end": 21,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "أحاول الغاء رخصة شركة فرع في الامارات الخاصة بي"
+      },
+      {
+        "intent": "ask_to_cancel_visa",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "رخصة شركة",
+            "entity": "cancelled_licence_type"
+          },
+          {
+            "start": 26,
+            "end": 29,
+            "value": "فرع",
+            "entity": "cancelled_licence_company_type"
+          }
+        ],
+        "text": "ساعدني في ايقاف رخصة شركة فرع من داخل البلاد"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 26,
+            "end": 40,
+            "value": "المدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "كيف احصل على فاتورة حسابي المدفوع مقدماً"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "ساعدني في الحصول على فاتورة حسابي"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 30,
+            "end": 44,
+            "value": "المدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "اريد ان اطلع على فاتورة حسابي المدفوع مقدماً"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "هل يمكنك الحصول على فاتورة حسابي؟"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 12,
+            "end": 24,
+            "value": "مدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "فاتوره حساب مدفوع مقدماً"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "أريد الأستعلام عن فاتورة حسابي"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 28,
+            "end": 42,
+            "value": "المدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "كيف أستعلم عن فاتورة الحساب المدفوع مقدماً ؟"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "كيفية استخراج فاتورة الحساب"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 24,
+            "end": 36,
+            "value": "الدفع المقدم",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "عرض فاتورة حسابي من نوع الدفع المقدم"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 39,
+            "end": 53,
+            "value": "المدفوع مقدماً",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "الخطوات المتبعة لأستخراج فاتورة الحساب المدفوع مقدماً"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "أريد أن احصل على فاتورة حسابي لو سمحت"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "فاتورة الحساب البنكي"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 35,
+            "end": 47,
+            "value": "الدفع المقدم",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "الحصول على فاتورة حساب بنكي من نوع الدفع المقدم"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "ماذا يمكنك أن تخبرني عن استخراج فاتورة الحساب البنكي؟"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "entities": [
+          {
+            "start": 21,
+            "end": 33,
+            "value": "المدفوع مقدم",
+            "entity": "receipt_account_type"
+          }
+        ],
+        "text": "فواتير الحساب البنكي المدفوع مقدم"
+      },
+      {
+        "intent": "receipt_prepaid_account",
+        "text": "استخراج فواتير الحسابات البنكية"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "متطلبات اضافة نشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "كيف اضيف نشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "مستندات اضافة نشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "اريد ان اضيف نشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "كيفية تعديل النشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "هل تعلم كيف يمكنني اضافة نشاط جديد؟"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "انشاء نشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "الوثائق المطلوبة لأضافة نشاط جديد"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "اخبرني كيف يمكن اضافة نشاط جديد لو سمحت"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "كنت أريد تعديل نشاط خاص بي"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "ماذا يجب أن افعل لأضيف نشاط جديد؟"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "الأوراق اللازم تقدميها لتعديل نشاط حالي خاص بي"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "طريقة تعديل النشاط"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "الخطوات المتبعة لإضافة نشاط جديد"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "هل تعرف كيف اضيف نشاط جديد"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "الاستعلام عن اضافة نشاط جديد"
+      },
+      {
+        "intent": "requirements_to_add_activity",
+        "text": "ساعدني في تعديل نشاط حالي"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "شروط الحصول على رخصة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "ما المطلوب للحصول على رخصة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "المستندات المطلوبة للحصول على رخصة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "اريد ان احصل على رخصة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "كيف احصل على رخصة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "افكر في فتح رخصة لعملي الجديد"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "كيفية استخراج رخصة عمل جديدة؟"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "متطلبات فتح رخصة عمل"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "رخصة عمل جديدة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "إصدار رخص العمل"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "خطوات استخراج رخصة عمل جديدة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "ساعدني في الحصول على رخصة عمل جديدة لو سمحت"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "ماذا تعرف عن خطوات استخراج رخص عمل"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "هل تعرف كيف يمكنني اصدار رخصة جديدة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "فتح رخصه عمل"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "ماذا يجب أن افعل لأستخراج رخصة عمل جديدة"
+      },
+      {
+        "intent": "ask_for_licenses_requirements",
+        "text": "اخبرني عن خطوات فتح الرخص في تراخيص"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد ان اقوم بتقديم شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد التواصل مع مكتب الشكاوي"
+      },
+      {
+        "intent": "complain",
+        "text": "لدي شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "يوجد لدي شكوى اريد تقديمها"
+      },
+      {
+        "intent": "complain",
+        "text": "هل يمكنني تقديم شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "لا تعجبني هذه الخدمة"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد التبليغ عن بعض الخطاء"
+      },
+      {
+        "intent": "complain",
+        "text": "هذه الخدمة لا تعمل بشكل جيد"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد التبليغ عن شكوتى"
+      },
+      {
+        "intent": "complain",
+        "text": "لدي شكولى اريد التبليغ عنها"
+      },
+      {
+        "intent": "complain",
+        "text": "هل يمكنني التبليغ عن بعض الشكاوي"
+      },
+      {
+        "intent": "complain",
+        "text": "انت غبي لا تفهم"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد ان اقدم شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "هي يمكنني ان ابلغ عن شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد تقديم شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد التواصل لتقديم شكوى"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد التواصل مع مكتب الشكاوي لتراخيص"
+      },
+      {
+        "intent": "complain",
+        "text": "اريد مديرك للإبلاغ عن بعض المشاكل"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "كيف يمكنني تعديل العقد؟"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "أريد تغيير عنواني بالفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "كيفية تعديل عقود البيع"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "ساعدني في تغيير اسمي بالفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "يوجد خطأ بعقد شراء وأريد تصحيحه"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "هل يمكنني تعديل عنوان الباسبور الخاص بي؟"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "كنت أفكر في تعديل بنود العقد الخاص بي"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "أحاول تصحيح وظيفتي في الفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "أخبرني كيف يمكن أن اعدل عقداً ما"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "تغيير العنوان بالفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "تعديل العقد"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "تصحيح رقم الهاتف بالفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "ماذا يجب أن افعل لأعدل هذا العقد؟"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "تصحيح خطأ بالفيزا لو سمحت"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "امكانية تعديل العقود في تراخيص"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "خطوات تصحيح بعض البيانات الخاطئة بفيزتي"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "أفكر في تعديل البند الخامس بعقد شراء قطعة أرض"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "أريد أن اصحح مكان اقامتي بالفيزا"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "اريد أن اغير البنود رقم 5, 59 و 140 بعقد"
+      },
+      {
+        "intent": "ask_for_modifications",
+        "text": "محل اقامتي ورقم هاتفي بالفيزا خطأ"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "متطلبات بيع رخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "كيف ابيع رخصتي"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "كيفية بيع الرخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "ماذا افعل لابيع الرخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "المستندات المطلوبة لبيع الرخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "هل يمكنني بيع رخصة منطقة حرة؟"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "بيع الرخص"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "خطوات بيع رخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "ماذا يمكنني أن افعل لأبيع رخصتي"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "خطوات بيع رخصة منطقة حرة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "أريد أن ابيع رخصتي"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "كيف يمكن بيع الرخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "ساعدني في بيع رخصتي"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "أفكر في بيع رخصة من نوع رخص المناطق الحرة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "هل تعلم كيف يمكن أن ابيع رخصة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "اريد ان استفسر عن امكانية بيع رخصة حرة"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "نقل ملكية الرخصة الي شخص أخر"
+      },
+      {
+        "intent": "ask_for_selling_licenses_requirements",
+        "text": "أريد تغيير ملكية رخصتي"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "ما هي الرخص التي يدعمها تراخيص؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "أنواع الرخص التي يمكن اصدارها"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "الرخص المدعومة"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "ما هي أنواع الرخص لديكم"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "جميع أنواع الرخص التي يمكن استخراجها"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل لديكم رخص منطقة حرة؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل يمكن اصدار رخصة منطقة حرة في تراخيص؟!"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل تدعمون رخصة شركة من نوع LLC؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل يمكن اصدار رخصة شركة محلية في تراخيص؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "عرض أنواع الرخص المختلفة"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "أخبرني عن أنواع الرخص المدعومة في تراخيص"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل تعلم ما اذا كان يمكنني اصدار رخصة FZCO في تراخيص أم لا؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل يمكن استخراج رخصة ملكية فردية؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل يدعم تراخيص رخص شركات الملكية الفردية؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "أنواع رخص الشركات المدعومة في تراخيص"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "رخص تراخيص"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "هل تدعمون الرخص المحلية؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "ما هي أنواع الرخص التي يمكنني استخراجها بالظبط؟"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "الرخص التي لديكم"
+      },
+      {
+        "intent": "licenses_types",
+        "text": "أنواع الرخص التي يمكن اصدارها من تراخيص"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 15,
+            "end": 28,
+            "value": "المنطقة الحرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 35,
+            "end": 50,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "الفرق بين رخصة المنطقة الحرة ورخصة المؤسسة الفردية"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 15,
+            "end": 30,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 37,
+            "end": 50,
+            "value": "المنطقة الحرة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "الفرق بين رخصة المؤسسة الفردية ورخصة المنطقة الحرة"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 27,
+            "end": 33,
+            "value": "محدودة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 44,
+            "end": 59,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 66,
+            "end": 75,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "الفرق بين شركة ذات مسؤولية محدودة (ش.م.م) و المؤسسة الفردية ورخصة منطقة حرة"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 21,
+            "end": 34,
+            "value": "المنطقة الحرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 41,
+            "end": 59,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "هل يوجد فرق بين رخصة المنطقة الحرة ورخصة المسئولية المحدودة"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 18,
+            "end": 36,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 38,
+            "end": 53,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "ما الفرق بين شركة المسئولية المحدودة والمؤسسة الفردية"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 21,
+            "end": 36,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "رخصة منطقة حرة ورخصة المؤسسة الفردية"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 27,
+            "end": 36,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 43,
+            "end": 58,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 65,
+            "end": 83,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "هل يوجد أي فروق بين شركة المنطقة حرة وشركة المؤسسة الفردية وشركة المسئولية المحدودة ؟"
+      },
+      {
+        "intent": "licenses_difference",
+        "text": "ما هي الأختلافات بين رخص تراخيص المختلفة؟"
+      },
+      {
+        "intent": "licenses_difference",
+        "text": "هل يوجد فرق بين أنواع الرخص؟"
+      },
+      {
+        "intent": "licenses_difference",
+        "text": "وما الفرق بين تلك الرخص؟!"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 23,
+            "end": 41,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "مميزات وعيوب الرخص ذات المسئولية المحدودة"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 23,
+            "end": 32,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 39,
+            "end": 54,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "أهم الفوارق بين شركة المنطقة حرة وشركة المؤسسة الفردية"
+      },
+      {
+        "intent": "licenses_difference",
+        "entities": [
+          {
+            "start": 12,
+            "end": 27,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 36,
+            "end": 54,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "مميزات رخصة المؤسسة الفردية ضد رخصة المسئولية المحدودة"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لماذا تم رفض طلبي؟!"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لقد تم رفض طلب استخراج التأشيرة!!"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "أريد ان اعرف لماذا تم رفض طلب استخراج تصريح السفر الخاص بي"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "الأستعلام عن أسباب رفض الطلبات في تراخيص"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "هل يمكن أن يتم رفض طلبي بعد تقديمه؟"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "الأستفسار عن دواعي رفض طلب استخراج فيزا"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "رفض الطلبات"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "ورقي كامل وتم رفض طلبي ما هذا؟!!!!!!!!"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لقد تم رفض طلبي على الرغم من استوفائي للشروط"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "أسباب رفض طلب اصدار رخصة منطقة حرة"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لماذا تم رفض طلب رقم 511 لأستخراج شهادة عمل"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "أريد أن اعرف لما تم رفض هذا الطلب من فضلك؟"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "اخبرني عن الأسباب المحتملة لرفض طلب تصريح جديد"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لماذا لم يتم قبول طلب تجديد رخصة المحل؟!"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "الأسباب وراء عدم قبول طلب تعديل العقد"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لقد تقدمت بطلب جديد لأستخراج رخصة مؤسسة فردية ولم يتم قبوله"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "لماذا لم يتم النظر في طلب 84 لسنة 2019"
+      },
+      {
+        "intent": "application_rejected",
+        "text": "أنا أشعر بالغضب لأن طلبي الذي تقدمت به الى تراخيص تم رفضه!"
+      },
+      {
+        "intent": "license_fees",
+        "text": "كم تبلغ رسوم تسجيل الرخصة؟"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 16,
+            "end": 25,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "رسوم تسجيل رخصة منطقة حرة"
+      },
+      {
+        "intent": "license_fees",
+        "text": "رسوم تسجيل الرخص في تراخيص"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 16,
+            "end": 34,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "رسوم اصدار رخصة المسئولية المحدودة"
+      },
+      {
+        "intent": "license_fees",
+        "text": "مصاريف استخراج رخصة جديدة"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 17,
+            "end": 20,
+            "value": "فرع",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "تكلفة اصدار رخصة فرع جديد"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 23,
+            "end": 32,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "مصاريف تجديد رخصة شركة منطقة حرة"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 21,
+            "end": 39,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "تكلفة طلب تسجيل شركة المسئولية المحدودة"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 11,
+            "end": 24,
+            "value": "المنطقة الحرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 32,
+            "end": 47,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "تكلفة رخصة المنطقة الحرة و رخصة المؤسسة الفردية"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 36,
+            "end": 42,
+            "value": "محدودة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 53,
+            "end": 68,
+            "value": "المؤسسة الفردية",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 77,
+            "end": 86,
+            "value": "منطقة حرة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "رسوم استخراج أوراق شركة ذات مسؤولية محدودة (ش.م.م) و المؤسسة الفردية و  رخصة منطقة حرة"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 18,
+            "end": 31,
+            "value": "المنطقة الحرة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 39,
+            "end": 57,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "مصاريف اصدار رخصة المنطقة الحرة و رخصة المسئولية المحدودة"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 15,
+            "end": 33,
+            "value": "المسئولية المحدودة",
+            "entity": "licenses_list"
+          },
+          {
+            "start": 37,
+            "end": 48,
+            "value": "مؤسسة فردية",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "تكلفة فتح شركة المسئولية المحدودة أو مؤسسة فردية"
+      },
+      {
+        "intent": "license_fees",
+        "text": "تكاليف الرخص المختلفة"
+      },
+      {
+        "intent": "license_fees",
+        "text": "رسوم الرخص المتاح إصدارها من تراخيص"
+      },
+      {
+        "intent": "license_fees",
+        "entities": [
+          {
+            "start": 11,
+            "end": 14,
+            "value": "فرع",
+            "entity": "licenses_list"
+          }
+        ],
+        "text": "رسوم تسجيل فرع"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "من أين يمكنني الحصول على بطاقة المندوب؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "هل تعلم كيف يمكنني استخراج كارت مندوب"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "أريد التقديم على بطاقة برو"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "أحاول الحصول على كارت برو من فضلك"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "هل يمكن أن استخرج بطاقة مندوب جديدة؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "كيف لي أن اقدم على كارت المندوب من تراخيص"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "بطاقة برو"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "كيفية الحصول على كارت برو من تراخيص؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "أفكر في طلب بطاقة مندوب جديدة, ساعدني"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "طلب كارت المندوب"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "هل تدعم تراخيص خدمة بطاقة البرو؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "كيفية التقديم على كارت برو"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "ماذا بشأن بطاقة المندوب؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "هل يمكن أن تخبرني من أين يمكنني طلب كارت مندوب؟"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "برو كارد"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "كيفية الحصول على كارت برو"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "كيف احصل على برو كارد"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "خطوات الحصول على كارت برو"
+      },
+      {
+        "intent": "ask_where_to_get_a_pro_card",
+        "text": "اجراءات الحصول على برو كارد"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "ما هو رقم ضريبة القيمة المضافة لتراخيص؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "ضريبة القيمة المضافة في تراخيص"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "ما هي قيمة ال VAT بتراخيص؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "هل يوجد لديكم VAT? وما هو؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "هل توجد لديكم ضريبة قيمة مضافة؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "VAT Number"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "ما هي الضريبة المضافة لديكم؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "رقم الفات في تراخيص"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "القيمة المضافة على الرخص"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "قيمة ال vat عندكم"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "عرض رقم ضريبة القيمة"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "هل يمكنك أن تخبرني بقيمة \"الفات\" عندكم؟"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "رقم الضريبة"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "الأستعلام عن ضريبة القيمة المضافة(فات) في تراخيص"
+      },
+      {
+        "intent": "ask_about_vat_number",
+        "text": "من أين يمكنني الحصول على ضريبة القيمة المضافة في تراخيص؟"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "متطلبات بطاقة الصحة المهنية"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "كيف احصل على بطاقة صحة"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "المستندات المطلوبة للحصول على بطاقة صحة مهنية"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "كيفية استخراج بطاقة صحة"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "من أين يمكنني الحصول على بطاقة الصحة المهنية؟"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "هل تعلم كيف يمكنني استخراج كارت صحة"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "أريد التقديم على بطاقة صحة مهنية"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "أحاول الحصول على كارت صحة مهنية من فضلك"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "هل يمكن أن استخرج بطاقة صحة مهنية جديدة؟"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "كيف لي أن اقدم على كارت الصحة المهنية"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "بطاقة OCC"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "كيفية الحصول على كارت صحة occ من تراخيص؟"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "أفكر في طلب بطاقة صحة مهنية جديدة"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "طلب كارت occ"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "هل تدعم تراخيص خدمة بطاقة الصحة المهنية؟"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "كيفية التقديم على كارت صحة مهني"
+      },
+      {
+        "intent": "occ_health_card_req",
+        "text": "ماذا بشأن بطاقة الصحة المهنية؟"
+      }
+    ],
+    "regex_features": [],
+    "lookup_tables": [],
+    "entity_synonyms": [
+      {
+        "value": "حرة",
+        "synonyms": [
+          "رخصة حرة",
+          "رخصه حرة",
+          "الرخصة الحرة",
+          "الرخصه الحرة",
+          "رخصة حره",
+          "رخصه حره",
+          "الرخصة الحره",
+          "الرخصه الحره",
+          "حره",
+          "منطقة حرة",
+          "منطقه حرة",
+          "منطقة حره",
+          "منطقه حره",
+          "المنطقة حرة",
+          "المنطقه حرة",
+          "المنطقة حره",
+          "المنطقه حره",
+          "رخصة منطقة حرة",
+          "رخصة منطقه حرة",
+          "رخصة منطقة حره",
+          "رخصة منطقه حره",
+          "رخصة المنطقة الحرة",
+          "رخصة المنطقه الحرة",
+          "رخصة المنطقة الحره",
+          "رخصة المنطقه الحره",
+          "رخصه منطقة حرة",
+          "رخصه منطقه حرة",
+          "رخصه منطقة حره",
+          "رخصه منطقه حره",
+          "رخصه المنطقة الحرة",
+          "رخصه المنطقه الحرة",
+          "رخصه المنطقة الحره",
+          "رخصه المنطقه الحره"
+        ]
+      },
+      {
+        "value": "تجارية",
+        "synonyms": [
+          "رخصة تجارية",
+          "رخصه تجارية",
+          "الرخصة التجارية",
+          "الرخصه التجارية",
+          "رخصة تجاريه",
+          "رخصه تجاريه",
+          "الرخصة التجاريه",
+          "الرخصه التجاريه",
+          "تجاريه",
+          "منطقة تجارية",
+          "منطقه تجارية",
+          "منطقة تجاريه",
+          "منطقه تجاريه",
+          "المنطقة تجارية",
+          "المنطقه تجارية",
+          "المنطقة تجاريه",
+          "المنطقه تجاريه",
+          "رخصة منطقة تجارية",
+          "رخصة منطقه تجارية",
+          "رخصة منطقة تجاريه",
+          "رخصة منطقه تجاريه",
+          "رخصة المنطقة التجارية",
+          "رخصة المنطقه التجارية",
+          "رخصة المنطقة التجاريه",
+          "رخصة المنطقه التجاريه",
+          "رخصه منطقة تجارية",
+          "رخصه منطقه تجارية",
+          "رخصه منطقة تجاريه",
+          "رخصه منطقه تجاريه",
+          "رخصه المنطقة التجارية",
+          "رخصه المنطقه التجارية",
+          "رخصه المنطقة التجاريه",
+          "رخصه المنطقه التجاريه"
+        ]
+      }
+    ]
+  }
+}
