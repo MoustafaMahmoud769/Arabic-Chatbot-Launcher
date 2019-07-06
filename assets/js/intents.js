@@ -221,7 +221,7 @@ function(n) {
         // update key
         let newCellx = newRow.insertCell(-1);
         let elementx = document.createElement("input");
-        elementx.value = "Display/Modify";
+        elementx.value = "View/Modify";
         elementx.className = "button submit";
         elementx.type = "input";
         elementx.onclick = function() {

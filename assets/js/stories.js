@@ -104,21 +104,24 @@ function(n) {
         text = document.getElementById('story-body').value + selected;
         document.getElementById('story-body').value = text;
         document.getElementById('slots-list').value = '';
-        document.getElementById('value1').style = 'visibility:hidden;';
-        document.getElementById('value2').style = 'visibility:hidden;';
+        document.getElementById('value1').style = 'display:none;';
+        document.getElementById('value2').style = 'display:none;';
         document.getElementById('value1').value = '';
         document.getElementById('value2').value = '';
       },
 
       handleSlotChange: function() {
         slot = document.getElementById('slots-list').value;
-        if (slot == '')
+        if (slot == ''){
+          document.getElementById('value1').style = 'display:none;';
+          document.getElementById('value2').style = 'display:none;';
           return;
+        }
         for (var i = 0; i < storyslots.length; ++i) {
           if (storyslots[i].name == slot) {
             if (storyslots[i].type == "categorical" || storyslots[i].type == "bool") {
               document.getElementById('value1').style = '';
-              document.getElementById('value2').style = 'visibility:hidden;';
+              document.getElementById('value2').style = 'display:none;';
               var sel = document.getElementById('value1');
               sel.innerHTML = '';
               if (storyslots[i].type == "categorical") {
@@ -141,7 +144,7 @@ function(n) {
               }
             }
             else {
-              document.getElementById('value1').style = 'visibility:hidden;';
+              document.getElementById('value1').style = 'display:none;';
               document.getElementById('value2').style = '';
             }
           }
@@ -277,7 +280,7 @@ function(n) {
         // update key
         let newCellx = newRow.insertCell(-1);
         let elementx = document.createElement("input");
-        elementx.value = "Display/Modify";
+        elementx.value = "View/Modify";
         elementx.className = "button submit";
         elementx.type = "input";
         elementx.onclick = function() {

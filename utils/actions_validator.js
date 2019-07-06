@@ -74,10 +74,14 @@ function validate_single_button(button)
   // intent
   let found_intent = false;
 
-  for(let j=0; j<intents.length; j++) {
-    if(intents[j].name == button.intent) {
-      found_intent = true;
-      break;
+  if (button.intent == ''){
+    found_intent = true;
+  } else {
+    for(let j=0; j<intents.length; j++) {
+      if(intents[j].name == button.intent) {
+        found_intent = true;
+        break;
+      }
     }
   }
 

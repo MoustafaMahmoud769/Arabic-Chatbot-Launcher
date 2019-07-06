@@ -8,11 +8,11 @@
           <div class="field">
             <label for="action-name">Action Name</label>
             <label id="action-warning" style="color:red; font-size: 12px;"></label>
-            <textarea name="action-name" id="action-name" rows="1"></textarea>
+            <textarea name="action-name" id="action-name" rows="1" style="resize:none"></textarea>
           </div>
           <div class="field">
             <label for="action-examples">Action Text</label>
-            <textarea name="action-examples" id="action-examples" rows="7"></textarea>
+            <textarea name="action-examples" id="action-examples" rows="7" style="text-align:right" dir="rtl"></textarea>
           </div>
           <div class="field">
             <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
@@ -32,17 +32,19 @@
           </div>
           <div class="field">
             <div class="row" style="display: inline-block; position: relative;vertical-align: top;">
+              <label for="slots-in-buttons">Slot Buttons</label>
+            </div>
+            <div class="row" style="position: relative;vertical-align: top;">
               <div class="col">
-                <label for="slots-in-buttons">Slot Buttons</label>
                 <select id="slots-in-buttons">
                 </select>
               </div>
               <div class="col">
-                <label for="add-action-slot"></label>
+                <label for="add-action-slot" style="display:none"></label>
                 <button type="button" id="add-action-slot" name="add-action-slot" class="button submit"">Add</button>
               </div>
               <div class="col">
-                <label for="remove-action-slot"></label>
+                <label for="remove-action-slot" style="display:none"></label>
                 <button type="button" id="remove-action-slot" name="remove-action-slot" class="button submit" >Remove</button>
               </div>
             </div>

@@ -8,7 +8,7 @@
           <div class="field">
             <label for="story-name">Story Name</label>
             <label id="story-warning" style="color:red; font-size: 12px;"></label>
-            <textarea name="story-name" id="story-name" rows="1"></textarea>
+            <textarea name="story-name" id="story-name" rows="1" style="resize:none"></textarea>
           </div>
           <div class="field">
             <label for="story-body">Story Body</label>
@@ -40,11 +40,9 @@
               </div>
               <div class="col">
                 <label for="value1">Value</label>
-                <select id="value1" style="visibility:hidden;">
+                <select id="value1" style="display:none;">
                 </select>
-              </div>
-              <div class="col">
-                <textarea name="value2" id="value2" style="visibility:hidden;" row="1"></textarea>
+                <textarea name="value2" id="value2" style="display:none;" rows="1"></textarea>
               </div>
               <div class="col">
                 <button type="button" id="add-story-slot" name="add-story-slot" class="button submit" style ="position: absolute; bottom: 0px;">Add</button>

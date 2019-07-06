@@ -8,6 +8,9 @@ const fs = require('fs')
 var net = require('net');
 var request = require('request');
 const ProgressBar = require('electron-progressbar');
+// var http = require('http');
+// var finalhandler = require('finalhandler');
+// var serveStatic = require('serve-static');
 
 var progressStart;
 var progressStop;
@@ -197,6 +200,13 @@ ipcMain.on('build-my-model', (event, arg)=> {
 			return;
 		}
 	});
+
+	// var serve = serveStatic("./");
+	// var server = http.createServer(function(req, res) {
+	//   var done = finalhandler(req, res);
+	//   serve(req, res, done);
+	// });
+	// server.listen(8000);
 
 	progressBuild = new ProgressBar({
     text: 'Building...',

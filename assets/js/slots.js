@@ -113,7 +113,7 @@ function(n) {
         // update key
         let newCell4 = newRow.insertCell(-1);
         let element4 = document.createElement("input");
-        element4.value = "Display/Modify";
+        element4.value = "View/Modify";
         element4.className = "button submit";
         element4.type = "input";
         element4.onclick = function() {

@@ -100,7 +100,7 @@ function(n) {
           return;
         }
         text = document.getElementById('msgs-container').innerHTML;
-        newMsg = '<div class="outgoing_msg"><div class="sent_msg"><p>';
+        newMsg = '<div class="outgoing_msg"><div class="sent_msg"><p style="text-align:right" dir="rtl">';
         newMsg += document.getElementById('msg-body').value;
         newMsg += '</p><span class="time_date">';
         newMsg += launch.messaging.getTime();
@@ -137,7 +137,7 @@ function(n) {
 
       addReply: function(reply) {
         text = document.getElementById('msgs-container').innerHTML;
-        newMsg = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="assets/icons/bot.png" alt="Image Not Found !"> </div><div class="received_msg"><div class="received_withd_msg"><p>';
+        newMsg = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="assets/icons/bot.png" alt="Image Not Found !"> </div><div class="received_msg"><div class="received_withd_msg"><p style="text-align:right" dir="rtl">';
         newMsg += reply;
         newMsg += '</p><span class="time_date">';
         newMsg += launch.messaging.getTime();
