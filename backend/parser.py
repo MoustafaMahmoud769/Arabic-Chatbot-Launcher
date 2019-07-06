@@ -65,9 +65,9 @@ def write_domain(data, path):
                             domain.write("  - " + val + "\n")
                 domain.write("\n")
 
+        domain.write("actions:\n")
+        domain.write(" - utter_default\n")
         if "actions" in data:
-            domain.write("actions:\n")
-            domain.write(" - utter_default\n")
             for action in data["actions"].keys():
                 if not action.startswith("utter_"):
                     domain.write(" - utter_" + action + "\n")
@@ -91,7 +91,10 @@ def write_domain(data, path):
                             domain.write("    buttons:\n")
                             for btn in data["actions"][action]["buttons"]:
                                 domain.write("    - title: \"" + btn["text"] + "\"\n")
-                                domain.write("      payload: '/slot{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
+                                if len(btn["intent"]) > 0:
+                                    domain.write("      payload: '/" + btn["intent"] + "{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
+                                else:
+                                    domain.write("      payload: '/slot{\"" + btn["slot"] + "\": \"" + btn["value"] + "\"}'\n")
             domain.write("\n")
 
 def write_nlu(data, path):

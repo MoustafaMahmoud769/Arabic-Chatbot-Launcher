@@ -1,20 +1,22 @@
-pipeline:
-- name: "SpacyNLP"
-- name: "lemma_farasa.FarasaLemmatizer"
-- name: "SpacyTokenizer"
-- name: "RegexFeaturizer"
-- name: "SpacyFeaturizer"
-- name: "SpacyEntityExtractor"
-- name: "CRFEntityExtractor"
-- name: "SklearnIntentClassifier"
+# language: "ar_model"
+#
+# pipeline:
+# - name: "SpacyNLP"
+# - name: "lemma_farasa.FarasaLemmatizer"
+# - name: "SpacyTokenizer"
+# - name: "RegexFeaturizer"
+# - name: "SpacyFeaturizer"
+# - name: "SpacyEntityExtractor"
+# - name: "CRFEntityExtractor"
+# - name: "SklearnIntentClassifier"
+
+pipeline: "supervised_embeddings"
 
 policies:
   - name: KerasPolicy
     epochs: 100
     max_history: 5
   - name: FallbackPolicy
-    core_threshold: 0.5
-    nlu_threshold: 0.3
     fallback_action_name: 'action_default_fallback'
   - name: MemoizationPolicy
     max_history: 5

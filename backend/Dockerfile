@@ -3,8 +3,14 @@ MAINTAINER Samik Saha
 
 RUN apt-get update && apt-get install -y python3 python3-pip
 RUN pip3 install rasa-core rasa-nlu[spacy] spacy sklearn-crfsuite rasa-core-sdk
-RUN python3 -m spacy download en
 RUN apt-get install default-jre -y
+# RUN apt-get install wget -y
+
+# RUN wget http://192.168.1.108:8000/ar_model-0.0.0.zip
+# RUN apt-get install zip -y
+# RUN unzip ar_model-0.0.0.zip
+# RUN pip3 install ar_model-0.0.0/
+# RUN rm -rf ar_model-0.0.0.zip && rm -rf ar_model-0.0.0/
 
 ADD ./config /app/config/
 ADD ./actions /app/actions/
@@ -29,7 +35,3 @@ RUN ["chmod", "777", "/app/FarasaSegmenterJar.jar"]
 WORKDIR /app
 ENTRYPOINT []
 CMD /app/scripts/start_services.sh
-
-
-#CMD python3 -m rasa_core_sdk.endpoint --actions app.actions.actions& && python3 -m rasa_core.run --enable_api --core /app/models/rasa_core -u /app/models/rasa_nlu/current/nlu --endpoints /app/config/endpoints.yml --credentials /app/config/credentials.yml -p $PORT
-# python3 -m rasa_nlu.train -c config/nlu_config.yml -d data/nlu.md --fixed_model_name nlu -o models/rasa_nlu --project current
