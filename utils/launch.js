@@ -320,21 +320,6 @@ ipcMain.on('stop-my-model', (event, arg)=> {
 
 ipcMain.on('start-example-model', (event, arg)=> {
 
-	var docker = new dockerode({socketPath: '/var/run/docker.sock'});
-	function handler(err, stream) {
-
-     stream.pipe(process.stdout, {
-      end: true
-    });
-
-     stream.on('end', function() {
-      done();
-    });
-  }
-  var data = require('fs').createReadStream('./serene_boyd.zip');
-  docker.importImage(data, handler);
-	return;
-
 	//if already started!
 	if(is_server_on == true) {
 		dialog.showMessageBox({
