@@ -1,42 +1,44 @@
 [
   {
-    "name": "fares",
-    "type": "categorical",
-    "fmin": "",
-    "fmax": "",
-    "clist": [
-      "fares1",
-      "fares2",
-      "fares3",
-      "fares5"
-    ]
-  },
-  {
-    "name": "sdfasf",
+    "name": "name",
     "type": "text",
     "fmin": "",
     "fmax": "",
     "clist": []
   },
   {
-    "name": "sdfasfdsdf",
-    "type": "text",
-    "fmin": "",
-    "fmax": "",
-    "clist": []
-  },
-  {
-    "name": "mins",
-    "type": "float",
-    "fmin": "-1.0",
-    "fmax": "1.1",
-    "clist": []
-  },
-  {
-    "name": "b7b_omk_awy",
+    "name": "feedback",
     "type": "bool",
     "fmin": "",
     "fmax": "",
     "clist": []
+  },
+  {
+    "name": "account",
+    "type": "float",
+    "fmin": "0",
+    "fmax": "10000000",
+    "clist": []
+  },
+  {
+    "name": "bill",
+    "type": "categorical",
+    "fmin": "",
+    "fmax": "",
+    "clist": [
+      "الهاتف",
+      "الانترنت",
+      "الكهرباء"
+    ]
+  },
+  {
+    "name": "bill_service",
+    "type": "categorical",
+    "fmin": "",
+    "fmax": "",
+    "clist": [
+      "فوري",
+      "bee"
+    ]
   }
 ]

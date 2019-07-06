@@ -1,17 +1,137 @@
 [
   {
-    "name": "sdasa",
+    "name": "pay_bill",
     "examples": [
-      "sadasda",
-      "asdasdasad"
+      "كيفية دفع فاتورة الهاتف باستخدام فوري",
+      "اريد دفع فاتورة الانترنت باستخدام bee",
+      "اريد دفع فاتورة الكهرباء باستخدام فوري"
+    ],
+    "entites": [
+      {
+        "from": 17,
+        "to": 23,
+        "index": 0,
+        "name": "bill",
+        "value": "الهاتف"
+      },
+      {
+        "from": 16,
+        "to": 24,
+        "index": 1,
+        "name": "bill",
+        "value": "الانترنت"
+      },
+      {
+        "from": 16,
+        "to": 24,
+        "index": 2,
+        "name": "bill",
+        "value": "الكهرباء"
+      },
+      {
+        "from": 33,
+        "to": 37,
+        "index": 0,
+        "name": "bill_service",
+        "value": "فوري"
+      },
+      {
+        "from": 34,
+        "to": 37,
+        "index": 1,
+        "name": "bill_service",
+        "value": "bee"
+      },
+      {
+        "from": 34,
+        "to": 38,
+        "index": 2,
+        "name": "bill_service",
+        "value": "فوري"
+      }
+    ]
+  },
+  {
+    "name": "say_account",
+    "examples": [
+      "حسابي 1234",
+      "رقم حسابي 7777"
+    ],
+    "entites": [
+      {
+        "from": 6,
+        "to": 10,
+        "index": 0,
+        "name": "account",
+        "value": "1234"
+      },
+      {
+        "from": 10,
+        "to": 14,
+        "index": 1,
+        "name": "account",
+        "value": "7777"
+      }
+    ]
+  },
+  {
+    "name": "say_name",
+    "examples": [
+      "اسمي مصطفى",
+      "ادعى شوقي",
+      "أنا هشام"
+    ],
+    "entites": [
+      {
+        "from": 5,
+        "to": 10,
+        "index": 0,
+        "name": "name",
+        "value": "مصطفى"
+      },
+      {
+        "from": 5,
+        "to": 9,
+        "index": 1,
+        "name": "name",
+        "value": "شوقي"
+      },
+      {
+        "from": 4,
+        "to": 8,
+        "index": 2,
+        "name": "name",
+        "value": "هشام"
+      }
+    ]
+  },
+  {
+    "name": "greet",
+    "examples": [
+      "السلام عليكم",
+      "صباح الخير",
+      "مساء الخير",
+      "أهلاً",
+      "السلام عليكم ورحمة الله وبركاته"
     ],
     "entites": []
   },
   {
-    "name": "sdsads",
+    "name": "affirm",
     "examples": [
-      "asdasdasda",
-      "sadasdassad"
+      "نعم",
+      "اجل",
+      "بالطبع",
+      "بالتاكيد"
+    ],
+    "entites": []
+  },
+  {
+    "name": "deny",
+    "examples": [
+      "لا",
+      "ليس كذلك",
+      "غير صحيح"
     ],
     "entites": []
   }

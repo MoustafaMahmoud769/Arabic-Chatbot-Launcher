@@ -1,9 +1,33 @@
 [
   {
-    "name": "sadsad",
+    "name": "story1",
     "examples": [
-      "* sdasa",
-      "- sdsadasas"
+      "* greet",
+      "- utter_greet",
+      "* say_name",
+      "- utter_ask_account",
+      "* say_account",
+      "- utter_store_account"
+    ]
+  },
+  {
+    "name": "story2",
+    "examples": [
+      "* pay_bill",
+      "- utter_bill",
+      "- utter_feedback",
+      "* affirm",
+      "- utter_thanks"
+    ]
+  },
+  {
+    "name": "story22",
+    "examples": [
+      "* pay_bill",
+      "- utter_bill",
+      "- utter_feedback",
+      "* deny",
+      "- utter_sorry"
     ]
   }
 ]

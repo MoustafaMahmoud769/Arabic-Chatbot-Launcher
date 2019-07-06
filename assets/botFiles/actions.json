@@ -1,29 +1,71 @@
 [
   {
-    "name": "asdfasdfas",
+    "name": "utter_ask_account",
     "examples": [
-      "fdasfasfasfasfsdf  {fares}"
-    ],
-    "slots": [
-      "Button value: sdfasfasfasf",
-      "Slot name: fares",
-      "Slot value: fares1",
-      "Button value: sfasfasf",
-      "Slot name: sdfasf",
-      "Slot value: asfasfas"
-    ]
-  },
-  {
-    "name": "sdsadasas",
-    "examples": [
-      "sdasda"
+      "ما هو رقم حسابك يا {name}"
     ],
     "slots": []
   },
   {
-    "name": "eqfdfdf",
+    "name": "utter_greet",
     "examples": [
-      "adff"
+      "مرحبا بك، ما اسمك؟"
+    ],
+    "slots": []
+  },
+  {
+    "name": "utter_store_account",
+    "examples": [
+      "تم تسجيل حساب رقم {account} باسم {name} بنجاح!"
+    ],
+    "slots": []
+  },
+  {
+    "name": "utter_bill",
+    "examples": [
+      "تم دفع فاتورة  {bill} باستخدام خدمة  {bill_service} من حساب رقم  {account} باسم {name}"
+    ],
+    "slots": []
+  },
+  {
+    "name": "test",
+    "examples": [
+      "Test action"
+    ],
+    "slots": [
+      "Button value: click me",
+      "Slot name: name",
+      "Slot value: bob",
+      "Activate intent:"
+    ]
+  },
+  {
+    "name": "utter_feedback",
+    "examples": [
+      "هل اعجبتك الخدمة؟"
+    ],
+    "slots": [
+      "Button value: نعم",
+      "Slot name: feedback",
+      "Slot value: True",
+      "Activate intent: affirm",
+      "Button value: لا",
+      "Slot name: feedback",
+      "Slot value: False",
+      "Activate intent: deny"
+    ]
+  },
+  {
+    "name": "utter_thanks",
+    "examples": [
+      "شكرا لك"
+    ],
+    "slots": []
+  },
+  {
+    "name": "utter_sorry",
+    "examples": [
+      "نأسف لذلك"
     ],
     "slots": []
   }

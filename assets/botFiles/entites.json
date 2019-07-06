@@ -1,8 +1,17 @@
 [
   {
-    "name": "fawry"
+    "name": "name"
   },
   {
-    "name": "abc"
+    "name": "feedback"
+  },
+  {
+    "name": "account"
+  },
+  {
+    "name": "bill"
+  },
+  {
+    "name": "bill_service"
   }
 ]
