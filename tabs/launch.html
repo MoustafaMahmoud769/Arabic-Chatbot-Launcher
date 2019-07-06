@@ -6,8 +6,17 @@
         <h2>Your Custom Model</h2>
         <h3>Summary - Your bot is <span id="connection-state" style="color: red">Offline</span></h3>
         <p id="model-validation">
-
         </p>
+        <div class="row">
+          <div class="col">
+            <h3>Training configuration</h3>
+            <select name="train-config" id="train-config">
+              <option value="arabic">Arabic</option>
+              <option value="lang">Language Independent</option>
+            </select>
+            <br/>
+          </div>
+        </div>
         <div class="row">
           <section>
             <button type="button" id="validate-my-model" name="validate-my-model" class="button submit" >Validate</button>
@@ -24,7 +33,7 @@
           <section>
             <button type="button" id="stop-my-model" name="stop-my-model" class="button submit" >Stop Server</button>
           </section>
-        <div />
+        </div>
       </div>
     </div>
   </section>

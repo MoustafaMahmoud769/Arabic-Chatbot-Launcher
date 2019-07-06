@@ -46,11 +46,17 @@ function(n) {
       },
 
       startMyModel: function() {
-        ipcRenderer.send('start-my-model', null)
+        var config = document.getElementById('train-config').value;
+        ipcRenderer.send('start-my-model', config)
+      },
+
+      trainConfig: function() {
+        // TODO: setup warning
       },
 
       buildMyModel: function() {
-        ipcRenderer.send('build-my-model', null)
+        var config = document.getElementById('train-config').value;
+        ipcRenderer.send('build-my-model', config)
       },
 
       stopMyModel: function() {
@@ -155,6 +161,10 @@ function(n) {
 
         $('#start-my-model').click( function () {
           launch.messaging.startMyModel()
+        })
+
+        $('#train-config').change( function () {
+          launch.messaging.trainConfig($(this).val)
         })
 
         $('#build-my-model').click( function () {

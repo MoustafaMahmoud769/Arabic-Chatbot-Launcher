@@ -111,6 +111,10 @@ ipcMain.on('validate-my-model', async (event, arg)=> {
 
 ipcMain.on('start-my-model', (event, arg)=> {
 
+	var bot_name = "testbot_1";
+	if (arg == "arabic"){
+		bot_name = "testbot_ar";
+	}
 	//if already started!
 	if(is_server_on == true) {
 		dialog.showMessageBox({
@@ -133,7 +137,7 @@ ipcMain.on('start-my-model', (event, arg)=> {
 
 	/////// Used to start the server of the bot, check for port 5005 afterwards to know that it has started
 	var drode = new dockerode({socketPath: '/var/run/docker.sock'});
-	drode.run('testbot_1', [], process.stdout, {
+	drode.run(bot_name, [], process.stdout, {
 		Env : ["PORT=5005", "PYTHONPATH=/app/:$PYTHONPATH"],
 	  ExposedPorts: {
 	    '5005/tcp': {}
@@ -148,6 +152,7 @@ ipcMain.on('start-my-model', (event, arg)=> {
 	})
 	.then(() => {
 		console.log("Terminated");
+		progressStart.close();
 	})
 	.catch(error => {
 		console.log(error);
@@ -165,7 +170,14 @@ ipcMain.on('start-my-model', (event, arg)=> {
 })
 
 ipcMain.on('build-my-model', (event, arg)=> {
+	console.log(arg);
 
+	var directory = "backend";
+	var bot_name = "testbot_1";
+	if (arg == "arabic"){
+		directory += "_ar";
+		bot_name = "testbot_ar";
+	}
 	//if already started!
 	if(is_server_on == true) {
 		dialog.showMessageBox({
@@ -193,7 +205,7 @@ ipcMain.on('build-my-model', (event, arg)=> {
 		return;
 	}
 	//write to backend file
-	fs.writeFile("backend/data.json", data_error_free, (err) => {
+	fs.writeFile(directory + "/data.json", data_error_free, (err) => {
 		if (err) {
 			dialog.showErrorBox('Oops.. ', 'Something went wrong');
 			free_lock(2);
@@ -232,9 +244,9 @@ ipcMain.on('build-my-model', (event, arg)=> {
 
 	const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 
-	var tarStream = tar.pack('./backend');
+	var tarStream = tar.pack('./' + directory);
 	docker.image.build(tarStream, {
-	  t: 'testbot_1'
+	  t: bot_name
 	})
 	.then(stream => promisifyStream(stream))
 	.then(() => {
@@ -242,7 +254,7 @@ ipcMain.on('build-my-model', (event, arg)=> {
 			progressBuild.setCompleted();
 			progressBuild.close();
 		}
-		console.log(docker.image.get('testbot_1').status());
+		console.log(docker.image.get(bot_name).status());
 		if (err){
 			dialog.showMessageBox({
 				type: 'info',
@@ -360,6 +372,7 @@ ipcMain.on('start-example-model', (event, arg)=> {
 	})
 	.then(() => {
 		console.log("Terminated");
+		progressStart.close();
 	})
 	.catch(error => {
 		console.log(error);
