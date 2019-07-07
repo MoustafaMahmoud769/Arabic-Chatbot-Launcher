@@ -19,10 +19,6 @@
       },
       {
         "intent": "bye",
-        "text": "سلام عليكم"
-      },
-      {
-        "intent": "bye",
         "text": "باي باي"
       },
       {
@@ -1308,7 +1304,7 @@
             "start": 5,
             "end": 8,
             "value": "حرة",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "رخصة حرة"
@@ -1320,7 +1316,7 @@
             "start": 5,
             "end": 11,
             "value": "تجارية",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "رخصة تجارية"
@@ -1332,7 +1328,7 @@
             "start": 0,
             "end": 3,
             "value": "حرة",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "حرة"
@@ -1416,7 +1412,7 @@
             "start": 0,
             "end": 6,
             "value": "تجارية",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "تجارية"
@@ -1428,7 +1424,7 @@
             "start": 5,
             "end": 8,
             "value": "حرة",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "رخصة حرة"
@@ -1440,10 +1436,26 @@
             "start": 5,
             "end": 9,
             "value": "شركة",
-            "entity": "license_type"
+            "entity": "licence_type"
           }
         ],
         "text": "رخصة شركة"
+      },
+      {
+        "intent": "enter_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "شركة",
+            "entity": "licence_type"
+          }
+        ],
+        "text": "شركة"
+      },
+      {
+        "intent": "trakhees_locations",
+        "text": "اريد استخراج رخصة منطقة حرة"
       },
       {
         "intent": "trakhees_locations",

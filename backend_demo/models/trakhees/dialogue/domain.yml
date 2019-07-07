@@ -39,13 +39,14 @@ actions:
 - utter_licenses_types
 - utter_approve_trakhees_location
 - utter_deny_trakhees_location
+- utter_deny_trakhees_location_none_type
 - utter_list_all_trakhees_locations
 - action_trakhees_locations
 config:
   store_entities_as_slots: true
 entities:
 - licenses_list
-- license_type
+- licence_type
 - receipt_account_type
 - name
 - freezone_license_location
@@ -132,7 +133,7 @@ slots:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.TextSlot
-  license_type:
+  licence_type:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.CategoricalSlot
@@ -305,6 +306,8 @@ templates:
   utter_deny_trakhees_location:
   - text: نأسف ولكن استخراج الرخص الحرة غير متوفر في {freezone_license_location} حتى
       الأن
+  utter_deny_trakhees_location_none_type:
+  - text: نأسف ولكن استخراج الرخص الحرة غير متوفر في ذلك المكان حتى الأن
   utter_docu:
   - text: 'إذا كنت تبحث عن المزيد من محتوى تراخيص الرائع, فيمكنك زيارة منتدانا: http://trakhees.ae/en/Pages/Services.aspx'
   utter_great:

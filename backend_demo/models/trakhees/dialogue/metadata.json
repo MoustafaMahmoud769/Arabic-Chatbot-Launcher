@@ -2,7 +2,7 @@
   "action_fingerprints": {
     "action_listen": {
       "slots": [
-        "license_type",
+        "licence_type",
         "freezone_license_location"
       ]
     },
@@ -37,9 +37,6 @@
       "slots": []
     },
     "utter_visa_renewal": {
-      "slots": []
-    },
-    "utter_trakhees_locations": {
       "slots": []
     },
     "utter_licenses_difference": {
@@ -102,7 +99,7 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190705-161013",
+  "trained_at": "20190707-041826",
   "rasa_core": "0.14.5",
   "tensorflow": "1.13.1",
   "sklearn": "0.20.3"

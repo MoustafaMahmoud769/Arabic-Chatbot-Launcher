@@ -33,13 +33,15 @@ class Action_trakhees_locations(Action):
         freezone_license_location = next(tracker.get_latest_entity_values('freezone_license_location'), None)
         lemmatized_locations = [lemmatize(lemmatize(i)) for i in self.TRAKHEES_LOCATION]
         # retrieve the correct chitchat utterance dependent on the intent
-        print(lemmatized_locations)
-        print("Value is {}".format(freezone_license_location))
-        print([True if freezone_license_location in i else False for i in lemmatized_locations])
-        if any([True if freezone_license_location in i else False for i in lemmatized_locations]):
-            dispatcher.utter_template('utter_approve_trakhees_location', tracker)
-        else:
-            dispatcher.utter_template('utter_deny_trakhees_location', tracker)
+        # print(lemmatized_locations)
+        # print("Value is {}".format(freezone_license_location))
+        # print([True if freezone_license_location in i else False for i in lemmatized_locations])
+        if freezone_license_location is not None:
+            if any([True if freezone_license_location in i else False for i in lemmatized_locations]):
+                dispatcher.utter_template('utter_approve_trakhees_location', tracker)
+            else:
+                dispatcher.utter_template('utter_deny_trakhees_location', tracker)
+     
         dispatcher.utter_template('utter_trakhees_locations', tracker)
         return []
 
@@ -81,6 +83,8 @@ class CancelLicenceForm(FormAction):
             return {"cancelled_licence_type": [self.from_entity(entity="cancelled_licence_type",
                                                 intent="ask_to_cancel_visa"),
                                                 self.from_entity(entity="licenses_list",
+                                                                intent="enter_data"),
+                                                self.from_entity(entity="licence_type",
                                                                 intent="enter_data"),
                                                 self.from_entity(entity="cancelled_licence_type",
                                                                 intent="choose")],
@@ -145,7 +149,7 @@ class CancelLicenceForm(FormAction):
                              domain: Dict[Text, Any]) -> Optional[Text]:
             """Validate cancelled_licence_company_type"""
 
-            print("In cancelled_licence_company_type, val: {}".format(value))
+            # print("In cancelled_licence_company_type, val: {}".format(value))
             if "محلي" in value or "law" in value:
                 return "law"
             elif "فرع" in value or "branch" in value:
